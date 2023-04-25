@@ -13,12 +13,10 @@ export const dataAnalysisBackwardIR = <T>(
     const { transfer, meet, compare } = operators
 
     const graph = generate(ir, irs)
-    const workList = new Set(irs)
+    const workList = [...irs]
 
-    while (workList.size) {
-        ;[ir] = workList
-        workList.delete(ir)
-
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    while ((ir = workList.shift()!)) {
         const inputs = graph.outs.get(ir)
         if (!inputs) throw 'Unexpected missing outs'
 
@@ -42,7 +40,9 @@ export const dataAnalysisBackwardIR = <T>(
         if (!ins) throw 'Unexpected missing ins'
 
         for (const ir of ins) {
-            workList.add(ir)
+            if (workList.includes(ir)) continue
+
+            workList.push(ir)
         }
     }
 }
