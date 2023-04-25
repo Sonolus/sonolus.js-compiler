@@ -1,5 +1,5 @@
 import { EngineDataBucket } from 'sonolus-core'
-import { JudgmentWindows } from '../index.js'
+import { JudgmentWindows } from '../JudgmentWindows.js'
 import { preprocessWritablePointer } from '../utils/pointer.js'
 import { defineLib } from './lib.js'
 

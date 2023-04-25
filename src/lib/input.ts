@@ -1,7 +1,7 @@
+import { JudgmentWindows } from './JudgmentWindows.js'
 import { defineLib } from './define/lib.js'
 import { Judgment } from './enums/Judgment.js'
 import { native } from './native.js'
-import { JudgmentWindows } from './types/JudgmentWindows.js'
 import { preprocessWritablePointer } from './utils/pointer.js'
 
 type Input = {
