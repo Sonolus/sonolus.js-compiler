@@ -1,6 +1,6 @@
 import { New } from '../../nodes/New.js'
 import { transformIR, TransformIR } from './index.js'
-import { isConstant, rewriteAsExecute, transformIRAndGet } from './utils.js'
+import { isConstant, isResolved, rewriteAsExecute, transformIRAndGet } from './utils.js'
 import { callClassConstructor } from './utils/class.js'
 
 export const transformNew: TransformIR<New> = (ir, ctx) => {
@@ -12,6 +12,8 @@ export const transformNew: TransformIR<New> = (ir, ctx) => {
 
     const result = isConstant(callee)
     if (!result) return { ...ir, callee, args }
+
+    if (!isResolved(args.init)) return { ...ir, callee, args }
 
     if (typeof result.value !== 'function') return { ...ir, callee, args }
 

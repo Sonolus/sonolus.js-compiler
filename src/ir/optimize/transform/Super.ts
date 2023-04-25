@@ -1,6 +1,6 @@
 import { Super } from '../../nodes/Super.js'
 import { TransformIR } from './index.js'
-import { rewriteAsExecute, transformIRAndGet } from './utils.js'
+import { isResolved, rewriteAsExecute, transformIRAndGet } from './utils.js'
 import { callClassConstructor, initializeClassFields } from './utils/class.js'
 
 export const transformSuper: TransformIR<Super> = (ir, ctx) => {
@@ -9,6 +9,8 @@ export const transformSuper: TransformIR<Super> = (ir, ctx) => {
         init: transformIRAndGet(ir.args.init, ctx),
         value: ir.args.value,
     }
+
+    if (!isResolved(args.init)) return { ...ir, args }
 
     return rewriteAsExecute(ir, ctx, [
         init,
