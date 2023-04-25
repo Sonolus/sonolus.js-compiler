@@ -5,21 +5,23 @@ import { callClassConstructor } from './utils/class.js'
 
 export const transformNew: TransformIR<New> = (ir, ctx) => {
     const callee = transformIR(ir.callee, ctx)
-    const init = transformIRAndGet(ir.args.init, ctx)
-    const newIR = { ...ir, callee, args: { init, value: ir.args.value } }
+    const args = {
+        init: transformIRAndGet(ir.args.init, ctx),
+        value: ir.args.value,
+    }
 
     const result = isConstant(callee)
-    if (!result) return newIR
+    if (!result) return { ...ir, callee, args }
 
-    if (typeof result.value !== 'function') return newIR
+    if (typeof result.value !== 'function') return { ...ir, callee, args }
 
     const prototype = result.value.prototype
     const instance = Object.create(prototype)
 
-    return rewriteAsExecute(newIR, ctx, [
+    return rewriteAsExecute(ir, ctx, [
         callee,
-        init,
-        ...callClassConstructor(newIR, instance, prototype, newIR.args.value, ctx),
-        ctx.value(newIR, instance),
+        args.init,
+        ...callClassConstructor(ir, instance, prototype, args.value, ctx),
+        ctx.value(ir, instance),
     ])
 }

@@ -11,27 +11,29 @@ import { isConstant, isResolved, rewriteAsExecute, transformIRAndGet } from './u
 
 export const transformCall: TransformIR<Call> = (ir, ctx) => {
     const callee = transformIR(ir.callee, ctx)
-    const init = transformIRAndGet(ir.args.init, ctx)
-    const newIR = { ...ir, callee, args: { init, value: ir.args.value } }
+    const args = {
+        init: transformIRAndGet(ir.args.init, ctx),
+        value: ir.args.value,
+    }
 
     const result = isConstant(callee)
-    if (!result) return newIR
+    if (!result) return { ...ir, callee, args }
 
-    if (!isResolved(init)) return newIR
+    if (!isResolved(args.init)) return { ...ir, callee, args }
 
     if (hasIntrinsicCall(result.value))
-        return rewriteAsExecute(newIR, ctx, [
+        return rewriteAsExecute(ir, ctx, [
             callee,
-            init,
-            result.value[Intrinsic.Call](newIR, result.thisValue, newIR.args.value, ctx),
+            args.init,
+            result.value[Intrinsic.Call](ir, result.thisValue, args.value, ctx),
         ])
 
-    if (typeof result.value !== 'function') return newIR
+    if (typeof result.value !== 'function') return { ...ir, callee, args }
 
-    const calls = callFunction(newIR, result.thisValue, result.value, newIR.args.value)
-    if (!calls) return newIR
+    const calls = callFunction(ir, result.thisValue, result.value, args.value)
+    if (!calls) return { ...ir, callee, args }
 
-    return rewriteAsExecute(newIR, ctx, [callee, init, ...calls])
+    return rewriteAsExecute(ir, ctx, [callee, args.init, ...calls])
 }
 
 const callFunction = (ir: IR, thisValue: unknown, func: Function, args: unknown[]) => {

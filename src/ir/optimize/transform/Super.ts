@@ -5,18 +5,21 @@ import { callClassConstructor, initializeClassFields } from './utils/class.js'
 
 export const transformSuper: TransformIR<Super> = (ir, ctx) => {
     const init = transformIRAndGet(ir.args.init, ctx)
-    const newIR = { ...ir, args: { init, value: ir.args.value } }
+    const args = {
+        init: transformIRAndGet(ir.args.init, ctx),
+        value: ir.args.value,
+    }
 
-    return rewriteAsExecute(newIR, ctx, [
+    return rewriteAsExecute(ir, ctx, [
         init,
         ...callClassConstructor(
-            newIR,
-            newIR.instance,
-            Object.getPrototypeOf(newIR.prototype),
-            newIR.args.value,
+            ir,
+            ir.instance,
+            Object.getPrototypeOf(ir.prototype),
+            args.value,
             ctx,
         ),
-        ...initializeClassFields(newIR, newIR.instance, newIR.prototype as Function, ctx),
-        ctx.value(newIR, newIR.instance),
+        ...initializeClassFields(ir, ir.instance, ir.prototype as Function, ctx),
+        ctx.value(ir, ir.instance),
     ])
 }

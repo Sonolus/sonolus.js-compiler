@@ -5,16 +5,15 @@ import { isConstant, transformIRAndGet } from './utils.js'
 
 export const transformJSCall: TransformIR<JSCall> = (ir, ctx) => {
     const args = ir.args.map((arg) => transformIRAndGet(arg, ctx))
-    const newIR = { ...ir, args }
 
     const results = args.map(isConstant)
-    if (!results.every((result): result is Value => !!result)) return newIR
+    if (!results.every((result): result is Value => !!result)) return { ...ir, args }
 
     let result: unknown
     try {
-        result = newIR.func.call(newIR.thisValue, ...results.map((result) => result.value))
+        result = ir.func.call(ir.thisValue, ...results.map((result) => result.value))
     } catch (_) {
-        return newIR
+        return { ...ir, args }
     }
 
     return ctx.value(ir, result)

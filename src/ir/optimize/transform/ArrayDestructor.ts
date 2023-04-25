@@ -4,12 +4,11 @@ import { isConstant, transformIRAndGet } from './utils.js'
 
 export const transformArrayDestructor: TransformIR<ArrayDestructor> = (ir, ctx) => {
     const array = transformIRAndGet(ir.array, ctx)
-    const newIR = { ...ir, array }
 
     const result = isConstant(array)
-    if (!result) return newIR
+    if (!result) return { ...ir, array }
 
-    newIR.elements.length = 0
-    newIR.elements.push(...(result.value as unknown[]))
+    ir.elements.length = 0
+    ir.elements.push(...(result.value as unknown[]))
     return array
 }

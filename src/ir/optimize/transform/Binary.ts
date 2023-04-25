@@ -5,18 +5,17 @@ import { isConstant, rewriteAsExecute, transformIRAndGet } from './utils.js'
 export const transformBinary: TransformIR<Binary> = (ir, ctx) => {
     const lhs = transformIRAndGet(ir.lhs, ctx)
     const rhs = transformIRAndGet(ir.rhs, ctx)
-    const newIR = { ...ir, lhs, rhs }
 
     const lhsResult = isConstant(lhs)
     const rhsResult = isConstant(rhs)
-    if (!lhsResult || !rhsResult) return newIR
+    if (!lhsResult || !rhsResult) return { ...ir, lhs, rhs }
 
-    const operation = operations[newIR.operator]
+    const operation = operations[ir.operator]
 
-    return rewriteAsExecute(newIR, ctx, [
+    return rewriteAsExecute(ir, ctx, [
         lhs,
         rhs,
-        ctx.value(newIR, operation(lhsResult.value, rhsResult.value)),
+        ctx.value(ir, operation(lhsResult.value, rhsResult.value)),
     ])
 }
 

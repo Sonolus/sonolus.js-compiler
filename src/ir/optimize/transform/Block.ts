@@ -6,18 +6,17 @@ import { rewriteAsExecute, transformIRAndGet } from './utils.js'
 
 export const transformBlock: TransformIR<Block> = (ir, ctx) => {
     const body = transformIRAndGet(ir.body, ctx)
-    const newIR = { ...ir, body }
 
-    const count = countBreaks(body, newIR.target)
+    const count = countBreaks(body, ir.target)
 
     if (count === 0) return body
 
-    const result = endsInBreak(body, newIR.target)
-    if (!result) return newIR
+    const result = endsInBreak(body, ir.target)
+    if (!result) return { ...ir, body }
 
-    if (count === 1) return rewriteAsExecute(newIR, ctx, result)
+    if (count === 1) return rewriteAsExecute(ir, ctx, result)
 
-    return { ...newIR, body: rewriteAsExecute(newIR, ctx, result) }
+    return { ...ir, body: rewriteAsExecute(ir, ctx, result) }
 }
 
 const countBreaks = (ir: IR, target: object) =>

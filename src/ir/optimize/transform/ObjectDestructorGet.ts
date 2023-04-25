@@ -4,21 +4,20 @@ import { isConstant, rewriteAsExecute, transformIRAndGet } from './utils.js'
 
 export const transformObjectDestructorGet: TransformIR<ObjectDestructorGet> = (ir, ctx) => {
     const key = transformIRAndGet(ir.key, ctx)
-    const newIR = { ...ir, key }
 
     const result = isConstant(key)
-    if (!result) return newIR
+    if (!result) return { ...ir, key }
 
-    const index = newIR.target.keys.indexOf(result.value as never)
+    const index = ir.target.keys.indexOf(result.value as never)
     if (index !== -1) {
-        newIR.target.keys.splice(index, 1)
+        ir.target.keys.splice(index, 1)
     }
 
-    return rewriteAsExecute(newIR, ctx, [
+    return rewriteAsExecute(ir, ctx, [
         key,
-        ctx.Member(newIR, {
-            object: ctx.value(newIR, newIR.target.object),
-            key: ctx.value(newIR, result.value),
+        ctx.Member(ir, {
+            object: ctx.value(ir, ir.target.object),
+            key: ctx.value(ir, result.value),
         }),
     ])
 }

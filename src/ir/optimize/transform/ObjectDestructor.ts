@@ -4,13 +4,12 @@ import { isConstant, transformIRAndGet } from './utils.js'
 
 export const transformObjectDestructor: TransformIR<ObjectDestructor> = (ir, ctx) => {
     const object = transformIRAndGet(ir.object, ctx)
-    const newIR = { ...ir, object }
 
     const result = isConstant(object)
-    if (!result) return newIR
+    if (!result) return { ...ir, object }
 
-    newIR.target.object = result.value
-    newIR.target.keys = Object.keys(result.value as never)
+    ir.target.object = result.value
+    ir.target.keys = Object.keys(result.value as never)
 
     return object
 }

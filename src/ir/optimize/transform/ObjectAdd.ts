@@ -6,41 +6,36 @@ import { isConstant, isReference, rewriteAsExecute, transformIRAndGet } from './
 export const transformObjectAdd: TransformIR<ObjectAdd> = (ir, ctx) => {
     const key = transformIRAndGet(ir.key, ctx)
     const value = transformIRAndGet(ir.value, ctx)
-    const newIR = { ...ir, key, value }
 
     const keyResult = isConstant(key)
-    if (!keyResult) return newIR
+    if (!keyResult) return { ...ir, key, value }
 
-    if (newIR.kind === 'get' || newIR.kind === 'set') {
+    if (ir.kind === 'get' || ir.kind === 'set') {
         const valueResult = isConstant(value)
-        if (!valueResult) return newIR
+        if (!valueResult) return { ...ir, key, value }
 
-        const descriptor = Object.getOwnPropertyDescriptor(newIR.object, keyResult.value as never)
-        Object.defineProperty(newIR.object, keyResult.value as never, {
+        const descriptor = Object.getOwnPropertyDescriptor(ir.object, keyResult.value as never)
+        Object.defineProperty(ir.object, keyResult.value as never, {
             get: descriptor?.get,
             set: descriptor?.set,
-            [newIR.kind]: valueResult.value,
+            [ir.kind]: valueResult.value,
 
             enumerable: true,
             configurable: true,
         })
 
-        return rewriteAsExecute(newIR, ctx, [key, value, ctx.zero(newIR)])
+        return rewriteAsExecute(ir, ctx, [key, value, ctx.zero(ir)])
     }
 
     const valueResult = isReference(value)
     if (valueResult) {
-        newIR.object[keyResult.value as never] = valueResult.value as never
+        ir.object[keyResult.value as never] = valueResult.value as never
 
-        return rewriteAsExecute(newIR, ctx, [key, value, ctx.zero(newIR)])
+        return rewriteAsExecute(ir, ctx, [key, value, ctx.zero(ir)])
     }
 
     const temp = ctx.allocate()
-    newIR.object[keyResult.value as never] = temp as never
+    ir.object[keyResult.value as never] = temp as never
 
-    return rewriteAsExecute(newIR, ctx, [
-        key,
-        temp[Intrinsic.Set](newIR, value, ctx),
-        ctx.zero(newIR),
-    ])
+    return rewriteAsExecute(ir, ctx, [key, temp[Intrinsic.Set](ir, value, ctx), ctx.zero(ir)])
 }

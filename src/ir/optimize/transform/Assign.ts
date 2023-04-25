@@ -7,18 +7,17 @@ import { isConstant, rewriteAsExecute, transformIRAndGet } from './utils.js'
 export const transformAssign: TransformIR<Assign> = (ir, ctx) => {
     const lhs = transformIR(ir.lhs, ctx)
     const rhs = transformIRAndGet(ir.rhs, ctx)
-    const newIR = { ...ir, lhs, rhs }
 
     const result = isConstant(lhs)
-    if (!result || !hasIntrinsicSet(result.value)) return newIR
+    if (!result || !hasIntrinsicSet(result.value)) return { ...ir, lhs, rhs }
 
     if (ir.operator === '=')
-        return rewriteAsExecute(newIR, ctx, [lhs, result.value[Intrinsic.Set](newIR, rhs, ctx)])
+        return rewriteAsExecute(ir, ctx, [lhs, result.value[Intrinsic.Set](ir, rhs, ctx)])
 
-    if (!result || !hasIntrinsicGet(result.value)) return newIR
+    if (!result || !hasIntrinsicGet(result.value)) return { ...ir, lhs, rhs }
 
     if (ir.operator === '||=' || ir.operator === '&&=' || ir.operator === '??=')
-        return rewriteAsExecute(newIR, ctx, [
+        return rewriteAsExecute(ir, ctx, [
             lhs,
             ctx.Logical(ir, {
                 operator: (
@@ -28,15 +27,15 @@ export const transformAssign: TransformIR<Assign> = (ir, ctx) => {
                         '??=': '??',
                     } as const
                 )[ir.operator],
-                lhs: result.value[Intrinsic.Get](newIR, ctx),
-                rhs: result.value[Intrinsic.Set](newIR, rhs, ctx),
+                lhs: result.value[Intrinsic.Get](ir, ctx),
+                rhs: result.value[Intrinsic.Set](ir, rhs, ctx),
             }),
         ])
 
-    return rewriteAsExecute(newIR, ctx, [
+    return rewriteAsExecute(ir, ctx, [
         lhs,
         result.value[Intrinsic.Set](
-            newIR,
+            ir,
             ctx.Binary(ir, {
                 operator: (
                     {
@@ -48,7 +47,7 @@ export const transformAssign: TransformIR<Assign> = (ir, ctx) => {
                         '**=': '**',
                     } as const
                 )[ir.operator],
-                lhs: result.value[Intrinsic.Get](newIR, ctx),
+                lhs: result.value[Intrinsic.Get](ir, ctx),
                 rhs,
             }),
             ctx,

@@ -6,18 +6,17 @@ import { isConstant, transformIRAndGet } from './utils.js'
 
 export const transformNative: TransformIR<Native> = (ir, ctx) => {
     const args = ir.args.map((arg) => transformIRAndGet(arg, ctx))
-    const newIR = { ...ir, args }
 
-    const result = funcs[newIR.func]
-    if (!result) return newIR
+    const result = funcs[ir.func]
+    if (!result) return { ...ir, args }
 
     const [length, func] = result
-    if (length !== Infinity && args.length !== length) return newIR
+    if (length !== Infinity && args.length !== length) return { ...ir, args }
 
     const results = args.map(isConstant)
-    if (!results.every((result): result is Value => !!result)) return newIR
+    if (!results.every((result): result is Value => !!result)) return { ...ir, args }
 
-    return ctx.value(newIR, func(...results.map((arg) => arg.value as never)))
+    return ctx.value(ir, func(...results.map((arg) => arg.value as never)))
 }
 
 const reducer =

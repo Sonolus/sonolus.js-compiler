@@ -6,22 +6,21 @@ import { isConstant, rewriteAsExecute, transformIRAndGet } from './utils.js'
 export const transformMember: TransformIR<Member> = (ir, ctx) => {
     const object = transformIRAndGet(ir.object, ctx)
     const key = transformIRAndGet(ir.key, ctx)
-    const newIR = { ...ir, object, key }
 
     const objectResult = isConstant(object)
-    if (!objectResult) return newIR
+    if (!objectResult) return { ...ir, object, key }
 
     const keyResult = isConstant(key)
-    if (!keyResult) return newIR
+    if (!keyResult) return { ...ir, object, key }
 
     const descriptor = getPropertyDescriptor(objectResult.value, keyResult.value as never)
-    if (!descriptor) return newIR
+    if (!descriptor) return { ...ir, object, key }
 
-    return rewriteAsExecute(newIR, ctx, [
+    return rewriteAsExecute(ir, ctx, [
         object,
         key,
         ctx.value(
-            newIR,
+            ir,
             toValue(descriptor, objectResult.value),
             objectResult.isSuper ? objectResult.thisValue : objectResult.value,
         ),

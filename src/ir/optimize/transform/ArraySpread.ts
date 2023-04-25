@@ -12,29 +12,28 @@ import {
 
 export const transformArraySpread: TransformIR<ArraySpread> = (ir, ctx) => {
     const arg = transformIRAndGet(ir.arg, ctx)
-    const newIR = { ...ir, arg }
 
     const result = isConstant(arg)
-    if (!result) return newIR
+    if (!result) return { ...ir, arg }
 
     const inits: IR[] = []
 
     for (const element of result.value as unknown[]) {
-        const value = unwrapIRGet(ctx.value(newIR, element), ctx)
+        const value = unwrapIRGet(ctx.value(ir, element), ctx)
 
         const result = isReference(value)
         if (result) {
-            newIR.array.push(result.value)
+            ir.array.push(result.value)
 
             inits.push(value)
             continue
         }
 
         const temp = ctx.allocate()
-        newIR.array.push(temp)
+        ir.array.push(temp)
 
-        inits.push(temp[Intrinsic.Set](newIR, value, ctx))
+        inits.push(temp[Intrinsic.Set](ir, value, ctx))
     }
 
-    return rewriteAsExecute(newIR, ctx, [arg, ...inits, ctx.zero(newIR)])
+    return rewriteAsExecute(ir, ctx, [arg, ...inits, ctx.zero(ir)])
 }
