@@ -1,5 +1,5 @@
 import { EffectClipName } from 'sonolus-core'
-import { EffectClipId } from '../index.js'
+import { EffectClipId } from '../ids/EffectClipId.js'
 import { native } from '../native.js'
 import {
     LoopedEffectClipInstanceId,
