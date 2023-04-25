@@ -7,10 +7,10 @@ import { transformIR, TransformIR } from './index.js'
 import { rewriteAsExecute } from './utils.js'
 
 export const transformExecute: TransformIR<Execute> = (ir, ctx) => {
-    const children = ir.children
-        .map((child) => transformIR(child, ctx))
-        .map((child, i, children) => expand(child, i === children.length - 1, ctx))
-        .flat()
+    const children: IR[] = []
+    for (const [i, child] of ir.children.entries()) {
+        children.push(...expand(transformIR(child, ctx), i === ir.children.length - 1, ctx))
+    }
 
     const cutOffIndex = children.findIndex(
         (child) => child.type === 'Break' || child.type === 'Throw',
