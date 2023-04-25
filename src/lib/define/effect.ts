@@ -1,10 +1,8 @@
 import { EffectClipName } from 'sonolus-core'
 import { EffectClipId } from '../ids/EffectClipId.js'
+import { LoopedEffectClipInstanceId } from '../instanceIds/LoopedEffectClipInstanceId.js'
+import { ScheduledLoopedEffectClipInstanceId } from '../instanceIds/ScheduledLoopedEffectClipInstanceId.js'
 import { native } from '../native.js'
-import {
-    LoopedEffectClipInstanceId,
-    ScheduledLoopedEffectClipInstanceId,
-} from '../types/instanceIds.js'
 import { defineLib } from './lib.js'
 
 export type EffectClip = {
