@@ -1,11 +1,10 @@
-import { mapIR } from '../../map/index.js'
 import { ObjectDestructorGet } from '../../nodes/ObjectDestructorGet.js'
 import { TransformIR } from './index.js'
 import { isConstant, rewriteAsExecute, transformIRAndGet } from './utils.js'
 
 export const transformObjectDestructorGet: TransformIR<ObjectDestructorGet> = (ir, ctx) => {
     const key = transformIRAndGet(ir.key, ctx)
-    const newIR = mapIR(ir, key)
+    const newIR = { ...ir, key }
 
     const result = isConstant(key)
     if (!result) return newIR

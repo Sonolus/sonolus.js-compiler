@@ -1,5 +1,4 @@
 import { Intrinsic } from '../../../intrinsic/index.js'
-import { mapIR } from '../../map/index.js'
 import { Member } from '../../nodes/Member.js'
 import { TransformIR } from './index.js'
 import { isConstant, rewriteAsExecute, transformIRAndGet } from './utils.js'
@@ -7,7 +6,7 @@ import { isConstant, rewriteAsExecute, transformIRAndGet } from './utils.js'
 export const transformMember: TransformIR<Member> = (ir, ctx) => {
     const object = transformIRAndGet(ir.object, ctx)
     const key = transformIRAndGet(ir.key, ctx)
-    const newIR = mapIR(ir, object, key)
+    const newIR = { ...ir, object, key }
 
     const objectResult = isConstant(object)
     if (!objectResult) return newIR

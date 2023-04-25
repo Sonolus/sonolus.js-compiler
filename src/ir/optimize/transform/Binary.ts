@@ -1,4 +1,3 @@
-import { mapIR } from '../../map/index.js'
 import { Binary, BinaryOperator } from '../../nodes/Binary.js'
 import { TransformIR } from './index.js'
 import { isConstant, rewriteAsExecute, transformIRAndGet } from './utils.js'
@@ -6,7 +5,7 @@ import { isConstant, rewriteAsExecute, transformIRAndGet } from './utils.js'
 export const transformBinary: TransformIR<Binary> = (ir, ctx) => {
     const lhs = transformIRAndGet(ir.lhs, ctx)
     const rhs = transformIRAndGet(ir.rhs, ctx)
-    const newIR = mapIR(ir, lhs, rhs)
+    const newIR = { ...ir, lhs, rhs }
 
     const lhsResult = isConstant(lhs)
     const rhsResult = isConstant(rhs)

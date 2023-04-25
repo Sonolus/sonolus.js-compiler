@@ -1,5 +1,4 @@
 import { collectIR } from '../../collect/index.js'
-import { mapIR } from '../../map/index.js'
 import { Block } from '../../nodes/Block.js'
 import { IR } from '../../nodes/index.js'
 import { TransformIR } from './index.js'
@@ -7,7 +6,7 @@ import { rewriteAsExecute, transformIRAndGet } from './utils.js'
 
 export const transformBlock: TransformIR<Block> = (ir, ctx) => {
     const body = transformIRAndGet(ir.body, ctx)
-    const newIR = mapIR(ir, body)
+    const newIR = { ...ir, body }
 
     const count = countBreaks(body, newIR.target)
 
@@ -18,7 +17,7 @@ export const transformBlock: TransformIR<Block> = (ir, ctx) => {
 
     if (count === 1) return rewriteAsExecute(newIR, ctx, result)
 
-    return mapIR(newIR, rewriteAsExecute(newIR, ctx, result))
+    return { ...newIR, body: rewriteAsExecute(newIR, ctx, result) }
 }
 
 const countBreaks = (ir: IR, target: object) =>

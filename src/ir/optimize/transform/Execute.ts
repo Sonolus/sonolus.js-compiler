@@ -1,5 +1,4 @@
 import { sideEffectFreeFuncs } from '../../../utils/funcs.js'
-import { mapIR } from '../../map/index.js'
 import { Execute } from '../../nodes/Execute.js'
 import { IR } from '../../nodes/index.js'
 import { TransformIRContext } from './context.js'
@@ -22,7 +21,7 @@ export const transformExecute: TransformIR<Execute> = (ir, ctx) => {
     if (children.length === 0) return ctx.zero(ir)
     if (children.length === 1) return children[0]
 
-    return mapIR(ir, ...children)
+    return { ...ir, children }
 }
 
 const expand = (ir: IR, shouldPreserve: boolean, ctx: TransformIRContext) =>

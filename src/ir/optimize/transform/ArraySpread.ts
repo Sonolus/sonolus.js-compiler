@@ -1,5 +1,4 @@
 import { Intrinsic } from '../../../intrinsic/index.js'
-import { mapIR } from '../../map/index.js'
 import { ArraySpread } from '../../nodes/ArraySpread.js'
 import { IR } from '../../nodes/index.js'
 import { TransformIR } from './index.js'
@@ -13,7 +12,7 @@ import {
 
 export const transformArraySpread: TransformIR<ArraySpread> = (ir, ctx) => {
     const arg = transformIRAndGet(ir.arg, ctx)
-    const newIR = mapIR(ir, arg)
+    const newIR = { ...ir, arg }
 
     const result = isConstant(arg)
     if (!result) return newIR

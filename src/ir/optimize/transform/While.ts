@@ -1,4 +1,3 @@
-import { mapIR } from '../../map/index.js'
 import { While } from '../../nodes/While.js'
 import { TransformIR } from './index.js'
 import { transformIRAndGet } from './utils.js'
@@ -7,5 +6,5 @@ export const transformWhile: TransformIR<While> = (ir, ctx) => {
     const test = transformIRAndGet(ir.test, ctx)
     const body = transformIRAndGet(ir.body, ctx)
 
-    return mapIR(ir, test, body)
+    return { ...ir, test, body }
 }

@@ -4,7 +4,6 @@ import { hasIntrinsicCall } from '../../../intrinsic/has.js'
 import { Intrinsic } from '../../../intrinsic/index.js'
 import { compileJSFunction } from '../../../js/compile/function.js'
 import { searchPrototype } from '../../../utils/prototype.js'
-import { mapIR } from '../../map/index.js'
 import { Call } from '../../nodes/Call.js'
 import { IR } from '../../nodes/index.js'
 import { transformIR, TransformIR } from './index.js'
@@ -13,7 +12,7 @@ import { isConstant, isResolved, rewriteAsExecute, transformIRAndGet } from './u
 export const transformCall: TransformIR<Call> = (ir, ctx) => {
     const callee = transformIR(ir.callee, ctx)
     const init = transformIRAndGet(ir.args.init, ctx)
-    const newIR = mapIR(ir, callee, init)
+    const newIR = { ...ir, callee, args: { init, value: ir.args.value } }
 
     const result = isConstant(callee)
     if (!result) return newIR

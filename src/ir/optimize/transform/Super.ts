@@ -1,4 +1,3 @@
-import { mapIR } from '../../map/index.js'
 import { Super } from '../../nodes/Super.js'
 import { TransformIR } from './index.js'
 import { rewriteAsExecute, transformIRAndGet } from './utils.js'
@@ -6,7 +5,7 @@ import { callClassConstructor, initializeClassFields } from './utils/class.js'
 
 export const transformSuper: TransformIR<Super> = (ir, ctx) => {
     const init = transformIRAndGet(ir.args.init, ctx)
-    const newIR = mapIR(ir, init)
+    const newIR = { ...ir, args: { init, value: ir.args.value } }
 
     return rewriteAsExecute(newIR, ctx, [
         init,

@@ -2,14 +2,13 @@ import { createCompileESTreeContext } from '../../../estree/compile/context.js'
 import { compileForOf } from '../../../estree/compile/utils/forOf.js'
 import { hasIntrinsicIterate } from '../../../intrinsic/has.js'
 import { Intrinsic } from '../../../intrinsic/index.js'
-import { mapIR } from '../../map/index.js'
 import { ForOf } from '../../nodes/ForOf.js'
 import { TransformIR } from './index.js'
 import { isConstant, rewriteAsExecute, transformIRAndGet } from './utils.js'
 
 export const transformForOf: TransformIR<ForOf> = (ir, ctx) => {
     const value = transformIRAndGet(ir.value, ctx)
-    const newIR = mapIR(ir, value)
+    const newIR = { ...ir, value }
 
     const result = isConstant(value)
     if (!result) return newIR

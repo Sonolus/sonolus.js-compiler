@@ -1,4 +1,3 @@
-import { mapIR } from '../../map/index.js'
 import { New } from '../../nodes/New.js'
 import { transformIR, TransformIR } from './index.js'
 import { isConstant, rewriteAsExecute, transformIRAndGet } from './utils.js'
@@ -7,7 +6,7 @@ import { callClassConstructor } from './utils/class.js'
 export const transformNew: TransformIR<New> = (ir, ctx) => {
     const callee = transformIR(ir.callee, ctx)
     const init = transformIRAndGet(ir.args.init, ctx)
-    const newIR = mapIR(ir, callee, init)
+    const newIR = { ...ir, callee, args: { init, value: ir.args.value } }
 
     const result = isConstant(callee)
     if (!result) return newIR
