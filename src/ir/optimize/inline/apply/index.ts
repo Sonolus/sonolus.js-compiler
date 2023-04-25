@@ -1,3 +1,4 @@
+import { myMapGet } from '../../../../utils/MyMap.js'
 import { IR } from '../../../nodes/index.js'
 import { replaceIR } from '../../../replace/index.js'
 import { CountInlineState } from '../count/state.js'
@@ -13,10 +14,10 @@ export const applyInlineIR = (
         [...findStates.entries()].flatMap(([ir, state]): [IR, IR][] => {
             if (ir.type !== 'Get') return []
 
-            const element = state.get(ir.target)
+            const element = myMapGet(state, ir.target)
             if (!element || element === 'T') return []
 
-            const count = countState.counts.get(element)
+            const count = myMapGet(countState.counts, element)
             if (count !== 1) return []
 
             if (sideEffects.has(element)) return []

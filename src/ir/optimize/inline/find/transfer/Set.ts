@@ -1,10 +1,11 @@
+import { myMapSet } from '../../../../../utils/MyMap.js'
 import { Set } from '../../../../nodes/Set.js'
 import { TransferFindInlineStateIR } from './index.js'
 
 export const transferFindInlineSet: TransferFindInlineStateIR<Set> = (ir, input) => {
-    const output = new Map(input)
+    const output = [...input]
 
-    output.set(ir.target, ir)
+    myMapSet(output, ir.target, ir)
 
     return output
 }

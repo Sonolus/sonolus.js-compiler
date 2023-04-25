@@ -12,15 +12,15 @@ export const countInlineIR = (
     dependencies: ReadonlyMap<object, ReadonlySet<object>>,
 ): CountInlineState => {
     const input: CountInlineState = {
-        refs: new Map(),
-        counts: new Map(),
+        refs: [],
+        counts: [],
     }
     const states: CountInlineStates = new Map(
         irs.map((ir) => [
             ir,
             {
-                refs: new Map(),
-                counts: new Map(),
+                refs: [],
+                counts: [],
             },
         ]),
     )

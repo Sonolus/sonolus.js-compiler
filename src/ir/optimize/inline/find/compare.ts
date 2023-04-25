@@ -1,5 +1,5 @@
-import { compare } from '../../../../utils/map.js'
+import { myMapCompare } from '../../../../utils/MyMap.js'
 import { FindInlineState } from './state.js'
 
 export const compareFindInlineStates = (a: FindInlineState, b: FindInlineState): boolean =>
-    compare(a, b, (valueA, valueB) => valueA === valueB)
+    myMapCompare(a, b, (valueA, valueB) => valueA === valueB)
