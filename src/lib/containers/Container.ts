@@ -8,7 +8,6 @@ type ContainerConstructorMethods<T> = {
     read(pointers: unknown[]): T
     write(pointers: unknown[], source: T): void
     equals(a: T, b: T): boolean
-    copy(source: T, target: T): void
 }
 
 type ContainerMethods<T> = {
