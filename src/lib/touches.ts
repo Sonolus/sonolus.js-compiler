@@ -2,12 +2,13 @@ import { Intrinsic } from '../intrinsic/index.js'
 import { IR } from '../ir/nodes/index.js'
 import { Vec } from './containers/Vec.js'
 import { defineLib } from './define/lib.js'
+import { TouchId } from './instanceIds/TouchId.js'
 import { createIterate } from './utils/iterate.js'
 import { readonlyPointer } from './utils/pointer.js'
 
 export type Touch = {
     readonly index: number
-    readonly id: number
+    readonly id: TouchId
     readonly started: boolean
     readonly ended: boolean
     readonly t: number
