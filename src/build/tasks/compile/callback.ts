@@ -52,7 +52,7 @@ export const buildArchetypeCallback = (
     const snode = optimizeSNode(compileIR(ir, irCtx))
 
     const result = {
-        order: archetype[`${callback}Order`],
+        order: archetype[`${callback}Order` as never] ?? 0,
         snode,
     }
 
