@@ -7,7 +7,7 @@ import { defineLib } from './lib.js'
 
 export type EffectClip = {
     readonly name: string
-    readonly id: number
+    readonly id: EffectClipId
     readonly exists: boolean
 
     play(distance: number): void
@@ -45,7 +45,7 @@ export const defineEffect = <T extends EffectDefinition>(effect: T): Effect<T> =
                     key,
                     defineLib<EffectClip>({
                         name: name as never,
-                        id,
+                        id: id as never,
                         get exists() {
                             return native.HasEffectClip(this.id)
                         },

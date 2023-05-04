@@ -10,7 +10,7 @@ import { defineLib } from './lib.js'
 
 export type ParticleEffect = {
     readonly name: string
-    readonly id: number
+    readonly id: ParticleEffectId
     readonly exists: boolean
 
     spawn(
@@ -72,7 +72,7 @@ export const defineParticle = <T extends ParticleDefinition>(particle: T): Parti
                     key,
                     defineLib<ParticleEffect>({
                         name: name as never,
-                        id,
+                        id: id as never,
                         get exists() {
                             return native.HasParticleEffect(this.id)
                         },
