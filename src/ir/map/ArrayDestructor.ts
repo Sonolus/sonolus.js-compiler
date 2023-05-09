@@ -3,5 +3,5 @@ import { createMapIRVisitor } from './utils.js'
 
 export const mapArrayDestructor = createMapIRVisitor<ArrayDestructor>((ir, array) => ({
     array,
-    elements: ir.elements,
+    target: ir.target,
 }))

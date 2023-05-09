@@ -22,14 +22,14 @@ const bindFunctionParameters = (
     value: IR,
     ctx: CompileESTreeContext,
 ) => {
-    const elements: [string, unknown][] = []
+    const target = {}
 
     const destructs: IR[] = []
 
     for (const parameter of parameters) {
         if (parameter.type === 'RestElement') {
             const restValue = ctx.ArrayDestructorRest(parameter, {
-                elements,
+                target,
             })
 
             destructs.push(...bindPattern(parameter.argument, restValue, ctx))
@@ -37,7 +37,7 @@ const bindFunctionParameters = (
         }
 
         const elementValue = ctx.ArrayDestructorGet(parameter, {
-            elements,
+            target,
         })
 
         destructs.push(...bindPattern(parameter, elementValue, ctx))
@@ -46,7 +46,7 @@ const bindFunctionParameters = (
     return [
         ctx.ArrayDestructor(node, {
             array: value,
-            elements,
+            target,
         }),
         ...destructs,
     ]

@@ -8,7 +8,7 @@ export const transformArrayDestructor: TransformIR<ArrayDestructor> = (ir, ctx) 
     const result = isConstant(array)
     if (!result) return { ...ir, array }
 
-    ir.elements.length = 0
-    ir.elements.push(...(result.value as unknown[]))
+    ir.target.elements = (result.value as unknown[]).slice()
+
     return array
 }
