@@ -21,8 +21,8 @@ import { mapLogical } from './Logical.js'
 import { mapMember } from './Member.js'
 import { mapNative } from './Native.js'
 import { mapNew } from './New.js'
-import { mapObjectAdd } from './ObjectAdd.js'
 import { mapObjectConstructor } from './ObjectConstructor.js'
+import { mapObjectConstructorAdd } from './ObjectConstructorAdd.js'
 import { mapObjectDestructor } from './ObjectDestructor.js'
 import { mapObjectDestructorGet } from './ObjectDestructorGet.js'
 import { mapObjectDestructorRest } from './ObjectDestructorRest.js'
@@ -59,8 +59,8 @@ export const mapIR = visit<<N extends IR>(ir: N, ...children: IRChildren<N>) => 
     mapMember,
     mapNative,
     mapNew,
-    mapObjectAdd,
     mapObjectConstructor,
+    mapObjectConstructorAdd,
     mapObjectDestructor,
     mapObjectDestructorGet,
     mapObjectDestructorRest,

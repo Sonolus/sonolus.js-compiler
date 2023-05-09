@@ -4,7 +4,7 @@ import { TransformIR } from './index.js'
 export const transformObjectDestructorRest: TransformIR<ObjectDestructorRest> = (ir, ctx) => {
     const object = {}
     const children = ir.target.keys.map((key) =>
-        ctx.ObjectAdd(ir, {
+        ctx.ObjectConstructorAdd(ir, {
             object,
             kind: 'init',
             key: ctx.value(ir, key),

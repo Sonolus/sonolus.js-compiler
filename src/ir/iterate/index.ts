@@ -21,8 +21,8 @@ import { iterateLogical } from './Logical.js'
 import { iterateMember } from './Member.js'
 import { iterateNative } from './Native.js'
 import { iterateNew } from './New.js'
-import { iterateObjectAdd } from './ObjectAdd.js'
 import { iterateObjectConstructor } from './ObjectConstructor.js'
+import { iterateObjectConstructorAdd } from './ObjectConstructorAdd.js'
 import { iterateObjectDestructor } from './ObjectDestructor.js'
 import { iterateObjectDestructorGet } from './ObjectDestructorGet.js'
 import { iterateObjectDestructorRest } from './ObjectDestructorRest.js'
@@ -59,8 +59,8 @@ export const iterateIR = visit<(ir: IR) => IR[]>().create('iterate', {
     iterateMember,
     iterateNative,
     iterateNew,
-    iterateObjectAdd,
     iterateObjectConstructor,
+    iterateObjectConstructorAdd,
     iterateObjectDestructor,
     iterateObjectDestructorGet,
     iterateObjectDestructorRest,

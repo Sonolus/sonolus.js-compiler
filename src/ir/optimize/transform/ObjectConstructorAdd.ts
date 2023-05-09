@@ -1,9 +1,9 @@
 import { Intrinsic } from '../../../intrinsic/index.js'
-import { ObjectAdd } from '../../nodes/ObjectAdd.js'
+import { ObjectConstructorAdd } from '../../nodes/ObjectConstructorAdd.js'
 import { TransformIR } from './index.js'
 import { isConstant, isReference, rewriteAsExecute, transformIRAndGet } from './utils.js'
 
-export const transformObjectAdd: TransformIR<ObjectAdd> = (ir, ctx) => {
+export const transformObjectConstructorAdd: TransformIR<ObjectConstructorAdd> = (ir, ctx) => {
     const key = transformIRAndGet(ir.key, ctx)
     const value = transformIRAndGet(ir.value, ctx)
 

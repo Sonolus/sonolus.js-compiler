@@ -11,4 +11,4 @@ export const transformObjectConstructor: TransformIR<ObjectConstructor> = (ir, c
     return rewriteAsExecute(ir, ctx, [...children, ctx.value(ir, ir.object)])
 }
 
-const isResolved = (ir: IR) => ir.type !== 'ObjectAdd' && ir.type !== 'ObjectSpread'
+const isResolved = (ir: IR) => ir.type !== 'ObjectConstructorAdd' && ir.type !== 'ObjectSpread'

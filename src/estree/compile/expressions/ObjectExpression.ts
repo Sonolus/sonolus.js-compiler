@@ -23,7 +23,7 @@ export const compileObjectExpression: CompileESTree<ObjectExpression> = (node, c
             case 'get':
             case 'set':
                 children.push(
-                    ctx.ObjectAdd(property, {
+                    ctx.ObjectConstructorAdd(property, {
                         object,
                         kind: property.kind,
                         key: compileObjectKey(property.key, property.computed, ctx),

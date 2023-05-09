@@ -11,7 +11,6 @@ import { transformBlock } from './Block.js'
 import { transformBreak } from './Break.js'
 import { transformCall } from './Call.js'
 import { transformConditional } from './Conditional.js'
-import { TransformIRContext } from './context.js'
 import { transformDeclare } from './Declare.js'
 import { transformDoWhile } from './DoWhile.js'
 import { transformExecute } from './Execute.js'
@@ -22,8 +21,8 @@ import { transformLogical } from './Logical.js'
 import { transformMember } from './Member.js'
 import { transformNative } from './Native.js'
 import { transformNew } from './New.js'
-import { transformObjectAdd } from './ObjectAdd.js'
 import { transformObjectConstructor } from './ObjectConstructor.js'
+import { transformObjectConstructorAdd } from './ObjectConstructorAdd.js'
 import { transformObjectDestructor } from './ObjectDestructor.js'
 import { transformObjectDestructorGet } from './ObjectDestructorGet.js'
 import { transformObjectDestructorRest } from './ObjectDestructorRest.js'
@@ -35,6 +34,7 @@ import { transformThrow } from './Throw.js'
 import { transformUnary } from './Unary.js'
 import { transformValue } from './Value.js'
 import { transformWhile } from './While.js'
+import { TransformIRContext } from './context.js'
 
 export type TransformIR<N extends IR> = (ir: N, ctx: TransformIRContext) => IR
 
@@ -60,8 +60,8 @@ export const transformIR = visit<TransformIR<IR>>().create('transform', {
     transformMember,
     transformNative,
     transformNew,
-    transformObjectAdd,
     transformObjectConstructor,
+    transformObjectConstructorAdd,
     transformObjectDestructor,
     transformObjectDestructorGet,
     transformObjectDestructorRest,

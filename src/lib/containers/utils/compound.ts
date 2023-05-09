@@ -61,7 +61,7 @@ const createCompoundContainerRead =
 
             const object = {}
             const children = Object.entries(type).map(([k, v]) =>
-                ctx.ObjectAdd(ir, {
+                ctx.ObjectConstructorAdd(ir, {
                     object,
                     kind: 'init',
                     key: ctx.value(ir, k),
