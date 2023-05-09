@@ -8,12 +8,11 @@ export const compileCallArgs = (
     ctx: CompileESTreeContext,
 ): { init: IR; value: unknown[] } => {
     const array: unknown[] = []
-
-    const inits: IR[] = []
+    const children: IR[] = []
 
     for (const argument of node.arguments) {
         if (argument.type === 'SpreadElement') {
-            inits.push(
+            children.push(
                 ctx.ArraySpread(argument, {
                     array,
                     arg: compileESTree(argument.argument, ctx),
@@ -22,7 +21,7 @@ export const compileCallArgs = (
             continue
         }
 
-        inits.push(
+        children.push(
             ctx.ArrayAdd(argument, {
                 array,
                 value: compileESTree(argument, ctx),
@@ -31,8 +30,9 @@ export const compileCallArgs = (
     }
 
     return {
-        init: ctx.Execute(node, {
-            children: [...inits, ctx.zero(node)],
+        init: ctx.ArrayConstructor(node, {
+            array,
+            children,
         }),
         value: array,
     }

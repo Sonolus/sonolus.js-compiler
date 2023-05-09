@@ -57,13 +57,19 @@ const toValue = (descriptor: PropertyDescriptor, thisValue: unknown) => {
         Object.assign(value, {
             [Intrinsic.Set]: (ir, value, ctx) => {
                 const array: unknown[] = []
+                const children = [
+                    ctx.ArrayAdd(ir, {
+                        array,
+                        value,
+                    }),
+                ]
 
                 return ctx.Call(ir, {
                     callee: ctx.value(ir, descriptor.set, thisValue),
                     args: {
-                        init: ctx.ArrayAdd(ir, {
+                        init: ctx.ArrayConstructor(ir, {
                             array,
-                            value,
+                            children,
                         }),
                         value: array,
                     },

@@ -42,20 +42,16 @@ const createCompoundContainerRead =
 
             if (Array.isArray(type)) {
                 const array: unknown[] = []
+                const children = type.map((element) =>
+                    ctx.ArrayAdd(ir, {
+                        array,
+                        value: walk(element),
+                    }),
+                )
 
-                const inits: IR[] = []
-
-                for (const element of type) {
-                    inits.push(
-                        ctx.ArrayAdd(ir, {
-                            array,
-                            value: walk(element),
-                        }),
-                    )
-                }
-
-                return ctx.Execute(ir, {
-                    children: [...inits, ctx.value(ir, array)],
+                return ctx.ArrayConstructor(ir, {
+                    array,
+                    children,
                 })
             }
 
@@ -155,22 +151,23 @@ const createComparator = (
 ): Comparator => {
     const comparators: Comparator[] = comparisons.map(([get, Container]) => (ir, a, b, ctx) => {
         const array: unknown[] = []
+        const children = [
+            ctx.ArrayAdd(ir, {
+                array,
+                value: get(a(), ctx),
+            }),
+            ctx.ArrayAdd(ir, {
+                array,
+                value: get(b(), ctx),
+            }),
+        ]
 
         return ctx.Call(ir, {
             callee: ctx.value(ir, Container.equals, Container),
             args: {
-                init: ctx.Execute(ir, {
-                    children: [
-                        ctx.ArrayAdd(ir, {
-                            array,
-                            value: get(a(), ctx),
-                        }),
-                        ctx.ArrayAdd(ir, {
-                            array,
-                            value: get(b(), ctx),
-                        }),
-                        ctx.zero(ir),
-                    ],
+                init: ctx.ArrayConstructor(ir, {
+                    array,
+                    children,
                 }),
                 value: array,
             },

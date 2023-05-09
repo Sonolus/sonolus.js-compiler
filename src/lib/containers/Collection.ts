@@ -134,13 +134,19 @@ export const Collection = <const T extends object>(
                     }),
                 (index) => {
                     const array: unknown[] = []
+                    const children = [
+                        ctx.ArrayAdd(ir, {
+                            array,
+                            value: index(),
+                        }),
+                    ]
 
                     return ctx.Call(ir, {
                         callee: ctx.value(ir, (thisValue as this).get, thisValue),
                         args: {
-                            init: ctx.ArrayAdd(ir, {
+                            init: ctx.ArrayConstructor(ir, {
                                 array,
-                                value: index(),
+                                children,
                             }),
                             value: array,
                         },
