@@ -4,7 +4,7 @@ import { TransformIR } from './index.js'
 export const transformArrayDestructorRest: TransformIR<ArrayDestructorRest> = (ir, ctx) => {
     const array: unknown[] = []
     const children = ir.elements.map((element) =>
-        ctx.ArrayAdd(ir, {
+        ctx.ArrayConstructorAdd(ir, {
             array,
             value: ctx.value(ir, element),
         }),

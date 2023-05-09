@@ -55,7 +55,7 @@ const toValue = (descriptor: PropertyDescriptor, thisValue: unknown) => {
             [Intrinsic.Set]: (ir, value, ctx) => {
                 const array: unknown[] = []
                 const children = [
-                    ctx.ArrayAdd(ir, {
+                    ctx.ArrayConstructorAdd(ir, {
                         array,
                         value,
                     }),

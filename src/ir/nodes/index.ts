@@ -1,7 +1,7 @@
 import { StackTrace } from '../../utils/CompilerError.js'
 import { Env } from '../env/index.js'
-import { ArrayAdd, ArrayAddChildren } from './ArrayAdd.js'
 import { ArrayConstructor, ArrayConstructorChildren } from './ArrayConstructor.js'
+import { ArrayConstructorAdd, ArrayConstructorAddChildren } from './ArrayConstructorAdd.js'
 import { ArrayDestructor, ArrayDestructorChildren } from './ArrayDestructor.js'
 import { ArrayDestructorGet, ArrayDestructorGetChildren } from './ArrayDestructorGet.js'
 import { ArrayDestructorRest, ArrayDestructorRestChildren } from './ArrayDestructorRest.js'
@@ -45,8 +45,8 @@ export type BaseIR = {
 }
 
 export type IR =
-    | ArrayAdd
     | ArrayConstructor
+    | ArrayConstructorAdd
     | ArrayDestructor
     | ArrayDestructorGet
     | ArrayDestructorRest
@@ -82,8 +82,8 @@ export type IR =
     | While
 
 export type IRChildren<N extends IR> = {
-    ArrayAdd: ArrayAddChildren
     ArrayConstructor: ArrayConstructorChildren
+    ArrayConstructorAdd: ArrayConstructorAddChildren
     ArrayDestructor: ArrayDestructorChildren
     ArrayDestructorGet: ArrayDestructorGetChildren
     ArrayDestructorRest: ArrayDestructorRestChildren
@@ -120,8 +120,8 @@ export type IRChildren<N extends IR> = {
 }[N['type']]
 
 export const IRTypes = [
-    'ArrayAdd',
     'ArrayConstructor',
+    'ArrayConstructorAdd',
     'ArrayDestructor',
     'ArrayDestructorGet',
     'ArrayDestructorRest',

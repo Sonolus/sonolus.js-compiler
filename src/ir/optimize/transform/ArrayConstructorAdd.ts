@@ -1,9 +1,9 @@
 import { Intrinsic } from '../../../intrinsic/index.js'
-import { ArrayAdd } from '../../nodes/ArrayAdd.js'
+import { ArrayConstructorAdd } from '../../nodes/ArrayConstructorAdd.js'
 import { TransformIR } from './index.js'
 import { isReference, isResolved, rewriteAsExecute, transformIRAndGet } from './utils.js'
 
-export const transformArrayAdd: TransformIR<ArrayAdd> = (ir, ctx) => {
+export const transformArrayConstructorAdd: TransformIR<ArrayConstructorAdd> = (ir, ctx) => {
     const value = transformIRAndGet(ir.value, ctx)
 
     if (!isResolved(value)) return { ...ir, value }

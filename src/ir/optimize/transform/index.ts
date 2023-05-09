@@ -1,7 +1,7 @@
 import { visit } from '../../../utils/visitor.js'
 import { IR } from '../../nodes/index.js'
-import { transformArrayAdd } from './ArrayAdd.js'
 import { transformArrayConstructor } from './ArrayConstructor.js'
+import { transformArrayConstructorAdd } from './ArrayConstructorAdd.js'
 import { transformArrayDestructor } from './ArrayDestructor.js'
 import { transformArrayDestructorGet } from './ArrayDestructorGet.js'
 import { transformArrayDestructorRest } from './ArrayDestructorRest.js'
@@ -40,8 +40,8 @@ import { TransformIRContext } from './context.js'
 export type TransformIR<N extends IR> = (ir: N, ctx: TransformIRContext) => IR
 
 export const transformIR = visit<TransformIR<IR>>().create('transform', {
-    transformArrayAdd,
     transformArrayConstructor,
+    transformArrayConstructorAdd,
     transformArrayDestructor,
     transformArrayDestructorGet,
     transformArrayDestructorRest,

@@ -19,7 +19,7 @@ export const compileCallArgs = (node: CallExpression, ctx: CompileESTreeContext)
         }
 
         children.push(
-            ctx.ArrayAdd(argument, {
+            ctx.ArrayConstructorAdd(argument, {
                 array,
                 value: compileESTree(argument, ctx),
             }),

@@ -158,7 +158,7 @@ export const Dictionary = <const K extends object, const V extends object>(
                     const call = (method: 'getKey' | 'getValue') => {
                         const array: unknown[] = []
                         const children = [
-                            ctx.ArrayAdd(ir, {
+                            ctx.ArrayConstructorAdd(ir, {
                                 array,
                                 value: index(),
                             }),
@@ -175,11 +175,11 @@ export const Dictionary = <const K extends object, const V extends object>(
 
                     const array: unknown[] = []
                     const children = [
-                        ctx.ArrayAdd(ir, {
+                        ctx.ArrayConstructorAdd(ir, {
                             array,
                             value: call('getKey'),
                         }),
-                        ctx.ArrayAdd(ir, {
+                        ctx.ArrayConstructorAdd(ir, {
                             array,
                             value: call('getValue'),
                         }),

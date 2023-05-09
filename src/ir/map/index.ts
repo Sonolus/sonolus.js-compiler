@@ -1,7 +1,7 @@
 import { visit } from '../../utils/visitor.js'
 import { IR, IRChildren } from '../nodes/index.js'
-import { mapArrayAdd } from './ArrayAdd.js'
 import { mapArrayConstructor } from './ArrayConstructor.js'
+import { mapArrayConstructorAdd } from './ArrayConstructorAdd.js'
 import { mapArrayDestructor } from './ArrayDestructor.js'
 import { mapArrayDestructorGet } from './ArrayDestructorGet.js'
 import { mapArrayDestructorRest } from './ArrayDestructorRest.js'
@@ -39,8 +39,8 @@ import { mapWhile } from './While.js'
 export type MapIR<N extends IR> = (ir: N, ...children: IR[]) => N
 
 export const mapIR = visit<<N extends IR>(ir: N, ...children: IRChildren<N>) => N>().create('map', {
-    mapArrayAdd,
     mapArrayConstructor,
+    mapArrayConstructorAdd,
     mapArrayDestructor,
     mapArrayDestructorGet,
     mapArrayDestructorRest,

@@ -40,7 +40,7 @@ const createCompoundContainerRead =
             if (Array.isArray(type)) {
                 const array: unknown[] = []
                 const children = type.map((element) =>
-                    ctx.ArrayAdd(ir, {
+                    ctx.ArrayConstructorAdd(ir, {
                         array,
                         value: walk(element),
                     }),
@@ -146,11 +146,11 @@ const createComparator = (
     const comparators: Comparator[] = comparisons.map(([get, Container]) => (ir, a, b, ctx) => {
         const array: unknown[] = []
         const children = [
-            ctx.ArrayAdd(ir, {
+            ctx.ArrayConstructorAdd(ir, {
                 array,
                 value: get(a(), ctx),
             }),
-            ctx.ArrayAdd(ir, {
+            ctx.ArrayConstructorAdd(ir, {
                 array,
                 value: get(b(), ctx),
             }),

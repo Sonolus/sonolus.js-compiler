@@ -9,7 +9,7 @@ export const compileArrayExpression: CompileESTree<ArrayExpression> = (node, ctx
     for (const element of node.elements) {
         if (!element) {
             children.push(
-                ctx.ArrayAdd(node, {
+                ctx.ArrayConstructorAdd(node, {
                     array,
                     value: ctx.value(node, undefined),
                 }),
@@ -28,7 +28,7 @@ export const compileArrayExpression: CompileESTree<ArrayExpression> = (node, ctx
         }
 
         children.push(
-            ctx.ArrayAdd(element, {
+            ctx.ArrayConstructorAdd(element, {
                 array,
                 value: compileESTree(element, ctx),
             }),

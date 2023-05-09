@@ -1,7 +1,7 @@
 import { visit } from '../../utils/visitor.js'
 import { IR, IRChildren } from '../nodes/index.js'
-import { iterateArrayAdd } from './ArrayAdd.js'
 import { iterateArrayConstructor } from './ArrayConstructor.js'
+import { iterateArrayConstructorAdd } from './ArrayConstructorAdd.js'
 import { iterateArrayDestructor } from './ArrayDestructor.js'
 import { iterateArrayDestructorGet } from './ArrayDestructorGet.js'
 import { iterateArrayDestructorRest } from './ArrayDestructorRest.js'
@@ -39,8 +39,8 @@ import { iterateWhile } from './While.js'
 export type IterateIR<N extends IR> = (ir: N) => IRChildren<N>
 
 export const iterateIR = visit<(ir: IR) => IR[]>().create('iterate', {
-    iterateArrayAdd,
     iterateArrayConstructor,
+    iterateArrayConstructorAdd,
     iterateArrayDestructor,
     iterateArrayDestructorGet,
     iterateArrayDestructorRest,

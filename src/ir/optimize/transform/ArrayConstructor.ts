@@ -11,4 +11,4 @@ export const transformArrayConstructor: TransformIR<ArrayConstructor> = (ir, ctx
     return rewriteAsExecute(ir, ctx, [...children, ctx.value(ir, ir.array)])
 }
 
-const isResolved = (ir: IR) => ir.type !== 'ArrayAdd' && ir.type !== 'ArraySpread'
+const isResolved = (ir: IR) => ir.type !== 'ArrayConstructorAdd' && ir.type !== 'ArraySpread'

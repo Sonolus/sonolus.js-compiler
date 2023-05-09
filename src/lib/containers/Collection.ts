@@ -135,7 +135,7 @@ export const Collection = <const T extends object>(
                 (index) => {
                     const array: unknown[] = []
                     const children = [
-                        ctx.ArrayAdd(ir, {
+                        ctx.ArrayConstructorAdd(ir, {
                             array,
                             value: index(),
                         }),
