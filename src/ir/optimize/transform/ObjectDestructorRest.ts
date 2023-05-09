@@ -2,6 +2,8 @@ import { ObjectDestructorRest } from '../../nodes/ObjectDestructorRest.js'
 import { TransformIR } from './index.js'
 
 export const transformObjectDestructorRest: TransformIR<ObjectDestructorRest> = (ir, ctx) => {
+    if (!ir.target.keys) return ir
+
     const object = {}
     const children = ir.target.keys.map((key) =>
         ctx.ObjectConstructorAdd(ir, {

@@ -92,12 +92,8 @@ const compileObjectPattern = (
     ctx: CompileESTreeContext,
     compileLeaf: CompileLeaf,
 ) => {
-    const target: {
-        object: unknown
-        keys: string[]
-    } = {
+    const target = {
         object: undefined,
-        keys: [],
     }
 
     const destructs: IR[] = []
