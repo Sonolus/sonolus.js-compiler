@@ -23,6 +23,7 @@ import { transformMember } from './Member.js'
 import { transformNative } from './Native.js'
 import { transformNew } from './New.js'
 import { transformObjectAdd } from './ObjectAdd.js'
+import { transformObjectConstructor } from './ObjectConstructor.js'
 import { transformObjectDestructor } from './ObjectDestructor.js'
 import { transformObjectDestructorGet } from './ObjectDestructorGet.js'
 import { transformObjectDestructorRest } from './ObjectDestructorRest.js'
@@ -60,6 +61,7 @@ export const transformIR = visit<TransformIR<IR>>().create('transform', {
     transformNative,
     transformNew,
     transformObjectAdd,
+    transformObjectConstructor,
     transformObjectDestructor,
     transformObjectDestructorGet,
     transformObjectDestructorRest,

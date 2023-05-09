@@ -22,6 +22,7 @@ import { Member, MemberChildren } from './Member.js'
 import { Native, NativeChildren } from './Native.js'
 import { New, NewChildren } from './New.js'
 import { ObjectAdd, ObjectAddChildren } from './ObjectAdd.js'
+import { ObjectConstructor, ObjectConstructorChildren } from './ObjectConstructor.js'
 import { ObjectDestructor, ObjectDestructorChildren } from './ObjectDestructor.js'
 import { ObjectDestructorGet, ObjectDestructorGetChildren } from './ObjectDestructorGet.js'
 import { ObjectDestructorRest, ObjectDestructorRestChildren } from './ObjectDestructorRest.js'
@@ -62,6 +63,7 @@ export type IR =
     | Native
     | New
     | ObjectAdd
+    | ObjectConstructor
     | ObjectDestructor
     | ObjectDestructorGet
     | ObjectDestructorRest
@@ -97,6 +99,7 @@ export type IRChildren<N extends IR> = {
     Native: NativeChildren
     New: NewChildren
     ObjectAdd: ObjectAddChildren
+    ObjectConstructor: ObjectConstructorChildren
     ObjectDestructor: ObjectDestructorChildren
     ObjectDestructorGet: ObjectDestructorGetChildren
     ObjectDestructorRest: ObjectDestructorRestChildren
@@ -133,6 +136,7 @@ export const IRTypes = [
     'Native',
     'New',
     'ObjectAdd',
+    'ObjectConstructor',
     'ObjectDestructor',
     'ObjectDestructorGet',
     'ObjectDestructorRest',

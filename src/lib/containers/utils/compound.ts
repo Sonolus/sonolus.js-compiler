@@ -60,22 +60,18 @@ const createCompoundContainerRead =
             }
 
             const object = {}
+            const children = Object.entries(type).map(([k, v]) =>
+                ctx.ObjectAdd(ir, {
+                    object,
+                    kind: 'init',
+                    key: ctx.value(ir, k),
+                    value: walk(v),
+                }),
+            )
 
-            const inits: IR[] = []
-
-            for (const [k, v] of Object.entries(type)) {
-                inits.push(
-                    ctx.ObjectAdd(ir, {
-                        object,
-                        kind: 'init',
-                        key: ctx.value(ir, k),
-                        value: walk(v),
-                    }),
-                )
-            }
-
-            return ctx.Execute(ir, {
-                children: [...inits, ctx.value(ir, object)],
+            return ctx.ObjectConstructor(ir, {
+                object,
+                children,
             })
         }
 

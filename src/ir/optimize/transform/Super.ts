@@ -14,14 +14,18 @@ export const transformSuper: TransformIR<Super> = (ir, ctx) => {
 
     return rewriteAsExecute(ir, ctx, [
         init,
-        ...callClassConstructor(
-            ir,
-            ir.instance,
-            Object.getPrototypeOf(ir.prototype),
-            args.value,
-            ctx,
-        ),
-        ...initializeClassFields(ir, ir.instance, ir.prototype as Function, ctx),
-        ctx.value(ir, ir.instance),
+        ctx.ObjectConstructor(ir, {
+            object: ir.instance,
+            children: [
+                ...callClassConstructor(
+                    ir,
+                    ir.instance,
+                    Object.getPrototypeOf(ir.prototype),
+                    args.value,
+                    ctx,
+                ),
+                ...initializeClassFields(ir, ir.instance, ir.prototype as Function, ctx),
+            ],
+        }),
     ])
 }

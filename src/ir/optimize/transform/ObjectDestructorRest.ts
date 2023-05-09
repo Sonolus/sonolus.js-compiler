@@ -1,11 +1,9 @@
 import { ObjectDestructorRest } from '../../nodes/ObjectDestructorRest.js'
 import { TransformIR } from './index.js'
-import { rewriteAsExecute } from './utils.js'
 
 export const transformObjectDestructorRest: TransformIR<ObjectDestructorRest> = (ir, ctx) => {
     const object = {}
-
-    const inits = ir.target.keys.map((key) =>
+    const children = ir.target.keys.map((key) =>
         ctx.ObjectAdd(ir, {
             object,
             kind: 'init',
@@ -19,5 +17,8 @@ export const transformObjectDestructorRest: TransformIR<ObjectDestructorRest> = 
 
     ir.target.keys = []
 
-    return rewriteAsExecute(ir, ctx, [...inits, ctx.value(ir, object)])
+    return ctx.ObjectConstructor(ir, {
+        object,
+        children,
+    })
 }

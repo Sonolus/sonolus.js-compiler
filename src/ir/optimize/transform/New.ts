@@ -23,7 +23,9 @@ export const transformNew: TransformIR<New> = (ir, ctx) => {
     return rewriteAsExecute(ir, ctx, [
         callee,
         args.init,
-        ...callClassConstructor(ir, instance, prototype, args.value, ctx),
-        ctx.value(ir, instance),
+        ctx.ObjectConstructor(ir, {
+            object: instance,
+            children: callClassConstructor(ir, instance, prototype, args.value, ctx),
+        }),
     ])
 }
