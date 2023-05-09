@@ -1,7 +1,13 @@
 import { Intrinsic } from '../../../intrinsic/index.js'
 import { ObjectConstructorAdd } from '../../nodes/ObjectConstructorAdd.js'
 import { TransformIR } from './index.js'
-import { isConstant, isReference, rewriteAsExecute, transformIRAndGet } from './utils.js'
+import {
+    isConstant,
+    isReference,
+    isResolved,
+    rewriteAsExecute,
+    transformIRAndGet,
+} from './utils.js'
 
 export const transformObjectConstructorAdd: TransformIR<ObjectConstructorAdd> = (ir, ctx) => {
     const key = transformIRAndGet(ir.key, ctx)
@@ -26,6 +32,8 @@ export const transformObjectConstructorAdd: TransformIR<ObjectConstructorAdd> = 
 
         return rewriteAsExecute(ir, ctx, [key, value, ctx.zero(ir)])
     }
+
+    if (!isResolved(value)) return { ...ir, key, value }
 
     const valueResult = isReference(value)
     if (valueResult) {

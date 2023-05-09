@@ -34,6 +34,16 @@ export const unwrapIRGet = (ir: IR, ctx: TransformIRContext): IR => {
     return ir
 }
 
+export const isResolved = (ir: IR): boolean => {
+    switch (ir.type) {
+        case 'ArrayConstructor':
+        case 'ObjectConstructor':
+            return false
+        default:
+            return true
+    }
+}
+
 export const isConstant = (ir: IR): Value | undefined => {
     switch (ir.type) {
         case 'Execute':

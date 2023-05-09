@@ -5,6 +5,7 @@ import { TransformIR } from './index.js'
 import {
     isConstant,
     isReference,
+    isResolved,
     rewriteAsExecute,
     transformIRAndGet,
     unwrapIRGet,
@@ -21,6 +22,8 @@ export const transformObjectConstructorSpread: TransformIR<ObjectConstructorSpre
     for (const entry of Object.entries(result.value as never)) {
         const key = entry[0]
         const value = unwrapIRGet(ctx.value(ir, entry[1]), ctx)
+
+        if (!isResolved(value)) return { ...ir, arg }
 
         const result = isReference(value)
         if (result) {

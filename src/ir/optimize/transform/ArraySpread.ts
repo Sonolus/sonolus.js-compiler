@@ -5,6 +5,7 @@ import { TransformIR } from './index.js'
 import {
     isConstant,
     isReference,
+    isResolved,
     rewriteAsExecute,
     transformIRAndGet,
     unwrapIRGet,
@@ -20,6 +21,8 @@ export const transformArraySpread: TransformIR<ArraySpread> = (ir, ctx) => {
 
     for (const element of result.value as unknown[]) {
         const value = unwrapIRGet(ctx.value(ir, element), ctx)
+
+        if (!isResolved(value)) return { ...ir, arg }
 
         const result = isReference(value)
         if (result) {
