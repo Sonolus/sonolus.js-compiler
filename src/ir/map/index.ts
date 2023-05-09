@@ -23,10 +23,10 @@ import { mapNative } from './Native.js'
 import { mapNew } from './New.js'
 import { mapObjectConstructor } from './ObjectConstructor.js'
 import { mapObjectConstructorAdd } from './ObjectConstructorAdd.js'
+import { mapObjectConstructorSpread } from './ObjectConstructorSpread.js'
 import { mapObjectDestructor } from './ObjectDestructor.js'
 import { mapObjectDestructorGet } from './ObjectDestructorGet.js'
 import { mapObjectDestructorRest } from './ObjectDestructorRest.js'
-import { mapObjectSpread } from './ObjectSpread.js'
 import { mapReference } from './Reference.js'
 import { mapSet } from './Set.js'
 import { mapSuper } from './Super.js'
@@ -61,10 +61,10 @@ export const mapIR = visit<<N extends IR>(ir: N, ...children: IRChildren<N>) => 
     mapNew,
     mapObjectConstructor,
     mapObjectConstructorAdd,
+    mapObjectConstructorSpread,
     mapObjectDestructor,
     mapObjectDestructorGet,
     mapObjectDestructorRest,
-    mapObjectSpread,
     mapReference,
     mapSet,
     mapSuper,

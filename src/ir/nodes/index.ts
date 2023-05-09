@@ -23,10 +23,13 @@ import { Native, NativeChildren } from './Native.js'
 import { New, NewChildren } from './New.js'
 import { ObjectConstructor, ObjectConstructorChildren } from './ObjectConstructor.js'
 import { ObjectConstructorAdd, ObjectConstructorAddChildren } from './ObjectConstructorAdd.js'
+import {
+    ObjectConstructorSpread,
+    ObjectConstructorSpreadChildren,
+} from './ObjectConstructorSpread.js'
 import { ObjectDestructor, ObjectDestructorChildren } from './ObjectDestructor.js'
 import { ObjectDestructorGet, ObjectDestructorGetChildren } from './ObjectDestructorGet.js'
 import { ObjectDestructorRest, ObjectDestructorRestChildren } from './ObjectDestructorRest.js'
-import { ObjectSpread, ObjectSpreadChildren } from './ObjectSpread.js'
 import { Reference, ReferenceChildren } from './Reference.js'
 import { Set, SetChildren } from './Set.js'
 import { Super, SuperChildren } from './Super.js'
@@ -64,10 +67,10 @@ export type IR =
     | New
     | ObjectConstructor
     | ObjectConstructorAdd
+    | ObjectConstructorSpread
     | ObjectDestructor
     | ObjectDestructorGet
     | ObjectDestructorRest
-    | ObjectSpread
     | Reference
     | Set
     | Super
@@ -100,10 +103,10 @@ export type IRChildren<N extends IR> = {
     New: NewChildren
     ObjectConstructor: ObjectConstructorChildren
     ObjectConstructorAdd: ObjectConstructorAddChildren
+    ObjectConstructorSpread: ObjectConstructorSpreadChildren
     ObjectDestructor: ObjectDestructorChildren
     ObjectDestructorGet: ObjectDestructorGetChildren
     ObjectDestructorRest: ObjectDestructorRestChildren
-    ObjectSpread: ObjectSpreadChildren
     Reference: ReferenceChildren
     Set: SetChildren
     Super: SuperChildren
@@ -137,10 +140,10 @@ export const IRTypes = [
     'New',
     'ObjectConstructor',
     'ObjectConstructorAdd',
+    'ObjectConstructorSpread',
     'ObjectDestructor',
     'ObjectDestructorGet',
     'ObjectDestructorRest',
-    'ObjectSpread',
     'Reference',
     'Set',
     'Super',

@@ -10,7 +10,7 @@ export const compileObjectExpression: CompileESTree<ObjectExpression> = (node, c
     for (const property of node.properties) {
         if (property.type === 'SpreadElement') {
             children.push(
-                ctx.ObjectSpread(property, {
+                ctx.ObjectConstructorSpread(property, {
                     object,
                     arg: compileESTree(property.argument, ctx),
                 }),

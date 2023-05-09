@@ -23,10 +23,10 @@ import { iterateNative } from './Native.js'
 import { iterateNew } from './New.js'
 import { iterateObjectConstructor } from './ObjectConstructor.js'
 import { iterateObjectConstructorAdd } from './ObjectConstructorAdd.js'
+import { iterateObjectConstructorSpread } from './ObjectConstructorSpread.js'
 import { iterateObjectDestructor } from './ObjectDestructor.js'
 import { iterateObjectDestructorGet } from './ObjectDestructorGet.js'
 import { iterateObjectDestructorRest } from './ObjectDestructorRest.js'
-import { iterateObjectSpread } from './ObjectSpread.js'
 import { iterateReference } from './Reference.js'
 import { iterateSet } from './Set.js'
 import { iterateSuper } from './Super.js'
@@ -61,10 +61,10 @@ export const iterateIR = visit<(ir: IR) => IR[]>().create('iterate', {
     iterateNew,
     iterateObjectConstructor,
     iterateObjectConstructorAdd,
+    iterateObjectConstructorSpread,
     iterateObjectDestructor,
     iterateObjectDestructorGet,
     iterateObjectDestructorRest,
-    iterateObjectSpread,
     iterateReference,
     iterateSet,
     iterateSuper,

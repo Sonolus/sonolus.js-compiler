@@ -23,10 +23,10 @@ import { transformNative } from './Native.js'
 import { transformNew } from './New.js'
 import { transformObjectConstructor } from './ObjectConstructor.js'
 import { transformObjectConstructorAdd } from './ObjectConstructorAdd.js'
+import { transformObjectConstructorSpread } from './ObjectConstructorSpread.js'
 import { transformObjectDestructor } from './ObjectDestructor.js'
 import { transformObjectDestructorGet } from './ObjectDestructorGet.js'
 import { transformObjectDestructorRest } from './ObjectDestructorRest.js'
-import { transformObjectSpread } from './ObjectSpread.js'
 import { transformReference } from './Reference.js'
 import { transformSet } from './Set.js'
 import { transformSuper } from './Super.js'
@@ -62,10 +62,10 @@ export const transformIR = visit<TransformIR<IR>>().create('transform', {
     transformNew,
     transformObjectConstructor,
     transformObjectConstructorAdd,
+    transformObjectConstructorSpread,
     transformObjectDestructor,
     transformObjectDestructorGet,
     transformObjectDestructorRest,
-    transformObjectSpread,
     transformReference,
     transformSet,
     transformSuper,
