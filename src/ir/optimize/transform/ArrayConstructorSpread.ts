@@ -1,5 +1,5 @@
 import { Intrinsic } from '../../../intrinsic/index.js'
-import { ArraySpread } from '../../nodes/ArraySpread.js'
+import { ArrayConstructorSpread } from '../../nodes/ArrayConstructorSpread.js'
 import { IR } from '../../nodes/index.js'
 import { TransformIR } from './index.js'
 import {
@@ -11,7 +11,7 @@ import {
     unwrapIRGet,
 } from './utils.js'
 
-export const transformArraySpread: TransformIR<ArraySpread> = (ir, ctx) => {
+export const transformArrayConstructorSpread: TransformIR<ArrayConstructorSpread> = (ir, ctx) => {
     const arg = transformIRAndGet(ir.arg, ctx)
 
     const result = isConstant(arg)

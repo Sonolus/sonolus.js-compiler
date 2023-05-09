@@ -10,7 +10,7 @@ export const compileCallArgs = (node: CallExpression, ctx: CompileESTreeContext)
     for (const argument of node.arguments) {
         if (argument.type === 'SpreadElement') {
             children.push(
-                ctx.ArraySpread(argument, {
+                ctx.ArrayConstructorSpread(argument, {
                     array,
                     arg: compileESTree(argument.argument, ctx),
                 }),

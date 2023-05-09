@@ -19,7 +19,7 @@ export const compileArrayExpression: CompileESTree<ArrayExpression> = (node, ctx
 
         if (element.type === 'SpreadElement') {
             children.push(
-                ctx.ArraySpread(node, {
+                ctx.ArrayConstructorSpread(node, {
                     array,
                     arg: compileESTree(element.argument, ctx),
                 }),

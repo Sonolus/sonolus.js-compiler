@@ -2,10 +2,10 @@ import { StackTrace } from '../../utils/CompilerError.js'
 import { Env } from '../env/index.js'
 import { ArrayConstructor, ArrayConstructorChildren } from './ArrayConstructor.js'
 import { ArrayConstructorAdd, ArrayConstructorAddChildren } from './ArrayConstructorAdd.js'
+import { ArrayConstructorSpread, ArrayConstructorSpreadChildren } from './ArrayConstructorSpread.js'
 import { ArrayDestructor, ArrayDestructorChildren } from './ArrayDestructor.js'
 import { ArrayDestructorGet, ArrayDestructorGetChildren } from './ArrayDestructorGet.js'
 import { ArrayDestructorRest, ArrayDestructorRestChildren } from './ArrayDestructorRest.js'
-import { ArraySpread, ArraySpreadChildren } from './ArraySpread.js'
 import { Assign, AssignChildren } from './Assign.js'
 import { Binary, BinaryChildren } from './Binary.js'
 import { Block, BlockChildren } from './Block.js'
@@ -47,10 +47,10 @@ export type BaseIR = {
 export type IR =
     | ArrayConstructor
     | ArrayConstructorAdd
+    | ArrayConstructorSpread
     | ArrayDestructor
     | ArrayDestructorGet
     | ArrayDestructorRest
-    | ArraySpread
     | Assign
     | Binary
     | Block
@@ -84,10 +84,10 @@ export type IR =
 export type IRChildren<N extends IR> = {
     ArrayConstructor: ArrayConstructorChildren
     ArrayConstructorAdd: ArrayConstructorAddChildren
+    ArrayConstructorSpread: ArrayConstructorSpreadChildren
     ArrayDestructor: ArrayDestructorChildren
     ArrayDestructorGet: ArrayDestructorGetChildren
     ArrayDestructorRest: ArrayDestructorRestChildren
-    ArraySpread: ArraySpreadChildren
     Assign: AssignChildren
     Binary: BinaryChildren
     Block: BlockChildren
@@ -122,10 +122,10 @@ export type IRChildren<N extends IR> = {
 export const IRTypes = [
     'ArrayConstructor',
     'ArrayConstructorAdd',
+    'ArrayConstructorSpread',
     'ArrayDestructor',
     'ArrayDestructorGet',
     'ArrayDestructorRest',
-    'ArraySpread',
     'Assign',
     'Binary',
     'Block',
