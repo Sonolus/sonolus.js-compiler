@@ -46,10 +46,7 @@ const toValue = (descriptor: PropertyDescriptor, thisValue: unknown) => {
             [Intrinsic.Get]: (ir, ctx) =>
                 ctx.Call(ir, {
                     callee: ctx.value(ir, descriptor.get, thisValue),
-                    args: {
-                        init: ctx.zero(ir),
-                        value: [],
-                    },
+                    args: ctx.value(ir, []),
                 }),
         } satisfies Intrinsic<'Get'>)
 
@@ -66,13 +63,10 @@ const toValue = (descriptor: PropertyDescriptor, thisValue: unknown) => {
 
                 return ctx.Call(ir, {
                     callee: ctx.value(ir, descriptor.set, thisValue),
-                    args: {
-                        init: ctx.ArrayConstructor(ir, {
-                            array,
-                            children,
-                        }),
-                        value: array,
-                    },
+                    args: ctx.ArrayConstructor(ir, {
+                        array,
+                        children,
+                    }),
                 })
             },
         } satisfies Intrinsic<'Set'>)

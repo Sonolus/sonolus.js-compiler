@@ -143,13 +143,10 @@ export const Collection = <const T extends object>(
 
                     return ctx.Call(ir, {
                         callee: ctx.value(ir, (thisValue as this).get, thisValue),
-                        args: {
-                            init: ctx.ArrayConstructor(ir, {
-                                array,
-                                children,
-                            }),
-                            value: array,
-                        },
+                        args: ctx.ArrayConstructor(ir, {
+                            array,
+                            children,
+                        }),
                     })
                 },
                 estreeCtx,

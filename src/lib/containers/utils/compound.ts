@@ -33,10 +33,7 @@ const createCompoundContainerRead =
 
                 return ctx.Call(ir, {
                     callee: ctx.value(ir, Container.read, Container),
-                    args: {
-                        init: ctx.zero(ir),
-                        value: [pointers.splice(0, Container.size)],
-                    },
+                    args: ctx.value(ir, [pointers.splice(0, Container.size)]),
                 })
             }
 
@@ -85,10 +82,7 @@ const createCompoundContainerWrite =
                 writes.push(
                     ctx.Call(ir, {
                         callee: ctx.value(ir, Container.write, Container),
-                        args: {
-                            init: ctx.zero(ir),
-                            value: [pointers.splice(0, Container.size), value],
-                        },
+                        args: ctx.value(ir, [pointers.splice(0, Container.size), value]),
                     }),
                 )
                 return
@@ -164,13 +158,10 @@ const createComparator = (
 
         return ctx.Call(ir, {
             callee: ctx.value(ir, Container.equals, Container),
-            args: {
-                init: ctx.ArrayConstructor(ir, {
-                    array,
-                    children,
-                }),
-                value: array,
-            },
+            args: ctx.ArrayConstructor(ir, {
+                array,
+                children,
+            }),
         })
     })
 

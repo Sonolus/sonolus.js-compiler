@@ -166,13 +166,10 @@ export const Dictionary = <const K extends object, const V extends object>(
 
                         return ctx.Call(ir, {
                             callee: ctx.value(ir, (thisValue as this)[method], thisValue),
-                            args: {
-                                init: ctx.ArrayConstructor(ir, {
-                                    array,
-                                    children,
-                                }),
-                                value: array,
-                            },
+                            args: ctx.ArrayConstructor(ir, {
+                                array,
+                                children,
+                            }),
                         })
                     }
 

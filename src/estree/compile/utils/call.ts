@@ -3,10 +3,7 @@ import { IR } from '../../../ir/nodes/index.js'
 import { CompileESTreeContext } from '../context.js'
 import { compileESTree } from '../index.js'
 
-export const compileCallArgs = (
-    node: CallExpression,
-    ctx: CompileESTreeContext,
-): { init: IR; value: unknown[] } => {
+export const compileCallArgs = (node: CallExpression, ctx: CompileESTreeContext): IR => {
     const array: unknown[] = []
     const children: IR[] = []
 
@@ -29,11 +26,8 @@ export const compileCallArgs = (
         )
     }
 
-    return {
-        init: ctx.ArrayConstructor(node, {
-            array,
-            children,
-        }),
-        value: array,
-    }
+    return ctx.ArrayConstructor(node, {
+        array,
+        children,
+    })
 }

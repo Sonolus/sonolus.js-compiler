@@ -1,18 +1,16 @@
 import { Super } from '../../nodes/Super.js'
 import { TransformIR } from './index.js'
-import { isResolved, rewriteAsExecute, transformIRAndGet } from './utils.js'
+import { isConstant, rewriteAsExecute, transformIRAndGet } from './utils.js'
 import { callClassConstructor, initializeClassFields } from './utils/class.js'
 
 export const transformSuper: TransformIR<Super> = (ir, ctx) => {
-    const args = {
-        init: transformIRAndGet(ir.args.init, ctx),
-        value: ir.args.value,
-    }
+    const args = transformIRAndGet(ir.args, ctx)
 
-    if (!isResolved(args.init)) return { ...ir, args }
+    const result = isConstant(args)
+    if (!result) return { ...ir, args }
 
     return rewriteAsExecute(ir, ctx, [
-        args.init,
+        args,
         ctx.ObjectConstructor(ir, {
             object: ir.instance,
             children: [
@@ -20,7 +18,7 @@ export const transformSuper: TransformIR<Super> = (ir, ctx) => {
                     ir,
                     ir.instance,
                     Object.getPrototypeOf(ir.prototype),
-                    args.value,
+                    result.value as unknown[],
                     ctx,
                 ),
                 ...initializeClassFields(ir, ir.instance, ir.prototype as Function, ctx),

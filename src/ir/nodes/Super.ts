@@ -4,10 +4,7 @@ export type Super = BaseIR & {
     type: 'Super'
     instance: object
     prototype: unknown
-    args: {
-        init: IR
-        value: unknown[]
-    }
+    args: IR
 }
 
-export type SuperChildren = [init: IR]
+export type SuperChildren = [args: IR]

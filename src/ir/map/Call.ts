@@ -1,10 +1,7 @@
 import { Call } from '../nodes/Call.js'
 import { createMapIRVisitor } from './utils.js'
 
-export const mapCall = createMapIRVisitor<Call>((ir, callee, init) => ({
+export const mapCall = createMapIRVisitor<Call>((_, callee, args) => ({
     callee,
-    args: {
-        init,
-        value: ir.args.value,
-    },
+    args,
 }))

@@ -1,6 +1,5 @@
 import { hasIntrinsicGet } from '../../../intrinsic/has.js'
 import { Intrinsic } from '../../../intrinsic/index.js'
-import { iterateIR } from '../../iterate/index.js'
 import { Value } from '../../nodes/Value.js'
 import { IR } from '../../nodes/index.js'
 import { TransformIRContext } from './context.js'
@@ -52,25 +51,5 @@ export const isReference = (ir: IR): Value | undefined => {
             if (typeof ir.value === 'number' || typeof ir.value === 'boolean') return
 
             return ir
-    }
-}
-
-export const isResolved = (ir: IR): boolean => {
-    switch (ir.type) {
-        case 'Binary':
-        case 'Block':
-        case 'Break':
-        case 'Conditional':
-        case 'Execute':
-        case 'Get':
-        case 'Logical':
-        case 'Native':
-        case 'Set':
-        case 'Unary':
-        case 'Value':
-        case 'While':
-            return iterateIR(ir).every(isResolved)
-        default:
-            return false
     }
 }

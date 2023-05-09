@@ -7,33 +7,41 @@ import { searchPrototype } from '../../../utils/prototype.js'
 import { Call } from '../../nodes/Call.js'
 import { IR } from '../../nodes/index.js'
 import { transformIR, TransformIR } from './index.js'
-import { isConstant, isResolved, rewriteAsExecute, transformIRAndGet } from './utils.js'
+import { isConstant, rewriteAsExecute, transformIRAndGet } from './utils.js'
 
 export const transformCall: TransformIR<Call> = (ir, ctx) => {
     const callee = transformIR(ir.callee, ctx)
-    const args = {
-        init: transformIRAndGet(ir.args.init, ctx),
-        value: ir.args.value,
-    }
+    const args = transformIRAndGet(ir.args, ctx)
 
-    const result = isConstant(callee)
-    if (!result) return { ...ir, callee, args }
+    const calleeResult = isConstant(callee)
+    if (!calleeResult) return { ...ir, callee, args }
 
-    if (!isResolved(args.init)) return { ...ir, callee, args }
+    const argsResult = isConstant(args)
+    if (!argsResult) return { ...ir, callee, args }
 
-    if (hasIntrinsicCall(result.value))
+    if (hasIntrinsicCall(calleeResult.value))
         return rewriteAsExecute(ir, ctx, [
             callee,
-            args.init,
-            result.value[Intrinsic.Call](ir, result.thisValue, args.value, ctx),
+            args,
+            calleeResult.value[Intrinsic.Call](
+                ir,
+                calleeResult.thisValue,
+                argsResult.value as unknown[],
+                ctx,
+            ),
         ])
 
-    if (typeof result.value !== 'function') return { ...ir, callee, args }
+    if (typeof calleeResult.value !== 'function') return { ...ir, callee, args }
 
-    const calls = callFunction(ir, result.thisValue, result.value, args.value)
+    const calls = callFunction(
+        ir,
+        calleeResult.thisValue,
+        calleeResult.value,
+        argsResult.value as unknown[],
+    )
     if (!calls) return { ...ir, callee, args }
 
-    return rewriteAsExecute(ir, ctx, [callee, args.init, ...calls])
+    return rewriteAsExecute(ir, ctx, [callee, args, ...calls])
 }
 
 const callFunction = (ir: IR, thisValue: unknown, func: Function, args: unknown[]) => {

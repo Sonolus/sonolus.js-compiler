@@ -3,10 +3,7 @@ import { BaseIR, IR } from './index.js'
 export type New = BaseIR & {
     type: 'New'
     callee: IR
-    args: {
-        init: IR
-        value: unknown[]
-    }
+    args: IR
 }
 
-export type NewChildren = [callee: IR, init: IR]
+export type NewChildren = [callee: IR, args: IR]
