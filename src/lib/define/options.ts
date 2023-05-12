@@ -1,5 +1,5 @@
 import { EngineConfigurationOption } from 'sonolus-core'
-import { preprocessWritablePointer } from '../utils/pointer.js'
+import { readonlyPointer } from '../utils/pointer.js'
 
 type OptionsDefinition = Record<string, EngineConfigurationOption>
 
@@ -17,9 +17,6 @@ export const defineOptions = <T extends OptionsDefinition>(options: T): Options<
     Object.assign(
         Object.values(options),
         Object.fromEntries(
-            Object.keys(options).map((key, index) => [
-                key,
-                preprocessWritablePointer(2002, index, 0, 0),
-            ]),
+            Object.keys(options).map((key, index) => [key, readonlyPointer(2002, index, 0, 0)]),
         ),
     ) as never
