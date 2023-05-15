@@ -30,6 +30,7 @@ export class Quad extends Container<Quad>('x1', 'y1', 'x2', 'y2', 'x3', 'y3', 'x
         ...args:
             | []
             | [quad: QuadLike]
+            | [p1: VecLike, p2: VecLike, p3: VecLike, p4: VecLike]
             | [
                   x1: number,
                   y1: number,
@@ -45,6 +46,11 @@ export class Quad extends Container<Quad>('x1', 'y1', 'x2', 'y2', 'x3', 'y3', 'x
 
         if (args.length === 8) {
             ;[this.x1, this.y1, this.x2, this.y2, this.x3, this.y3, this.x4, this.y4] = args
+        } else if (args.length === 4) {
+            ;({ x: this.x1, y: this.y1 } = args[0])
+            ;({ x: this.x2, y: this.y2 } = args[1])
+            ;({ x: this.x3, y: this.y3 } = args[2])
+            ;({ x: this.x4, y: this.y4 } = args[3])
         } else if (args.length === 1) {
             ;({
                 x1: this.x1,
