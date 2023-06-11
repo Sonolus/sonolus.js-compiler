@@ -1,1 +1,3 @@
-export type Id<T extends string> = number & { __idType: T }
+declare const idType: unique symbol
+
+export type Id<T extends string> = number & { [idType]: T }
