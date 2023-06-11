@@ -22,8 +22,8 @@ export const transformObjectConstructorAdd: TransformIR<ObjectConstructorAdd> = 
 
         const descriptor = Object.getOwnPropertyDescriptor(ir.object, keyResult.value as never)
         Object.defineProperty(ir.object, keyResult.value as never, {
-            get: descriptor?.get,
-            set: descriptor?.set,
+            get: descriptor?.get as never,
+            set: descriptor?.set as never,
             [ir.kind]: valueResult.value,
 
             enumerable: true,
