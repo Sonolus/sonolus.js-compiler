@@ -17,9 +17,6 @@ export class DataType<T extends number | boolean> {
         return a === b
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    static copy(): void {}
-
     constructor(value: DataType<T>) {
         return value
     }

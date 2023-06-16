@@ -3,18 +3,14 @@ import { IR } from '../../../ir/nodes/index.js'
 import { CompileESTreeContext } from '../context.js'
 import { compileESTree } from '../index.js'
 
-export const compileCallArgs = (
-    node: CallExpression,
-    ctx: CompileESTreeContext,
-): { init: IR; value: unknown[] } => {
+export const compileCallArgs = (node: CallExpression, ctx: CompileESTreeContext): IR => {
     const array: unknown[] = []
-
-    const inits: IR[] = []
+    const children: IR[] = []
 
     for (const argument of node.arguments) {
         if (argument.type === 'SpreadElement') {
-            inits.push(
-                ctx.ArraySpread(argument, {
+            children.push(
+                ctx.ArrayConstructorSpread(argument, {
                     array,
                     arg: compileESTree(argument.argument, ctx),
                 }),
@@ -22,18 +18,16 @@ export const compileCallArgs = (
             continue
         }
 
-        inits.push(
-            ctx.ArrayAdd(argument, {
+        children.push(
+            ctx.ArrayConstructorAdd(argument, {
                 array,
                 value: compileESTree(argument, ctx),
             }),
         )
     }
 
-    return {
-        init: ctx.Execute(node, {
-            children: [...inits, ctx.zero(node)],
-        }),
-        value: array,
-    }
+    return ctx.ArrayConstructor(node, {
+        array,
+        children,
+    })
 }

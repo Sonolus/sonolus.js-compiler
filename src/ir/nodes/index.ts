@@ -1,10 +1,11 @@
 import { StackTrace } from '../../utils/CompilerError.js'
 import { Env } from '../env/index.js'
-import { ArrayAdd, ArrayAddChildren } from './ArrayAdd.js'
+import { ArrayConstructor, ArrayConstructorChildren } from './ArrayConstructor.js'
+import { ArrayConstructorAdd, ArrayConstructorAddChildren } from './ArrayConstructorAdd.js'
+import { ArrayConstructorSpread, ArrayConstructorSpreadChildren } from './ArrayConstructorSpread.js'
 import { ArrayDestructor, ArrayDestructorChildren } from './ArrayDestructor.js'
 import { ArrayDestructorGet, ArrayDestructorGetChildren } from './ArrayDestructorGet.js'
 import { ArrayDestructorRest, ArrayDestructorRestChildren } from './ArrayDestructorRest.js'
-import { ArraySpread, ArraySpreadChildren } from './ArraySpread.js'
 import { Assign, AssignChildren } from './Assign.js'
 import { Binary, BinaryChildren } from './Binary.js'
 import { Block, BlockChildren } from './Block.js'
@@ -21,11 +22,15 @@ import { Logical, LogicalChildren } from './Logical.js'
 import { Member, MemberChildren } from './Member.js'
 import { Native, NativeChildren } from './Native.js'
 import { New, NewChildren } from './New.js'
-import { ObjectAdd, ObjectAddChildren } from './ObjectAdd.js'
+import { ObjectConstructor, ObjectConstructorChildren } from './ObjectConstructor.js'
+import { ObjectConstructorAdd, ObjectConstructorAddChildren } from './ObjectConstructorAdd.js'
+import {
+    ObjectConstructorSpread,
+    ObjectConstructorSpreadChildren,
+} from './ObjectConstructorSpread.js'
 import { ObjectDestructor, ObjectDestructorChildren } from './ObjectDestructor.js'
 import { ObjectDestructorGet, ObjectDestructorGetChildren } from './ObjectDestructorGet.js'
 import { ObjectDestructorRest, ObjectDestructorRestChildren } from './ObjectDestructorRest.js'
-import { ObjectSpread, ObjectSpreadChildren } from './ObjectSpread.js'
 import { Reference, ReferenceChildren } from './Reference.js'
 import { Set, SetChildren } from './Set.js'
 import { Super, SuperChildren } from './Super.js'
@@ -40,11 +45,12 @@ export type BaseIR = {
 }
 
 export type IR =
-    | ArrayAdd
+    | ArrayConstructor
+    | ArrayConstructorAdd
+    | ArrayConstructorSpread
     | ArrayDestructor
     | ArrayDestructorGet
     | ArrayDestructorRest
-    | ArraySpread
     | Assign
     | Binary
     | Block
@@ -61,11 +67,12 @@ export type IR =
     | Member
     | Native
     | New
-    | ObjectAdd
+    | ObjectConstructor
+    | ObjectConstructorAdd
+    | ObjectConstructorSpread
     | ObjectDestructor
     | ObjectDestructorGet
     | ObjectDestructorRest
-    | ObjectSpread
     | Reference
     | Set
     | Super
@@ -75,11 +82,12 @@ export type IR =
     | While
 
 export type IRChildren<N extends IR> = {
-    ArrayAdd: ArrayAddChildren
+    ArrayConstructor: ArrayConstructorChildren
+    ArrayConstructorAdd: ArrayConstructorAddChildren
+    ArrayConstructorSpread: ArrayConstructorSpreadChildren
     ArrayDestructor: ArrayDestructorChildren
     ArrayDestructorGet: ArrayDestructorGetChildren
     ArrayDestructorRest: ArrayDestructorRestChildren
-    ArraySpread: ArraySpreadChildren
     Assign: AssignChildren
     Binary: BinaryChildren
     Block: BlockChildren
@@ -96,11 +104,12 @@ export type IRChildren<N extends IR> = {
     Member: MemberChildren
     Native: NativeChildren
     New: NewChildren
-    ObjectAdd: ObjectAddChildren
+    ObjectConstructor: ObjectConstructorChildren
+    ObjectConstructorAdd: ObjectConstructorAddChildren
+    ObjectConstructorSpread: ObjectConstructorSpreadChildren
     ObjectDestructor: ObjectDestructorChildren
     ObjectDestructorGet: ObjectDestructorGetChildren
     ObjectDestructorRest: ObjectDestructorRestChildren
-    ObjectSpread: ObjectSpreadChildren
     Reference: ReferenceChildren
     Set: SetChildren
     Super: SuperChildren
@@ -111,11 +120,12 @@ export type IRChildren<N extends IR> = {
 }[N['type']]
 
 export const IRTypes = [
-    'ArrayAdd',
+    'ArrayConstructor',
+    'ArrayConstructorAdd',
+    'ArrayConstructorSpread',
     'ArrayDestructor',
     'ArrayDestructorGet',
     'ArrayDestructorRest',
-    'ArraySpread',
     'Assign',
     'Binary',
     'Block',
@@ -132,11 +142,12 @@ export const IRTypes = [
     'Member',
     'Native',
     'New',
-    'ObjectAdd',
+    'ObjectConstructor',
+    'ObjectConstructorAdd',
+    'ObjectConstructorSpread',
     'ObjectDestructor',
     'ObjectDestructorGet',
     'ObjectDestructorRest',
-    'ObjectSpread',
     'Reference',
     'Set',
     'Super',

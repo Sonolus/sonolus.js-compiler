@@ -30,7 +30,7 @@ const compileArrayPattern = (
     ctx: CompileESTreeContext,
     compileLeaf: CompileLeaf,
 ) => {
-    const elements: [string, unknown][] = []
+    const target = {}
 
     const destructs: IR[] = []
 
@@ -38,7 +38,7 @@ const compileArrayPattern = (
         if (!element) {
             destructs.push(
                 ctx.ArrayDestructorGet(node, {
-                    elements,
+                    target,
                 }),
             )
             continue
@@ -46,7 +46,7 @@ const compileArrayPattern = (
 
         if (element.type === 'RestElement') {
             const restValue = ctx.ArrayDestructorRest(element, {
-                elements,
+                target,
             })
 
             destructs.push(...compilePattern(element.argument, restValue, ctx, compileLeaf))
@@ -54,7 +54,7 @@ const compileArrayPattern = (
         }
 
         const elementValue = ctx.ArrayDestructorGet(element, {
-            elements,
+            target,
         })
 
         destructs.push(...compilePattern(element, elementValue, ctx, compileLeaf))
@@ -63,7 +63,7 @@ const compileArrayPattern = (
     return [
         ctx.ArrayDestructor(node, {
             array: value,
-            elements,
+            target,
         }),
         ...destructs,
     ]
@@ -92,12 +92,8 @@ const compileObjectPattern = (
     ctx: CompileESTreeContext,
     compileLeaf: CompileLeaf,
 ) => {
-    const target: {
-        object: unknown
-        keys: string[]
-    } = {
+    const target = {
         object: undefined,
-        keys: [],
     }
 
     const destructs: IR[] = []

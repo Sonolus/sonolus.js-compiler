@@ -5,7 +5,7 @@ export type ObjectDestructor = BaseIR & {
     object: IR
     target: {
         object: unknown
-        keys: string[]
+        keys?: string[]
     }
 }
 

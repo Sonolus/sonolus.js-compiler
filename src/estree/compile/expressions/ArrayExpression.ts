@@ -4,13 +4,12 @@ import { compileESTree, CompileESTree } from '../index.js'
 
 export const compileArrayExpression: CompileESTree<ArrayExpression> = (node, ctx) => {
     const array: unknown[] = []
-
-    const inits: IR[] = []
+    const children: IR[] = []
 
     for (const element of node.elements) {
         if (!element) {
-            inits.push(
-                ctx.ArrayAdd(node, {
+            children.push(
+                ctx.ArrayConstructorAdd(node, {
                     array,
                     value: ctx.value(node, undefined),
                 }),
@@ -19,8 +18,8 @@ export const compileArrayExpression: CompileESTree<ArrayExpression> = (node, ctx
         }
 
         if (element.type === 'SpreadElement') {
-            inits.push(
-                ctx.ArraySpread(node, {
+            children.push(
+                ctx.ArrayConstructorSpread(node, {
                     array,
                     arg: compileESTree(element.argument, ctx),
                 }),
@@ -28,15 +27,16 @@ export const compileArrayExpression: CompileESTree<ArrayExpression> = (node, ctx
             continue
         }
 
-        inits.push(
-            ctx.ArrayAdd(element, {
+        children.push(
+            ctx.ArrayConstructorAdd(element, {
                 array,
                 value: compileESTree(element, ctx),
             }),
         )
     }
 
-    return ctx.Execute(node, {
-        children: [...inits, ctx.value(node, array)],
+    return ctx.ArrayConstructor(node, {
+        array,
+        children,
     })
 }

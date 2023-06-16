@@ -1,4 +1,3 @@
-import { mapIR } from '../../map/index.js'
 import { New } from '../../nodes/New.js'
 import { transformIR, TransformIR } from './index.js'
 import { isConstant, rewriteAsExecute, transformIRAndGet } from './utils.js'
@@ -6,21 +5,31 @@ import { callClassConstructor } from './utils/class.js'
 
 export const transformNew: TransformIR<New> = (ir, ctx) => {
     const callee = transformIR(ir.callee, ctx)
-    const init = transformIRAndGet(ir.args.init, ctx)
-    const newIR = mapIR(ir, callee, init)
+    const args = transformIRAndGet(ir.args, ctx)
 
-    const result = isConstant(callee)
-    if (!result) return newIR
+    const calleeResult = isConstant(callee)
+    if (!calleeResult) return { ...ir, callee, args }
 
-    if (typeof result.value !== 'function') return newIR
+    const argsResult = isConstant(args)
+    if (!argsResult) return { ...ir, callee, args }
 
-    const prototype = result.value.prototype
+    if (typeof calleeResult.value !== 'function') return { ...ir, callee, args }
+
+    const prototype = calleeResult.value.prototype
     const instance = Object.create(prototype)
 
-    return rewriteAsExecute(newIR, ctx, [
+    return rewriteAsExecute(ir, ctx, [
         callee,
-        init,
-        ...callClassConstructor(newIR, instance, prototype, newIR.args.value, ctx),
-        ctx.value(newIR, instance),
+        args,
+        ctx.ObjectConstructor(ir, {
+            object: instance,
+            children: callClassConstructor(
+                ir,
+                instance,
+                prototype,
+                argsResult.value as unknown[],
+                ctx,
+            ),
+        }),
     ])
 }

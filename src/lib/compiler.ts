@@ -30,7 +30,7 @@ export const compiler = defineLib<Compiler>({
             ctx.JSCall(ir, {
                 func: console.log,
                 thisValue: console,
-                args: args.map((arg) => ctx.value(ir, arg)),
+                args: ctx.value(ir, args),
             }),
     },
     dir: {
@@ -38,7 +38,7 @@ export const compiler = defineLib<Compiler>({
             ctx.JSCall(ir, {
                 func: console.dir,
                 thisValue: console,
-                args: args.map((arg) => ctx.value(ir, arg)),
+                args: ctx.value(ir, args),
             }),
     },
 })

@@ -33,49 +33,38 @@ const createCompoundContainerRead =
 
                 return ctx.Call(ir, {
                     callee: ctx.value(ir, Container.read, Container),
-                    args: {
-                        init: ctx.zero(ir),
-                        value: [pointers.splice(0, Container.size)],
-                    },
+                    args: ctx.value(ir, [pointers.splice(0, Container.size)]),
                 })
             }
 
             if (Array.isArray(type)) {
                 const array: unknown[] = []
+                const children = type.map((element) =>
+                    ctx.ArrayConstructorAdd(ir, {
+                        array,
+                        value: walk(element),
+                    }),
+                )
 
-                const inits: IR[] = []
-
-                for (const element of type) {
-                    inits.push(
-                        ctx.ArrayAdd(ir, {
-                            array,
-                            value: walk(element),
-                        }),
-                    )
-                }
-
-                return ctx.Execute(ir, {
-                    children: [...inits, ctx.value(ir, array)],
+                return ctx.ArrayConstructor(ir, {
+                    array,
+                    children,
                 })
             }
 
             const object = {}
+            const children = Object.entries(type).map(([k, v]) =>
+                ctx.ObjectConstructorAdd(ir, {
+                    object,
+                    kind: 'init',
+                    key: ctx.value(ir, k),
+                    value: walk(v),
+                }),
+            )
 
-            const inits: IR[] = []
-
-            for (const [k, v] of Object.entries(type)) {
-                inits.push(
-                    ctx.ObjectAdd(ir, {
-                        object,
-                        kind: 'init',
-                        key: ctx.value(ir, k),
-                        value: walk(v),
-                    }),
-                )
-            }
-
-            return ctx.Execute(ir, {
-                children: [...inits, ctx.value(ir, object)],
+            return ctx.ObjectConstructor(ir, {
+                object,
+                children,
             })
         }
 
@@ -93,10 +82,7 @@ const createCompoundContainerWrite =
                 writes.push(
                     ctx.Call(ir, {
                         callee: ctx.value(ir, Container.write, Container),
-                        args: {
-                            init: ctx.zero(ir),
-                            value: [pointers.splice(0, Container.size), value],
-                        },
+                        args: ctx.value(ir, [pointers.splice(0, Container.size), value]),
                     }),
                 )
                 return
@@ -159,25 +145,23 @@ const createComparator = (
 ): Comparator => {
     const comparators: Comparator[] = comparisons.map(([get, Container]) => (ir, a, b, ctx) => {
         const array: unknown[] = []
+        const children = [
+            ctx.ArrayConstructorAdd(ir, {
+                array,
+                value: get(a(), ctx),
+            }),
+            ctx.ArrayConstructorAdd(ir, {
+                array,
+                value: get(b(), ctx),
+            }),
+        ]
 
         return ctx.Call(ir, {
             callee: ctx.value(ir, Container.equals, Container),
-            args: {
-                init: ctx.Execute(ir, {
-                    children: [
-                        ctx.ArrayAdd(ir, {
-                            array,
-                            value: get(a(), ctx),
-                        }),
-                        ctx.ArrayAdd(ir, {
-                            array,
-                            value: get(b(), ctx),
-                        }),
-                        ctx.zero(ir),
-                    ],
-                }),
-                value: array,
-            },
+            args: ctx.ArrayConstructor(ir, {
+                array,
+                children,
+            }),
         })
     })
 

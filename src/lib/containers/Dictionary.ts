@@ -157,33 +157,37 @@ export const Dictionary = <const K extends object, const V extends object>(
                 (index) => {
                     const call = (method: 'getKey' | 'getValue') => {
                         const array: unknown[] = []
+                        const children = [
+                            ctx.ArrayConstructorAdd(ir, {
+                                array,
+                                value: index(),
+                            }),
+                        ]
 
                         return ctx.Call(ir, {
                             callee: ctx.value(ir, (thisValue as this)[method], thisValue),
-                            args: {
-                                init: ctx.ArrayAdd(ir, {
-                                    array,
-                                    value: index(),
-                                }),
-                                value: array,
-                            },
+                            args: ctx.ArrayConstructor(ir, {
+                                array,
+                                children,
+                            }),
                         })
                     }
 
                     const array: unknown[] = []
+                    const children = [
+                        ctx.ArrayConstructorAdd(ir, {
+                            array,
+                            value: call('getKey'),
+                        }),
+                        ctx.ArrayConstructorAdd(ir, {
+                            array,
+                            value: call('getValue'),
+                        }),
+                    ]
 
-                    return ctx.Execute(ir, {
-                        children: [
-                            ctx.ArrayAdd(ir, {
-                                array,
-                                value: call('getKey'),
-                            }),
-                            ctx.ArrayAdd(ir, {
-                                array,
-                                value: call('getValue'),
-                            }),
-                            ctx.value(ir, array),
-                        ],
+                    return ctx.ArrayConstructor(ir, {
+                        array,
+                        children,
                     })
                 },
                 estreeCtx,

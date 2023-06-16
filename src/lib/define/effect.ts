@@ -1,15 +1,13 @@
 import { EffectClipName } from 'sonolus-core'
-import { EffectClipId } from '../index.js'
+import { EffectClipId } from '../ids/EffectClipId.js'
+import { LoopedEffectClipInstanceId } from '../instanceIds/LoopedEffectClipInstanceId.js'
+import { ScheduledLoopedEffectClipInstanceId } from '../instanceIds/ScheduledLoopedEffectClipInstanceId.js'
 import { native } from '../native.js'
-import {
-    LoopedEffectClipInstanceId,
-    ScheduledLoopedEffectClipInstanceId,
-} from '../types/instanceIds.js'
 import { defineLib } from './lib.js'
 
 export type EffectClip = {
     readonly name: string
-    readonly id: number
+    readonly id: EffectClipId
     readonly exists: boolean
 
     play(distance: number): void
@@ -47,7 +45,7 @@ export const defineEffect = <T extends EffectDefinition>(effect: T): Effect<T> =
                     key,
                     defineLib<EffectClip>({
                         name: name as never,
-                        id,
+                        id: id as never,
                         get exists() {
                             return native.HasEffectClip(this.id)
                         },

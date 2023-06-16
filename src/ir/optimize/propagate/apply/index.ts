@@ -1,4 +1,4 @@
-import { mapIR } from '../../../map/index.js'
+import { myMapGet } from '../../../../utils/MyMap.js'
 import { IR } from '../../../nodes/index.js'
 import { replaceIR } from '../../../replace/index.js'
 import { PropagateStates } from '../analyze/state.js'
@@ -8,10 +8,10 @@ export const applyPropagateIR = (ir: IR, states: PropagateStates): { ir: IR; cha
         [...states.entries()].flatMap(([ir, state]): [IR, IR][] => {
             if (ir.type !== 'Get') return []
 
-            const element = state.get(ir.target)
+            const element = myMapGet(state, ir.target)
             if (!element || element === 'T') return []
 
-            return [[ir, mapIR(element)]]
+            return [[ir, { ...element }]]
         }),
     )
 

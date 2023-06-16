@@ -1,5 +1,4 @@
 import { Intrinsic } from '../../../intrinsic/index.js'
-import { mapIR } from '../../map/index.js'
 import { Member } from '../../nodes/Member.js'
 import { TransformIR } from './index.js'
 import { isConstant, rewriteAsExecute, transformIRAndGet } from './utils.js'
@@ -7,22 +6,21 @@ import { isConstant, rewriteAsExecute, transformIRAndGet } from './utils.js'
 export const transformMember: TransformIR<Member> = (ir, ctx) => {
     const object = transformIRAndGet(ir.object, ctx)
     const key = transformIRAndGet(ir.key, ctx)
-    const newIR = mapIR(ir, object, key)
 
     const objectResult = isConstant(object)
-    if (!objectResult) return newIR
+    if (!objectResult) return { ...ir, object, key }
 
     const keyResult = isConstant(key)
-    if (!keyResult) return newIR
+    if (!keyResult) return { ...ir, object, key }
 
     const descriptor = getPropertyDescriptor(objectResult.value, keyResult.value as never)
-    if (!descriptor) return newIR
+    if (!descriptor) return { ...ir, object, key }
 
-    return rewriteAsExecute(newIR, ctx, [
+    return rewriteAsExecute(ir, ctx, [
         object,
         key,
         ctx.value(
-            newIR,
+            ir,
             toValue(descriptor, objectResult.value),
             objectResult.isSuper ? objectResult.thisValue : objectResult.value,
         ),
@@ -48,10 +46,7 @@ const toValue = (descriptor: PropertyDescriptor, thisValue: unknown) => {
             [Intrinsic.Get]: (ir, ctx) =>
                 ctx.Call(ir, {
                     callee: ctx.value(ir, descriptor.get, thisValue),
-                    args: {
-                        init: ctx.zero(ir),
-                        value: [],
-                    },
+                    args: ctx.value(ir, []),
                 }),
         } satisfies Intrinsic<'Get'>)
 
@@ -59,16 +54,19 @@ const toValue = (descriptor: PropertyDescriptor, thisValue: unknown) => {
         Object.assign(value, {
             [Intrinsic.Set]: (ir, value, ctx) => {
                 const array: unknown[] = []
+                const children = [
+                    ctx.ArrayConstructorAdd(ir, {
+                        array,
+                        value,
+                    }),
+                ]
 
                 return ctx.Call(ir, {
                     callee: ctx.value(ir, descriptor.set, thisValue),
-                    args: {
-                        init: ctx.ArrayAdd(ir, {
-                            array,
-                            value,
-                        }),
-                        value: array,
-                    },
+                    args: ctx.ArrayConstructor(ir, {
+                        array,
+                        children,
+                    }),
                 })
             },
         } satisfies Intrinsic<'Set'>)

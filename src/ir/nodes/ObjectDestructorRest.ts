@@ -4,7 +4,7 @@ export type ObjectDestructorRest = BaseIR & {
     type: 'ObjectDestructorRest'
     target: {
         object: unknown
-        keys: string[]
+        keys?: string[]
     }
 }
 

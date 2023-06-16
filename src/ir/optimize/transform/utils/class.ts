@@ -58,7 +58,7 @@ export const initializeClassFields = (
         if (!body.value) throw estreeCtx.error(body, 'Property must be initialized on declaration')
 
         inits.push(
-            estreeCtx.ObjectAdd(body, {
+            estreeCtx.ObjectConstructorAdd(body, {
                 object: instance,
                 kind: 'init',
                 key: compileObjectKey(body.key, body.computed, estreeCtx),

@@ -81,7 +81,6 @@ export class Archetype {
         return true
     }
 
-    initializeOrder = 0
     initialize(): void {}
 
     updateSequentialOrder = 0
@@ -90,10 +89,8 @@ export class Archetype {
     touchOrder = 0
     touch(): void {}
 
-    updateParallelOrder = 0
     updateParallel(): void {}
 
-    terminateOrder = 0
     terminate(): void {}
 
     protected get life(): ArchetypeLife {

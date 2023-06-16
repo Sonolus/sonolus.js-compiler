@@ -1,5 +1,4 @@
 import { sideEffectFreeFuncs } from '../../../utils/funcs.js'
-import { mapIR } from '../../map/index.js'
 import { Execute } from '../../nodes/Execute.js'
 import { IR } from '../../nodes/index.js'
 import { TransformIRContext } from './context.js'
@@ -7,10 +6,10 @@ import { transformIR, TransformIR } from './index.js'
 import { rewriteAsExecute } from './utils.js'
 
 export const transformExecute: TransformIR<Execute> = (ir, ctx) => {
-    const children = ir.children
-        .map((child) => transformIR(child, ctx))
-        .map((child, i, children) => expand(child, i === children.length - 1, ctx))
-        .flat()
+    const children: IR[] = []
+    for (const [i, child] of ir.children.entries()) {
+        children.push(...expand(transformIR(child, ctx), i === ir.children.length - 1, ctx))
+    }
 
     const cutOffIndex = children.findIndex(
         (child) => child.type === 'Break' || child.type === 'Throw',
@@ -22,7 +21,7 @@ export const transformExecute: TransformIR<Execute> = (ir, ctx) => {
     if (children.length === 0) return ctx.zero(ir)
     if (children.length === 1) return children[0]
 
-    return mapIR(ir, ...children)
+    return { ...ir, children }
 }
 
 const expand = (ir: IR, shouldPreserve: boolean, ctx: TransformIRContext) =>

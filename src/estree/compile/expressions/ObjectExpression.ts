@@ -5,13 +5,12 @@ import { compileObjectKey } from '../utils/object.js'
 
 export const compileObjectExpression: CompileESTree<ObjectExpression> = (node, ctx) => {
     const object = {}
-
-    const inits: IR[] = []
+    const children: IR[] = []
 
     for (const property of node.properties) {
         if (property.type === 'SpreadElement') {
-            inits.push(
-                ctx.ObjectSpread(property, {
+            children.push(
+                ctx.ObjectConstructorSpread(property, {
                     object,
                     arg: compileESTree(property.argument, ctx),
                 }),
@@ -23,8 +22,8 @@ export const compileObjectExpression: CompileESTree<ObjectExpression> = (node, c
             case 'init':
             case 'get':
             case 'set':
-                inits.push(
-                    ctx.ObjectAdd(property, {
+                children.push(
+                    ctx.ObjectConstructorAdd(property, {
                         object,
                         kind: property.kind,
                         key: compileObjectKey(property.key, property.computed, ctx),
@@ -37,7 +36,8 @@ export const compileObjectExpression: CompileESTree<ObjectExpression> = (node, c
         }
     }
 
-    return ctx.Execute(node, {
-        children: [...inits, ctx.value(node, object)],
+    return ctx.ObjectConstructor(node, {
+        object,
+        children,
     })
 }

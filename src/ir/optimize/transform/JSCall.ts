@@ -1,22 +1,19 @@
-import { mapIR } from '../../map/index.js'
 import { JSCall } from '../../nodes/JSCall.js'
-import { Value } from '../../nodes/Value.js'
 import { TransformIR } from './index.js'
 import { isConstant, transformIRAndGet } from './utils.js'
 
 export const transformJSCall: TransformIR<JSCall> = (ir, ctx) => {
-    const args = ir.args.map((arg) => transformIRAndGet(arg, ctx))
-    const newIR = mapIR(ir, ...args)
+    const args = transformIRAndGet(ir.args, ctx)
 
-    const results = args.map(isConstant)
-    if (!results.every((result): result is Value => !!result)) return newIR
+    const result = isConstant(args)
+    if (!result) return { ...ir, args }
 
-    let result: unknown
+    let ret: unknown
     try {
-        result = newIR.func.call(newIR.thisValue, ...results.map((result) => result.value))
+        ret = ir.func.call(ir.thisValue, ...(result.value as unknown[]))
     } catch (_) {
-        return newIR
+        return { ...ir, args }
     }
 
-    return ctx.value(ir, result)
+    return ctx.value(ir, ret)
 }

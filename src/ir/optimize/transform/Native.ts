@@ -1,24 +1,22 @@
 import { RuntimeFunction } from 'sonolus-core'
-import { mapIR } from '../../map/index.js'
 import { Native } from '../../nodes/Native.js'
 import { Value } from '../../nodes/Value.js'
 import { TransformIR } from './index.js'
 import { isConstant, transformIRAndGet } from './utils.js'
 
 export const transformNative: TransformIR<Native> = (ir, ctx) => {
-    const children = ir.args.map((arg) => transformIRAndGet(arg, ctx))
-    const newIR = mapIR(ir, ...children)
+    const args = ir.args.map((arg) => transformIRAndGet(arg, ctx))
 
-    const result = funcs[newIR.func]
-    if (!result) return newIR
+    const result = funcs[ir.func]
+    if (!result) return { ...ir, args }
 
     const [length, func] = result
-    if (length !== Infinity && children.length !== length) return newIR
+    if (length !== Infinity && args.length !== length) return { ...ir, args }
 
-    const args = children.map(isConstant)
-    if (!args.every((arg): arg is Value => !!arg)) return newIR
+    const results = args.map(isConstant)
+    if (!results.every((result): result is Value => !!result)) return { ...ir, args }
 
-    return ctx.value(newIR, func(...args.map((arg) => arg.value as never)))
+    return ctx.value(ir, func(...results.map((arg) => arg.value as never)))
 }
 
 const reducer =

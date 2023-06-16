@@ -2,15 +2,15 @@ import { ParticleEffectName } from 'sonolus-core'
 import { convert } from '../containers/Convertible.js'
 import { Mat, MatLike } from '../containers/Mat.js'
 import { QuadLikeConvertible } from '../containers/Quad.js'
-import { ParticleEffectId } from '../index.js'
+import { ParticleEffectId } from '../ids/ParticleEffectId.js'
+import { ParticleEffectInstanceId } from '../instanceIds/ParticleEffectInstanceId.js'
 import { native } from '../native.js'
-import { ParticleEffectInstanceId } from '../types/instanceIds.js'
 import { singleThreadedWritablePointer } from '../utils/pointer.js'
 import { defineLib } from './lib.js'
 
 export type ParticleEffect = {
     readonly name: string
-    readonly id: number
+    readonly id: ParticleEffectId
     readonly exists: boolean
 
     spawn(
@@ -72,7 +72,7 @@ export const defineParticle = <T extends ParticleDefinition>(particle: T): Parti
                     key,
                     defineLib<ParticleEffect>({
                         name: name as never,
-                        id,
+                        id: id as never,
                         get exists() {
                             return native.HasParticleEffect(this.id)
                         },

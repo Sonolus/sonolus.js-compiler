@@ -1,10 +1,11 @@
 import { visit } from '../../utils/visitor.js'
 import { IR, IRChildren } from '../nodes/index.js'
-import { mapArrayAdd } from './ArrayAdd.js'
+import { mapArrayConstructor } from './ArrayConstructor.js'
+import { mapArrayConstructorAdd } from './ArrayConstructorAdd.js'
+import { mapArrayConstructorSpread } from './ArrayConstructorSpread.js'
 import { mapArrayDestructor } from './ArrayDestructor.js'
 import { mapArrayDestructorGet } from './ArrayDestructorGet.js'
 import { mapArrayDestructorRest } from './ArrayDestructorRest.js'
-import { mapArraySpread } from './ArraySpread.js'
 import { mapAssign } from './Assign.js'
 import { mapBinary } from './Binary.js'
 import { mapBlock } from './Block.js'
@@ -21,11 +22,12 @@ import { mapLogical } from './Logical.js'
 import { mapMember } from './Member.js'
 import { mapNative } from './Native.js'
 import { mapNew } from './New.js'
-import { mapObjectAdd } from './ObjectAdd.js'
+import { mapObjectConstructor } from './ObjectConstructor.js'
+import { mapObjectConstructorAdd } from './ObjectConstructorAdd.js'
+import { mapObjectConstructorSpread } from './ObjectConstructorSpread.js'
 import { mapObjectDestructor } from './ObjectDestructor.js'
 import { mapObjectDestructorGet } from './ObjectDestructorGet.js'
 import { mapObjectDestructorRest } from './ObjectDestructorRest.js'
-import { mapObjectSpread } from './ObjectSpread.js'
 import { mapReference } from './Reference.js'
 import { mapSet } from './Set.js'
 import { mapSuper } from './Super.js'
@@ -37,11 +39,12 @@ import { mapWhile } from './While.js'
 export type MapIR<N extends IR> = (ir: N, ...children: IR[]) => N
 
 export const mapIR = visit<<N extends IR>(ir: N, ...children: IRChildren<N>) => N>().create('map', {
-    mapArrayAdd,
+    mapArrayConstructor,
+    mapArrayConstructorAdd,
+    mapArrayConstructorSpread,
     mapArrayDestructor,
     mapArrayDestructorGet,
     mapArrayDestructorRest,
-    mapArraySpread,
     mapAssign,
     mapBinary,
     mapBlock,
@@ -58,11 +61,12 @@ export const mapIR = visit<<N extends IR>(ir: N, ...children: IRChildren<N>) => 
     mapMember,
     mapNative,
     mapNew,
-    mapObjectAdd,
+    mapObjectConstructor,
+    mapObjectConstructorAdd,
+    mapObjectConstructorSpread,
     mapObjectDestructor,
     mapObjectDestructorGet,
     mapObjectDestructorRest,
-    mapObjectSpread,
     mapReference,
     mapSet,
     mapSuper,

@@ -2,42 +2,35 @@ import { createCompileESTreeContext } from '../../../estree/compile/context.js'
 import { compileForOf } from '../../../estree/compile/utils/forOf.js'
 import { hasIntrinsicIterate } from '../../../intrinsic/has.js'
 import { Intrinsic } from '../../../intrinsic/index.js'
-import { mapIR } from '../../map/index.js'
 import { ForOf } from '../../nodes/ForOf.js'
 import { TransformIR } from './index.js'
 import { isConstant, rewriteAsExecute, transformIRAndGet } from './utils.js'
 
 export const transformForOf: TransformIR<ForOf> = (ir, ctx) => {
     const value = transformIRAndGet(ir.value, ctx)
-    const newIR = mapIR(ir, value)
 
     const result = isConstant(value)
-    if (!result) return newIR
+    if (!result) return { ...ir, value }
 
-    const estreeCtx = createCompileESTreeContext(
-        newIR.stackTraces,
-        newIR.thisValue,
-        newIR.prototype,
-        newIR.env,
-    )
+    const estreeCtx = createCompileESTreeContext(ir.stackTraces, ir.thisValue, ir.prototype, ir.env)
 
     if (hasIntrinsicIterate(result.value))
-        return rewriteAsExecute(newIR, ctx, [
+        return rewriteAsExecute(ir, ctx, [
             value,
-            result.value[Intrinsic.Iterate](newIR, result.value, estreeCtx, ctx),
-            ctx.zero(newIR),
+            result.value[Intrinsic.Iterate](ir, result.value, estreeCtx, ctx),
+            ctx.zero(ir),
         ])
 
-    if (!isIterable(result.value)) return newIR
+    if (!isIterable(result.value)) return { ...ir, value }
 
-    return rewriteAsExecute(newIR, ctx, [
+    return rewriteAsExecute(ir, ctx, [
         value,
         compileForOf(
-            newIR.node,
+            ir.node,
             [...result.value].map((v) => ctx.value(value, v)),
             estreeCtx,
         ),
-        ctx.zero(newIR),
+        ctx.zero(ir),
     ])
 }
 

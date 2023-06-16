@@ -1,18 +1,16 @@
-import { mapIR } from '../../map/index.js'
 import { Unary, UnaryOperator } from '../../nodes/Unary.js'
 import { TransformIR } from './index.js'
 import { isConstant, rewriteAsExecute, transformIRAndGet } from './utils.js'
 
 export const transformUnary: TransformIR<Unary> = (ir, ctx) => {
     const arg = transformIRAndGet(ir.arg, ctx)
-    const newIR = mapIR(ir, arg)
 
     const result = isConstant(arg)
-    if (!result) return newIR
+    if (!result) return { ...ir, arg }
 
-    const operation = operations[newIR.operator]
+    const operation = operations[ir.operator]
 
-    return rewriteAsExecute(newIR, ctx, [arg, ctx.value(newIR, operation(result.value))])
+    return rewriteAsExecute(ir, ctx, [arg, ctx.value(ir, operation(result.value))])
 }
 
 const operations: Record<UnaryOperator, (arg: unknown) => unknown> = {
