@@ -1,9 +1,8 @@
-import { iterateIR } from '../iterate/index.js'
 import { ArrayConstructor } from '../nodes/ArrayConstructor.js'
 import { CompileIR, compileIR } from './index.js'
 
 export const compileArrayConstructor: CompileIR<ArrayConstructor> = (ir, ctx) => {
-    for (const child of iterateIR(ir)) {
+    for (const child of ir.children) {
         compileIR(child, ctx)
     }
 
