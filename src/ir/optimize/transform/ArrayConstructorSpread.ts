@@ -1,4 +1,5 @@
 import { Intrinsic } from '../../../intrinsic/index.js'
+import { isIterable } from '../../../utils/iterable.js'
 import { ArrayConstructorSpread } from '../../nodes/ArrayConstructorSpread.js'
 import { IR } from '../../nodes/index.js'
 import { TransformIR } from './index.js'
@@ -17,9 +18,11 @@ export const transformArrayConstructorSpread: TransformIR<ArrayConstructorSpread
     const result = isConstant(arg)
     if (!result) return { ...ir, arg }
 
+    if (!isIterable(result.value)) return { ...ir, arg }
+
     const inits: IR[] = []
 
-    for (const element of result.value as unknown[]) {
+    for (const element of result.value) {
         const value = unwrapIRGet(ctx.value(ir, element), ctx)
 
         if (!isResolved(value)) return { ...ir, arg }

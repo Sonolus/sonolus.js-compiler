@@ -14,7 +14,7 @@ export const transformAssign: TransformIR<Assign> = (ir, ctx) => {
     if (ir.operator === '=')
         return rewriteAsExecute(ir, ctx, [lhs, result.value[Intrinsic.Set](ir, rhs, ctx)])
 
-    if (!result || !hasIntrinsicGet(result.value)) return { ...ir, lhs, rhs }
+    if (!hasIntrinsicGet(result.value)) return { ...ir, lhs, rhs }
 
     if (ir.operator === '||=' || ir.operator === '&&=' || ir.operator === '??=')
         return rewriteAsExecute(ir, ctx, [

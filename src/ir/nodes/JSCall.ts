@@ -4,7 +4,7 @@ export type JSCall = BaseIR & {
     type: 'JSCall'
     func: Function
     thisValue: unknown
-    args: IR
+    args: IR[]
 }
 
-export type JSCallChildren = [args: IR]
+export type JSCallChildren = [...args: IR[]]
