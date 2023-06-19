@@ -1,3 +1,4 @@
+import { isIterable } from '../../utils/iterable.js'
 import { iterateIR } from '../iterate/index.js'
 import { ArrayConstructorSpread } from '../nodes/ArrayConstructorSpread.js'
 import { isConstant } from '../optimize/transform/utils.js'
@@ -8,8 +9,10 @@ export const compileArrayConstructorSpread: CompileIR<ArrayConstructorSpread> = 
         compileIR(child, ctx)
     }
 
-    if (!isConstant(ir.arg))
-        throw ctx.error(ir.arg, 'Spread argument must be resolved at compile time')
+    const result = isConstant(ir.arg)
+    if (!result) throw ctx.error(ir.arg, 'Spread argument must be resolved at compile time')
+
+    if (!isIterable(result.value)) throw ctx.error(ir.arg, 'Spread argument must be iterable')
 
     throw ctx.error(ir, `${ir.type} must be resolved at compile time`)
 }
