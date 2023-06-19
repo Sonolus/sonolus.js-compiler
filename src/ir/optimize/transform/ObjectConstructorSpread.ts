@@ -1,4 +1,5 @@
 import { Intrinsic } from '../../../intrinsic/index.js'
+import { isSpreadable } from '../../../utils/spreadable.js'
 import { IR } from '../../nodes/index.js'
 import { ObjectConstructorSpread } from '../../nodes/ObjectConstructorSpread.js'
 import { TransformIR } from './index.js'
@@ -17,9 +18,11 @@ export const transformObjectConstructorSpread: TransformIR<ObjectConstructorSpre
     const result = isConstant(arg)
     if (!result) return { ...ir, arg }
 
+    if (!isSpreadable(result.value)) return { ...ir, arg }
+
     const inits: IR[] = []
 
-    for (const entry of Object.entries(result.value as never)) {
+    for (const entry of Object.entries(result.value)) {
         const key = entry[0]
         const value = unwrapIRGet(ctx.value(ir, entry[1]), ctx)
 
