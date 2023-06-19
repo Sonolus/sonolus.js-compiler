@@ -1,9 +1,8 @@
-import { iterateIR } from '../iterate/index.js'
 import { ObjectConstructor } from '../nodes/ObjectConstructor.js'
 import { CompileIR, compileIR } from './index.js'
 
 export const compileObjectConstructor: CompileIR<ObjectConstructor> = (ir, ctx) => {
-    for (const child of iterateIR(ir)) {
+    for (const child of ir.children) {
         compileIR(child, ctx)
     }
 
