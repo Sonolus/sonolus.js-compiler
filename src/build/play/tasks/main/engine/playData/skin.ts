@@ -1,5 +1,5 @@
 import { EnginePlayData } from 'sonolus-core'
-import { clean } from '../../utils.js'
+import { clean } from '../../../../../shared/utils/clean.js'
 
 export const buildSkin = (skin: EnginePlayData['skin']): EnginePlayData['skin'] =>
     clean(skin, {

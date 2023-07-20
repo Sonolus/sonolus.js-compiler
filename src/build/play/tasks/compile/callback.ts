@@ -1,15 +1,15 @@
 import { ExpressionStatement } from 'estree'
-import { createCompileESTreeContext } from '../../../estree/compile/context.js'
-import { compileESTree } from '../../../estree/compile/index.js'
-import { createCompileIRContext } from '../../../ir/compile/context.js'
-import { compileIR } from '../../../ir/compile/index.js'
-import { optimizeIR } from '../../../ir/optimize/index.js'
-import { compileJS } from '../../../js/compile/index.js'
-import { Archetype } from '../../../lib/play/Archetype.js'
-import { ArchetypeCallback } from '../../../lib/play/enums/ArchetypeCallback.js'
-import { Func } from '../../../snode/nodes/Func.js'
-import { SNode } from '../../../snode/nodes/index.js'
-import { optimizeSNode } from '../../../snode/optimize/index.js'
+import { createCompileESTreeContext } from '../../../../estree/compile/context.js'
+import { compileESTree } from '../../../../estree/compile/index.js'
+import { createCompileIRContext } from '../../../../ir/compile/context.js'
+import { compileIR } from '../../../../ir/compile/index.js'
+import { optimizeIR } from '../../../../ir/optimize/index.js'
+import { compileJS } from '../../../../js/compile/index.js'
+import { Archetype } from '../../../../lib/play/Archetype.js'
+import { ArchetypeCallback } from '../../../../lib/play/enums/ArchetypeCallback.js'
+import { SNode } from '../../../../snode/nodes/index.js'
+import { optimizeSNode } from '../../../../snode/optimize/index.js'
+import { ignoreReturn } from '../../../shared/utils/compile.js'
 
 export const buildArchetypeCallback = (
     archetype: Archetype,
@@ -74,18 +74,4 @@ export const buildArchetypeCallback = (
     }
 
     return result
-}
-
-const ignoreReturn = (snode: Func): SNode => {
-    if (snode.func !== 'Execute') return snode
-
-    const args = snode.args
-    if (typeof args[args.length - 1] !== 'number') return snode
-
-    if (args.length === 2) return args[0]
-
-    return {
-        func: 'Execute',
-        args: snode.args.slice(0, snode.args.length - 1),
-    }
 }

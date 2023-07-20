@@ -6,11 +6,11 @@ import { buildEffect } from './effect.js'
 import { buildParticle } from './particle.js'
 import { buildSkin } from './skin.js'
 
-export const buildEngineData = (data: Project['engine']['playData']): EnginePlayData => ({
-    skin: buildSkin(data.skin),
-    effect: buildEffect(data.effect),
-    particle: buildParticle(data.particle),
-    buckets: buildBuckets(data.buckets),
-    archetypes: buildArchetypes(data.archetypes),
+export const buildEnginePlayData = (playData: Project['engine']['playData']): EnginePlayData => ({
+    skin: buildSkin(playData.skin),
+    effect: buildEffect(playData.effect),
+    particle: buildParticle(playData.particle),
+    buckets: buildBuckets(playData.buckets),
+    archetypes: buildArchetypes(playData.archetypes),
     nodes: [],
 })

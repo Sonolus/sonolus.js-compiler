@@ -1,5 +1,5 @@
 import { EngineConfigurationOption } from 'sonolus-core'
-import { clean } from '../../utils.js'
+import { clean } from '../../../../utils/clean.js'
 
 export const buildOptions = (options: EngineConfigurationOption[]): EngineConfigurationOption[] =>
     clean(options, [

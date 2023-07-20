@@ -4,7 +4,7 @@ import {
     EngineConfigurationUI,
     EngineConfigurationVisibility,
 } from 'sonolus-core'
-import { Schema, clean } from '../../utils.js'
+import { Schema, clean } from '../../../../utils/clean.js'
 
 export const buildUI = (ui: EngineConfigurationUI): EngineConfigurationUI =>
     clean(ui, {

@@ -1,6 +1,6 @@
 import { LevelData } from 'sonolus-core'
+import { clean } from '../../../../../shared/utils/clean.js'
 import { Project } from '../../../../project.js'
-import { clean } from '../../utils.js'
 
 export const buildLevelData = (data: Project['level']['data']): LevelData =>
     clean(data, {

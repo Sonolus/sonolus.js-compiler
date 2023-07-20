@@ -1,5 +1,5 @@
 import { EngineConfiguration, EnginePlayData, EnginePlayDataBucket, LevelData } from 'sonolus-core'
-import { Archetypes } from '../lib/play/define/archetypes.js'
+import { Archetypes } from '../../lib/play/define/archetypes.js'
 
 export type Project = {
     engine: {
