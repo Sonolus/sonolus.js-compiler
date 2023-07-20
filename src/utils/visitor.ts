@@ -44,4 +44,4 @@ export const visit = <F extends (...args: never[]) => unknown>(): CreateVisit<F>
                 return (visit as F)(node, ...args)
             }
         },
-    } as CreateVisit<F>)
+    }) as CreateVisit<F>

@@ -33,7 +33,7 @@ export const pointer = <T>(
 
             return pointerNative(ir, 'SetShifted', [id, x, y, s, () => value], ctx)
         },
-    } satisfies Pointer as never)
+    }) satisfies Pointer as never
 
 const createPointer =
     (writableCallbacks: ArchetypeCallback[]) =>
