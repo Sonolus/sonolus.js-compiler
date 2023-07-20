@@ -1,4 +1,4 @@
-import { ArchetypeCallback } from '../../../lib/enums/ArchetypeCallback.js'
+import { ArchetypeCallback } from '../../../lib/play/enums/ArchetypeCallback.js'
 import { SNode } from '../../../snode/nodes/index.js'
 import { Project } from '../../project.js'
 import { buildArchetypeCallback } from './callback.js'

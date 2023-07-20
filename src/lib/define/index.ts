@@ -1,7 +1,0 @@
-export { defineArchetypes } from './archetypes.js'
-export { Bucket, defineBuckets } from './buckets.js'
-export { EffectClip, defineEffect } from './effect.js'
-export { defineLib } from './lib.js'
-export { defineOptions } from './options.js'
-export { ParticleEffect, defineParticle } from './particle.js'
-export { SkinSprite, defineSkin } from './skin.js'
