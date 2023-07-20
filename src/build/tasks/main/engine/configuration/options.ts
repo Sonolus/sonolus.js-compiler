@@ -6,6 +6,7 @@ export const buildOptions = (options: EngineConfigurationOption[]): EngineConfig
         {
             name: 'string',
             'standard?': 'boolean',
+            'advanced?': 'boolean',
             'scope?': 'string',
             type: 'string',
             def: 'number',

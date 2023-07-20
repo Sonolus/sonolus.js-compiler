@@ -1,4 +1,4 @@
-import { EngineDataBucket } from 'sonolus-core'
+import { EnginePlayDataBucket } from 'sonolus-core'
 import { JudgmentWindows } from '../JudgmentWindows.js'
 import { preprocessWritablePointer } from '../utils/pointer.js'
 import { defineLib } from './lib.js'
@@ -21,9 +21,9 @@ export type Bucket = {
     set(windows: JudgmentWindows): void
 }
 
-type BucketsDefinition = Record<string, EngineDataBucket>
+type BucketsDefinition = Record<string, EnginePlayDataBucket>
 
-type Buckets<T extends BucketsDefinition> = EngineDataBucket[] & {
+type Buckets<T extends BucketsDefinition> = EnginePlayDataBucket[] & {
     [K in keyof T]: T[K] & Bucket
 }
 

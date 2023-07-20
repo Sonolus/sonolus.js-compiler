@@ -1,7 +1,7 @@
-import { EngineData } from 'sonolus-core'
+import { EnginePlayData } from 'sonolus-core'
 import { clean } from '../../utils.js'
 
-export const buildSkin = (skin: EngineData['skin']): EngineData['skin'] =>
+export const buildSkin = (skin: EnginePlayData['skin']): EnginePlayData['skin'] =>
     clean(skin, {
         sprites: [
             {

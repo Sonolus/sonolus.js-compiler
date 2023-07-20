@@ -24,12 +24,12 @@ export type CompileTaskArtifacts = {
 
 export const buildCompileTask = (project: Project, task: CompileTask): CompileTaskArtifacts => ({
     type: 'compile',
-    index: project.engine.data.archetypes[task.archetype].index,
+    index: project.engine.playData.archetypes[task.archetype].index,
     callback: task.callback,
     result: buildArchetypeCallback(
-        project.engine.data.archetypes[task.archetype],
+        project.engine.playData.archetypes[task.archetype],
         task.callback,
         task.optimizationLevel,
-        project.engine.data.globalResolver,
+        project.engine.playData.globalResolver,
     ),
 })

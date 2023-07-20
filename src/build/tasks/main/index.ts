@@ -1,4 +1,4 @@
-import { EngineConfiguration, EngineData, LevelData } from 'sonolus-core'
+import { EngineConfiguration, EnginePlayData, LevelData } from 'sonolus-core'
 import { Project } from '../../project.js'
 import { buildEngineConfiguration } from './engine/configuration/index.js'
 import { buildEngineData } from './engine/data/index.js'
@@ -12,7 +12,7 @@ export type MainTaskArtifacts = {
     type: 'main'
     engine: {
         configuration: EngineConfiguration
-        data: EngineData
+        playData: EnginePlayData
     }
     level: {
         data: LevelData
@@ -25,7 +25,7 @@ export const buildMainTask = (project: Project): MainTaskArtifacts =>
             type: 'main',
             engine: {
                 configuration: buildEngineConfiguration(project.engine.configuration),
-                data: buildEngineData(project.engine.data),
+                playData: buildEngineData(project.engine.playData),
             },
             level: {
                 data: buildLevelData(project.level.data),

@@ -16,6 +16,8 @@ export const buildUI = (ui: EngineConfigurationUI): EngineConfigurationUI =>
         comboVisibility: visibility,
         primaryMetricVisibility: visibility,
         secondaryMetricVisibility: visibility,
+        tutorialNavigationVisibility: visibility,
+        tutorialInstructionVisibility: visibility,
         judgmentAnimation: animation,
         comboAnimation: animation,
         judgmentErrorStyle: 'string',

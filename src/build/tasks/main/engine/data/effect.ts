@@ -1,7 +1,7 @@
-import { EngineData } from 'sonolus-core'
+import { EnginePlayData } from 'sonolus-core'
 import { clean } from '../../utils.js'
 
-export const buildEffect = (effect: EngineData['effect']): EngineData['effect'] =>
+export const buildEffect = (effect: EnginePlayData['effect']): EnginePlayData['effect'] =>
     clean(effect, {
         clips: [
             {

@@ -1,4 +1,4 @@
-import { EngineConfiguration, EngineData, EngineDataNode, LevelData } from 'sonolus-core'
+import { EngineConfiguration, EngineDataNode, EnginePlayData, LevelData } from 'sonolus-core'
 import { SNode } from '../snode/nodes/index.js'
 import { CompileTaskArtifacts } from './tasks/compile/index.js'
 import { MainTaskArtifacts } from './tasks/main/index.js'
@@ -6,7 +6,7 @@ import { MainTaskArtifacts } from './tasks/main/index.js'
 export type Artifacts = {
     engine: {
         configuration: EngineConfiguration
-        data: EngineData
+        playData: EnginePlayData
     }
     level: {
         data: LevelData
@@ -20,7 +20,7 @@ export const assemble = (main: MainTaskArtifacts, compiles: CompileTaskArtifacts
         let index = cache.get(key)
         if (index !== undefined) return index
 
-        index = main.engine.data.nodes.push(node) - 1
+        index = main.engine.playData.nodes.push(node) - 1
         cache.set(key, index)
 
         return index
@@ -44,7 +44,7 @@ export const assemble = (main: MainTaskArtifacts, compiles: CompileTaskArtifacts
     for (const { index, callback, result } of compiles) {
         if (!result) continue
 
-        main.engine.data.archetypes[index][callback] = {
+        main.engine.playData.archetypes[index][callback] = {
             index: appendSNode(result.snode),
             order: result.order,
         }

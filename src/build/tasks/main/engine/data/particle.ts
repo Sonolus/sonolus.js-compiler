@@ -1,7 +1,7 @@
-import { EngineData } from 'sonolus-core'
+import { EnginePlayData } from 'sonolus-core'
 import { clean } from '../../utils.js'
 
-export const buildParticle = (particle: EngineData['particle']): EngineData['particle'] =>
+export const buildParticle = (particle: EnginePlayData['particle']): EnginePlayData['particle'] =>
     clean(particle, {
         effects: [
             {

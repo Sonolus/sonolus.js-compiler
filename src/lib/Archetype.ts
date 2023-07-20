@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 
-import { EngineArchetypeDataName, EngineDataArchetype } from 'sonolus-core'
+import { EngineArchetypeDataName, EnginePlayDataArchetype } from 'sonolus-core'
 import { Intrinsic } from '../intrinsic/index.js'
 import { createDefineBlock, readContainer } from './blocks/utils.js'
 import { compiler } from './compiler.js'
@@ -97,7 +97,7 @@ export class Archetype {
         return life.archetypes.get(this.index)
     }
 
-    private readonly _entityData: EngineDataArchetype['data'] = []
+    private readonly _entityData: EnginePlayDataArchetype['data'] = []
     protected defineData<T extends EntityDataDefinition>(type: T): EntityData<T> {
         if (compiler.isCompiling) throw 'defineData can only be called at compile time'
 
