@@ -9,7 +9,11 @@
     "Sonolus"
   ],
   "type": "module",
-  "main": "dist/index.js",
+  "exports": {
+    "./play": "./dist/index.play.js",
+    "./tutorial": "./dist/index.tutorial.js",
+    "./internal/*": "./dist/*"
+  },
   "files": [
     "dist"
   ],
