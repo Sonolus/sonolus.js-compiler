@@ -11,4 +11,10 @@ export const buildInstruction = (
                 id: 'number',
             },
         ],
+        icons: [
+            {
+                name: 'string',
+                id: 'number',
+            },
+        ],
     })
