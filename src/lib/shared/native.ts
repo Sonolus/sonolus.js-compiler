@@ -298,6 +298,16 @@ export const native = defineNative<{
     ): number
     DestroyParticleEffect(particleId: number): number
 
+    Paint(
+        id: number,
+        x: number,
+        y: number,
+        size: number,
+        rotation: number,
+        z: number,
+        a: number,
+    ): void
+
     HasSkinSprite(id: number): boolean
     HasEffectClip(id: number): boolean
     HasParticleEffect(id: number): boolean
@@ -505,6 +515,8 @@ export const native = defineNative<{
     SpawnParticleEffect: 11,
     MoveParticleEffect: 9,
     DestroyParticleEffect: 1,
+
+    Paint: 7,
 
     HasSkinSprite: 1,
     HasEffectClip: 1,
