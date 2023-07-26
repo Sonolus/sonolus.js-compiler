@@ -21,7 +21,7 @@ export const createCompoundContainer = (
 const getCompoundContainerSize = (type: object): number => {
     if (typeof type === 'function') return getContainerConstructor(type).size
 
-    const members = Array.isArray(type) ? type : Object.values(type)
+    const members = (Array.isArray(type) ? type : Object.values(type)) as object[]
     return members.reduce((sum, member) => sum + getCompoundContainerSize(member), 0)
 }
 
@@ -42,7 +42,7 @@ const createCompoundContainerRead =
                 const children = type.map((element) =>
                     ctx.ArrayConstructorAdd(ir, {
                         array,
-                        value: walk(element),
+                        value: walk(element as object),
                     }),
                 )
 
@@ -58,7 +58,7 @@ const createCompoundContainerRead =
                     object,
                     kind: 'init',
                     key: ctx.value(ir, k),
-                    value: walk(v),
+                    value: walk(v as object),
                 }),
             )
 
@@ -90,7 +90,7 @@ const createCompoundContainerWrite =
 
             const entries = Array.isArray(type) ? type.entries() : Object.entries(type)
             for (const [k, v] of entries) {
-                walk(v, (value as never)[k])
+                walk(v as object, (value as never)[k])
             }
         }
 
@@ -118,7 +118,7 @@ const createCompoundContainerEquals = (type: object) => {
                         object: ir,
                         key: ctx.value(ir, k),
                     }),
-                v,
+                v as object,
             )
         }
     }

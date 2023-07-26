@@ -20,10 +20,13 @@ export const transformObjectConstructorAdd: TransformIR<ObjectConstructorAdd> = 
         const valueResult = isConstant(value)
         if (!valueResult) return { ...ir, key, value }
 
-        const descriptor = Object.getOwnPropertyDescriptor(ir.object, keyResult.value as never)
-        Object.defineProperty(ir.object, keyResult.value as never, {
-            get: descriptor?.get as never,
-            set: descriptor?.set as never,
+        const descriptor = Object.getOwnPropertyDescriptor(
+            ir.object,
+            keyResult.value as PropertyKey,
+        )
+        Object.defineProperty(ir.object, keyResult.value as PropertyKey, {
+            get: descriptor?.get as () => unknown,
+            set: descriptor?.set as () => unknown,
             [ir.kind]: valueResult.value,
 
             enumerable: true,

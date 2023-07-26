@@ -19,7 +19,7 @@ export type SpawnableArchetype<T extends SpawnDataDefinition> = Archetype & {
 
 export const SpawnableArchetype = <T extends SpawnDataDefinition>(
     spawnData: T,
-): { new (): SpawnableArchetype<T> } => {
+): new () => SpawnableArchetype<T> => {
     return class extends Archetype {
         spawnData = this.entityMemory(spawnData) as never
 

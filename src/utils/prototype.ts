@@ -3,7 +3,7 @@ export const searchPrototype = (thisValue: unknown, property: unknown): unknown 
     while (prototype) {
         if (
             Object.values(Object.getOwnPropertyDescriptors(prototype))
-                .map((descriptor) => descriptor.value)
+                .map((descriptor) => descriptor.value as unknown)
                 .includes(property)
         )
             return prototype

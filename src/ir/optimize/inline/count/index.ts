@@ -32,7 +32,7 @@ export const countInlineIR = (
     })
 
     const state = states.get(head(ir))
-    if (!state) throw 'Unexpected missing state'
+    if (!state) throw new Error('Unexpected missing state')
 
     return state
 }

@@ -16,7 +16,7 @@ export const transformNative: TransformIR<Native> = (ir, ctx) => {
     const results = args.map(isConstant)
     if (!results.every((result): result is Value => !!result)) return { ...ir, args }
 
-    return ctx.value(ir, func(...results.map((arg) => arg.value as never)))
+    return ctx.value(ir, func(...results.map((arg) => arg.value as number)))
 }
 
 const reducer =

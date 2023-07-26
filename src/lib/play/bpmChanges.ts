@@ -17,16 +17,16 @@ export const bpmChanges = defineLib<BpmChanges>({
         beat,
 
         get bpm() {
-            return native.BeatToBPM(this.beat)
+            return native.BeatToBPM(this.beat as number)
         },
         get time() {
-            return native.BeatToTime(this.beat)
+            return native.BeatToTime(this.beat as number)
         },
         get startingBeat() {
-            return native.BeatToStartingBeat(this.beat)
+            return native.BeatToStartingBeat(this.beat as number)
         },
         get startingTime() {
-            return native.BeatToStartingTime(this.beat)
+            return native.BeatToStartingTime(this.beat as number)
         },
     }),
 })

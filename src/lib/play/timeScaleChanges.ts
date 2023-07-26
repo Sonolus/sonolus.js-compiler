@@ -17,16 +17,16 @@ export const timeScaleChanges = defineLib<TimeScaleChanges>({
         time,
 
         get timeScale() {
-            return native.TimeToTimeScale(this.time)
+            return native.TimeToTimeScale(this.time as number)
         },
         get scaledTime() {
-            return native.TimeToScaledTime(this.time)
+            return native.TimeToScaledTime(this.time as number)
         },
         get startingTime() {
-            return native.TimeToStartingTime(this.time)
+            return native.TimeToStartingTime(this.time as number)
         },
         get startingScaledTime() {
-            return native.TimeToStartingScaledTime(this.time)
+            return native.TimeToStartingScaledTime(this.time as number)
         },
     }),
 })

@@ -5,7 +5,8 @@ export const compileFunctionExpression: CompileESTree<FunctionExpression> = (nod
     if (node.async) throw ctx.error(node, 'Async is not supported')
     if (node.generator) throw ctx.error(node, 'Generator is not supported')
 
-    const fn = new Function()
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    const fn = () => {}
 
     const source = node.sourceFile.slice(node.start, node.end)
     fn.toString = () => source

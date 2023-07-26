@@ -19,7 +19,7 @@ const defineNative = <T extends Record<string, (...args: never[]) => unknown>>(n
     Object.fromEntries(
         Object.entries(native).map(([func, argCount]) => [
             func,
-            createNative(func as never, argCount),
+            createNative(func as never, argCount as number),
         ]),
     ) as unknown as T
 

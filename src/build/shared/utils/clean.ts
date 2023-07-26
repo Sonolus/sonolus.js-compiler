@@ -27,6 +27,7 @@ export type Schema<T> = Schema_<T>
 export const clean = <T>(value: T, schema: Schema<T>): T => {
     if (schema === 'string' || schema === 'number' || schema === 'boolean') {
         if (typeof value !== schema)
+            // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
             throw new Error(`Type mismatch: expected ${schema}, got ${typeof value}`)
 
         return value

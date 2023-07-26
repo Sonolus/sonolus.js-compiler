@@ -89,10 +89,10 @@ const createTouch = (index: () => IR) =>
         vr: readonlyPointer(1002, 13, index, 15),
         vw: readonlyPointer(1002, 14, index, 15),
         get time() {
-            return this.t
+            return this.t as number
         },
         get startTime() {
-            return this.st
+            return this.st as number
         },
         get position() {
             return new Vec(this.x, this.y)
@@ -101,7 +101,7 @@ const createTouch = (index: () => IR) =>
             return new Vec(this.sx, this.sy)
         },
         get lastPosition() {
-            return this.position.sub(this.delta)
+            return (this.position as Vec).sub(this.delta)
         },
         get delta() {
             return new Vec(this.dx, this.dy)

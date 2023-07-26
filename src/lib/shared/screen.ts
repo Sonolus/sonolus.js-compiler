@@ -20,7 +20,7 @@ export const createScreen = (aspectRatio: Pointer): Screen =>
         },
         b: -1,
         get r() {
-            return this.aspectRatio
+            return this.aspectRatio as number
         },
         t: 1,
         get w() {

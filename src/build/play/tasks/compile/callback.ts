@@ -52,6 +52,7 @@ export const buildArchetypeCallback = (
     const snode = optimizeSNode(compileIR(ir, irCtx))
 
     const result = {
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         order: archetype[`${callback}Order` as never] ?? 0,
         snode,
     }

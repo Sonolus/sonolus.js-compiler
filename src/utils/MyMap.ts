@@ -3,10 +3,10 @@ export type MyMap<K, V> = {
     v: V
 }[]
 
-export type ReadonlyMyMap<K, V> = ReadonlyArray<{
+export type ReadonlyMyMap<K, V> = readonly {
     readonly k: K
     readonly v: V
-}>
+}[]
 
 export const myMapHas = <K, V>(myMap: ReadonlyMyMap<K, V>, key: K): boolean =>
     myMap.some(({ k }) => k === key)

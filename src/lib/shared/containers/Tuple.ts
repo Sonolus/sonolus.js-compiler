@@ -65,7 +65,7 @@ export const Tuple = <const T extends object>(
         }
 
         static copy(source: Tuple<ContainerType<T>>, target: Tuple<ContainerType<T>>) {
-            if (source.length !== target.length) throw 'Tuples must have the same length'
+            if (source.length !== target.length) throw new Error('Tuples must have the same length')
 
             for (let i = 0; i < target.length; i++) {
                 target.set(i, source.get(i))

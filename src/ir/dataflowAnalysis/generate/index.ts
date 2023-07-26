@@ -19,7 +19,7 @@ export const generate = (ir: IR, irs: IR[]): Graph => {
     for (const [inKey, inValues] of ctx.ins) {
         for (const outKey of inValues) {
             const outValues = outs.get(outKey)
-            if (!outValues) throw 'Unexpected missing values'
+            if (!outValues) throw new Error('Unexpected missing values')
 
             outValues.add(inKey)
         }

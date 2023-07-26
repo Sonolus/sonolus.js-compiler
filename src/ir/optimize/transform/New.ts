@@ -15,8 +15,8 @@ export const transformNew: TransformIR<New> = (ir, ctx) => {
 
     if (typeof calleeResult.value !== 'function') return { ...ir, callee, args }
 
-    const prototype = calleeResult.value.prototype
-    const instance = Object.create(prototype)
+    const prototype = calleeResult.value.prototype as Function
+    const instance = Object.create(prototype) as object
 
     return rewriteAsExecute(ir, ctx, [
         callee,

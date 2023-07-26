@@ -26,12 +26,12 @@ export const unwrapIRGet = (ir: IR, ctx: TransformIRContext): IR => {
                 ],
             })
         case 'Value':
-            if (!hasIntrinsicGet(ir.value)) break
+            if (!hasIntrinsicGet(ir.value)) return ir
 
             return ir.value[Intrinsic.Get](ir, ctx)
+        default:
+            return ir
     }
-
-    return ir
 }
 
 export const isResolved = (ir: IR): boolean => {
@@ -50,6 +50,8 @@ export const isConstant = (ir: IR): Value | undefined => {
             return isConstant(ir.children[ir.children.length - 1])
         case 'Value':
             return ir
+        default:
+            return
     }
 }
 
@@ -61,5 +63,7 @@ export const isReference = (ir: IR): Value | undefined => {
             if (typeof ir.value === 'number' || typeof ir.value === 'boolean') return
 
             return ir
+        default:
+            return
     }
 }

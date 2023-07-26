@@ -122,7 +122,7 @@ export const createCompileESTreeContext = (
         return: createBlock('return'),
         goto: (type, node, value) => {
             const scope = env[type]
-            if (!scope) throw `Unexpected missing ${type} scope`
+            if (!scope) throw new Error(`Unexpected missing ${type} scope`)
 
             return irFunctions.Break(node, {
                 target: scope.target,

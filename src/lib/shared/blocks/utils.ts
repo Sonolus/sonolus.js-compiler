@@ -38,6 +38,8 @@ export const readContainer = (
     }
 
     return Array.isArray(type)
-        ? type.map((v) => readContainer(v, allocate))
-        : Object.fromEntries(Object.entries(type).map(([k, v]) => [k, readContainer(v, allocate)]))
+        ? type.map((v) => readContainer(v as never, allocate))
+        : Object.fromEntries(
+              Object.entries(type).map(([k, v]) => [k, readContainer(v as never, allocate)]),
+          )
 }

@@ -2,6 +2,7 @@ import { createCompileESTreeContext } from '../../../estree/compile/context.js'
 import { compileForOf } from '../../../estree/compile/utils/forOf.js'
 import { hasIntrinsicIterate } from '../../../intrinsic/has.js'
 import { Intrinsic } from '../../../intrinsic/index.js'
+import { isIterable } from '../../../utils/iterable.js'
 import { ForOf } from '../../nodes/ForOf.js'
 import { TransformIR } from './index.js'
 import { isConstant, rewriteAsExecute, transformIRAndGet } from './utils.js'
@@ -33,6 +34,3 @@ export const transformForOf: TransformIR<ForOf> = (ir, ctx) => {
         ctx.zero(ir),
     ])
 }
-
-const isIterable = (value: unknown): value is Iterable<unknown> =>
-    value !== undefined && value !== null && (value as never)[Symbol.iterator]
