@@ -100,7 +100,8 @@ export class Archetype {
 
     private readonly _entityData: EnginePlayDataArchetype['data'] = []
     protected defineData<T extends EntityDataDefinition>(type: T): EntityData<T> {
-        if (compiler.isCompiling) throw new Error('defineData can only be called at compile time')
+        // eslint-disable-next-line @typescript-eslint/no-throw-literal
+        if (compiler.isCompiling) throw 'defineData can only be called at compile time'
 
         const data = Object.entries(type).map(([key, { name }], index) => ({
             key,
@@ -150,8 +151,8 @@ export class Archetype {
     protected defineSharedMemory<const T extends object>(
         type: T,
     ): ContainerType<T> & EntitySharedMemoryLib<T> {
-        if (compiler.isCompiling)
-            throw new Error('defineSharedMemory can only be called at compile time')
+        // eslint-disable-next-line @typescript-eslint/no-throw-literal
+        if (compiler.isCompiling) throw 'defineSharedMemory can only be called at compile time'
 
         const start = this._sharedMemoryOffset
 
@@ -198,7 +199,8 @@ export class Archetype {
 
     private readonly _entityMemory = createDefineBlock('entityMemory', 4000, 64, allWritablePointer)
     protected entityMemory<const T extends object>(type: T): ContainerType<T> {
-        if (compiler.isCompiling) throw new Error('entityMemory can only be called at compile time')
+        // eslint-disable-next-line @typescript-eslint/no-throw-literal
+        if (compiler.isCompiling) throw 'entityMemory can only be called at compile time'
 
         return this._entityMemory(type)
     }
