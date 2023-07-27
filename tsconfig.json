@@ -1,11 +1,11 @@
 {
     "compilerOptions": {
         "lib": [
-            "ESNext"
+            "ES2021"
         ],
-        "module": "NodeNext",
-        "target": "ESNext",
-        "moduleResolution": "NodeNext",
+        "target": "ES2022",
+        "module": "Node16",
+        "moduleResolution": "Node16",
         "strict": true,
         "skipLibCheck": true,
         "esModuleInterop": true,
