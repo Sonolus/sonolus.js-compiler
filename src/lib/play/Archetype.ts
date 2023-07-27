@@ -116,7 +116,8 @@ export class Archetype {
             })
         }
 
-        if (data.length > 32) throw new Error('Max defineData capacity (32) reached')
+        // eslint-disable-next-line @typescript-eslint/no-throw-literal
+        if (data.length > 32) throw 'Max defineData capacity (32) reached'
 
         return {
             ...Object.fromEntries(
@@ -160,8 +161,8 @@ export class Archetype {
             const start = this._sharedMemoryOffset
             this._sharedMemoryOffset += size
 
-            if (this._sharedMemoryOffset > 32)
-                throw new Error('Max defineSharedMemory capacity (32) reached')
+            // eslint-disable-next-line @typescript-eslint/no-throw-literal
+            if (this._sharedMemoryOffset > 32) throw 'Max defineSharedMemory capacity (32) reached'
 
             return [...Array(size).keys()].map((i) =>
                 singleThreadedWritablePointer(4002, start + i, 0, 0),
