@@ -36,11 +36,23 @@ export const unwrapIRGet = (ir: IR, ctx: TransformIRContext): IR => {
 
 export const isResolved = (ir: IR): boolean => {
     switch (ir.type) {
-        case 'ArrayConstructor':
-        case 'ObjectConstructor':
-            return false
-        default:
+        case 'Binary':
+        case 'Block':
+        case 'Break':
+        case 'Conditional':
+        case 'Declare':
+        case 'DoWhile':
+        case 'Execute':
+        case 'Get':
+        case 'Logical':
+        case 'Native':
+        case 'Set':
+        case 'Unary':
+        case 'Value':
+        case 'While':
             return true
+        default:
+            return false
     }
 }
 
