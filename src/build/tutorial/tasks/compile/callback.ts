@@ -11,14 +11,15 @@ import { optimizeSNode } from '../../../../snode/optimize/index.js'
 import { ignoreReturn } from '../../../shared/utils/compile.js'
 
 export const buildArchetypeCallback = (
-    tutorial: Record<TutorialCallback, () => void>,
+    tutorial: Partial<Record<TutorialCallback, ((index: number) => void)[]>>,
     callback: TutorialCallback,
+    index: number,
     optimizationLevel: 'low' | 'high',
     globalResolver: (name: string) => unknown,
 ): SNode | undefined => {
     const name = `Tutorial_${Math.ceil(Math.random() * Number.MAX_SAFE_INTEGER).toString(16)}`
 
-    const js = `\n${name}.${callback}()\n`
+    const js = `\n${name}.${callback}[${index}](${index})\n`
     const program = compileJS(js)
     const node = (program.body[0] as ExpressionStatement).expression
 

@@ -9,7 +9,7 @@ export type Project = {
             effect: EngineTutorialData['effect']
             particle: EngineTutorialData['particle']
             instruction: EngineTutorialData['instruction']
-            tutorial: Record<TutorialCallback, () => void>
+            tutorial: Partial<Record<TutorialCallback, ((index: number) => void)[]>>
             globalResolver: (name: string) => unknown
         }
     }
