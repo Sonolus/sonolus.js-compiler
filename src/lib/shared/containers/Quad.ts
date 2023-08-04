@@ -141,16 +141,24 @@ export class Quad extends Container<Quad>('x1', 'y1', 'x2', 'y2', 'x3', 'y3', 'x
         return this._apply((point) => point.transform(mat))
     }
 
-    swapLeft(): Quad {
-        return new Quad({ p1: this.p4, p2: this.p1, p3: this.p2, p4: this.p3 })
-    }
-
-    swapRight(): Quad {
+    swapRotate90(): Quad {
         return new Quad({ p1: this.p2, p2: this.p3, p3: this.p4, p4: this.p1 })
     }
 
-    swapTwice(): Quad {
+    swapRotate180(): Quad {
         return new Quad({ p1: this.p3, p2: this.p4, p3: this.p1, p4: this.p2 })
+    }
+
+    swapRotate270(): Quad {
+        return new Quad({ p1: this.p4, p2: this.p1, p3: this.p2, p4: this.p3 })
+    }
+
+    swapMirrorY(): Quad {
+        return new Quad({ p1: this.p4, p2: this.p3, p3: this.p2, p4: this.p1 })
+    }
+
+    swapMirrorX(): Quad {
+        return new Quad({ p1: this.p2, p2: this.p1, p3: this.p4, p4: this.p3 })
     }
 
     private _apply(fn: (point: Vec) => Vec) {
