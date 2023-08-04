@@ -1,3 +1,4 @@
+import { native } from '../native.js'
 import { Container } from './Container.js'
 import { Convertible } from './Convertible.js'
 import { MatLike } from './Mat.js'
@@ -208,5 +209,34 @@ export class Quad extends Container<Quad>('x1', 'y1', 'x2', 'y2', 'x3', 'y3', 'x
 
     static get rt(): Quad {
         return new Quad(0, 0, 0, 1, 1, 1, 1, 0)
+    }
+
+    static lerp(x: QuadLike, y: QuadLike, s: number): Quad {
+        return Quad._map(x, y, (x, y) => native.Lerp(x, y, s))
+    }
+
+    static lerpClamped(x: QuadLike, y: QuadLike, s: number): Quad {
+        return Quad._map(x, y, (x, y) => native.LerpClamped(x, y, s))
+    }
+
+    static remap(a: number, b: number, c: QuadLike, d: QuadLike, s: number): Quad {
+        return Quad._map(c, d, (c, d) => native.Remap(a, b, c, d, s))
+    }
+
+    static remapClamped(a: number, b: number, c: QuadLike, d: QuadLike, s: number): Quad {
+        return Quad._map(c, d, (c, d) => native.RemapClamped(a, b, c, d, s))
+    }
+
+    private static _map(x: QuadLike, y: QuadLike, fn: (x: number, y: number) => number): Quad {
+        return new Quad(
+            fn(x.x1, y.x1),
+            fn(x.y1, y.y1),
+            fn(x.x2, y.x2),
+            fn(x.y2, y.y2),
+            fn(x.x3, y.x3),
+            fn(x.y3, y.y3),
+            fn(x.x4, y.x4),
+            fn(x.y4, y.y4),
+        )
     }
 }

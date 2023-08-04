@@ -1,3 +1,4 @@
+import { native } from '../native.js'
 import { Container } from './Container.js'
 import { MatLike } from './Mat.js'
 
@@ -84,5 +85,25 @@ export class Vec extends Container<Vec>('x', 'y') {
 
     static get t(): Vec {
         return new Vec(0, 1)
+    }
+
+    static lerp(x: VecLike, y: VecLike, s: number): Vec {
+        return Vec._map(x, y, (x, y) => native.Lerp(x, y, s))
+    }
+
+    static lerpClamped(x: VecLike, y: VecLike, s: number): Vec {
+        return Vec._map(x, y, (x, y) => native.LerpClamped(x, y, s))
+    }
+
+    static remap(a: number, b: number, c: VecLike, d: VecLike, s: number): Vec {
+        return Vec._map(c, d, (c, d) => native.Remap(a, b, c, d, s))
+    }
+
+    static remapClamped(a: number, b: number, c: VecLike, d: VecLike, s: number): Vec {
+        return Vec._map(c, d, (c, d) => native.RemapClamped(a, b, c, d, s))
+    }
+
+    private static _map(x: VecLike, y: VecLike, fn: (x: number, y: number) => number): Vec {
+        return new Vec(fn(x.x, y.x), fn(x.y, y.y))
     }
 }

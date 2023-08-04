@@ -1,3 +1,4 @@
+import { native } from '../native.js'
 import { Container } from './Container.js'
 import { MatLike } from './Mat.js'
 import { Quad } from './Quad.js'
@@ -171,5 +172,25 @@ export class Rect extends Container<Rect>('l', 'b', 'r', 't') {
 
     static get rt(): Rect {
         return new Rect(0, 0, 1, 1)
+    }
+
+    static lerp(x: RectLike, y: RectLike, s: number): Rect {
+        return Rect._map(x, y, (x, y) => native.Lerp(x, y, s))
+    }
+
+    static lerpClamped(x: RectLike, y: RectLike, s: number): Rect {
+        return Rect._map(x, y, (x, y) => native.LerpClamped(x, y, s))
+    }
+
+    static remap(a: number, b: number, c: RectLike, d: RectLike, s: number): Rect {
+        return Rect._map(c, d, (c, d) => native.Remap(a, b, c, d, s))
+    }
+
+    static remapClamped(a: number, b: number, c: RectLike, d: RectLike, s: number): Rect {
+        return Rect._map(c, d, (c, d) => native.RemapClamped(a, b, c, d, s))
+    }
+
+    private static _map(x: RectLike, y: RectLike, fn: (x: number, y: number) => number): Rect {
+        return new Rect(fn(x.l, y.l), fn(x.b, y.b), fn(x.r, y.r), fn(x.t, y.t))
     }
 }
