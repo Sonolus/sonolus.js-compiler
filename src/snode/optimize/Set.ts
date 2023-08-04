@@ -17,28 +17,27 @@ export const optimizeSet: OptimizeFunc<'Set'> = (snode) => {
 
     if (
         isFuncs(value, ['Add', 'Subtract', 'Multiply', 'Divide', 'Rem', 'Mod', 'Power']) &&
-        value.args.length === 2
-    ) {
-        if (
-            isFunc(value.args[0], 'Get') &&
-            isEquivalent(value.args[0].args[0], id) &&
-            isEquivalent(value.args[0].args[1], index)
-        )
-            return {
-                func: `Set${value.func}`,
-                args: [id, index, value.args[1]],
-            }
+        value.args.length === 2 &&
+        isFunc(value.args[0], 'Get') &&
+        isEquivalent(value.args[0].args[0], id) &&
+        isEquivalent(value.args[0].args[1], index)
+    )
+        return {
+            func: `Set${value.func}`,
+            args: [id, index, value.args[1]],
+        }
 
-        if (
-            isFunc(value.args[1], 'Get') &&
-            isEquivalent(value.args[1].args[0], id) &&
-            isEquivalent(value.args[1].args[1], index)
-        )
-            return {
-                func: `Set${value.func}`,
-                args: [id, index, value.args[0]],
-            }
-    }
+    if (
+        isFuncs(value, ['Add', 'Multiply']) &&
+        value.args.length === 2 &&
+        isFunc(value.args[1], 'Get') &&
+        isEquivalent(value.args[1].args[0], id) &&
+        isEquivalent(value.args[1].args[1], index)
+    )
+        return {
+            func: `Set${value.func}`,
+            args: [id, index, value.args[0]],
+        }
 
     return snode
 }
