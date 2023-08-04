@@ -106,6 +106,14 @@ export class Rect extends Container<Rect>('l', 'b', 'r', 't') {
         return this._apply((point) => point.transform(mat))
     }
 
+    expand(x: number, y: number): Rect {
+        return new Rect(this.l - x, this.b - y, this.r + x, this.t + y)
+    }
+
+    shrink(x: number, y: number): Rect {
+        return new Rect(this.l + x, this.b + y, this.r - x, this.t - y)
+    }
+
     contains(vec: VecLike): boolean {
         return vec.x > this.l && vec.x < this.r && vec.y > this.b && vec.y < this.t
     }
