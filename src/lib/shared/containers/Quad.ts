@@ -73,6 +73,26 @@ export class Quad extends Container<Quad>('x1', 'y1', 'x2', 'y2', 'x3', 'y3', 'x
         }
     }
 
+    get c(): Vec {
+        return this.p1.add(this.p2).add(this.p3).add(this.p4).div(4)
+    }
+
+    get c12(): Vec {
+        return this.p1.add(this.p2).div(2)
+    }
+
+    get c14(): Vec {
+        return this.p1.add(this.p4).div(2)
+    }
+
+    get c34(): Vec {
+        return this.p3.add(this.p4).div(2)
+    }
+
+    get c23(): Vec {
+        return this.p2.add(this.p3).div(2)
+    }
+
     get p1(): Vec {
         return new Vec(this.x1, this.y1)
     }

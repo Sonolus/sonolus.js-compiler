@@ -38,6 +38,26 @@ export class Rect extends Container<Rect>('l', 'b', 'r', 't') {
         return this.w / this.h
     }
 
+    get c(): Vec {
+        return new Vec((this.l + this.r) / 2, (this.b + this.t) / 2)
+    }
+
+    get cl(): Vec {
+        return new Vec(this.l, (this.b + this.t) / 2)
+    }
+
+    get cb(): Vec {
+        return new Vec((this.l + this.r) / 2, this.b)
+    }
+
+    get cr(): Vec {
+        return new Vec(this.r, (this.b + this.t) / 2)
+    }
+
+    get ct(): Vec {
+        return new Vec((this.l + this.r) / 2, this.t)
+    }
+
     get lb(): Vec {
         return new Vec(this.l, this.b)
     }
