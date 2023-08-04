@@ -129,4 +129,44 @@ export class Quad extends Container<Quad>('x1', 'y1', 'x2', 'y2', 'x3', 'y3', 'x
 
         return new Quad(x1, y1, x2, y2, x3, y3, x4, y4)
     }
+
+    static get zero(): Quad {
+        return new Quad(0, 0, 0, 0, 0, 0, 0, 0)
+    }
+
+    static get one(): Quad {
+        return new Quad(-1, -1, -1, 1, 1, 1, 1, -1)
+    }
+
+    static get l(): Quad {
+        return new Quad(-1, -1, -1, 1, 0, 1, 0, -1)
+    }
+
+    static get b(): Quad {
+        return new Quad(-1, -1, -1, 0, 1, 0, 1, -1)
+    }
+
+    static get r(): Quad {
+        return new Quad(0, -1, 0, 1, 1, 1, 1, -1)
+    }
+
+    static get t(): Quad {
+        return new Quad(-1, 0, -1, 1, 1, 1, 1, 0)
+    }
+
+    static get lb(): Quad {
+        return new Quad(-1, -1, -1, 0, 0, 0, 0, -1)
+    }
+
+    static get rb(): Quad {
+        return new Quad(0, -1, 0, 0, 1, 0, 1, -1)
+    }
+
+    static get lt(): Quad {
+        return new Quad(-1, 0, -1, 1, 0, 1, 0, 0)
+    }
+
+    static get rt(): Quad {
+        return new Quad(0, 0, 0, 1, 1, 1, 1, 0)
+    }
 }

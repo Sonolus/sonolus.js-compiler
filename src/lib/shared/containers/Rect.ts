@@ -104,4 +104,44 @@ export class Rect extends Container<Rect>('l', 'b', 'r', 't') {
 
         return new Rect(l, b, r, t)
     }
+
+    static get zero(): Rect {
+        return new Rect(0, 0, 0, 0)
+    }
+
+    static get one(): Rect {
+        return new Rect(-1, -1, 1, 1)
+    }
+
+    static get l(): Rect {
+        return new Rect(-1, -1, 0, 1)
+    }
+
+    static get b(): Rect {
+        return new Rect(-1, -1, 1, 0)
+    }
+
+    static get r(): Rect {
+        return new Rect(0, -1, 1, 1)
+    }
+
+    static get t(): Rect {
+        return new Rect(-1, 0, 1, 1)
+    }
+
+    static get lb(): Rect {
+        return new Rect(-1, -1, 0, 0)
+    }
+
+    static get rb(): Rect {
+        return new Rect(0, -1, 1, 0)
+    }
+
+    static get lt(): Rect {
+        return new Rect(-1, 0, 0, 1)
+    }
+
+    static get rt(): Rect {
+        return new Rect(0, 0, 1, 1)
+    }
 }
