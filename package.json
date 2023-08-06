@@ -10,6 +10,7 @@
   ],
   "type": "module",
   "exports": {
+    "./shared": "./dist/index.shared.js",
     "./play": "./dist/index.play.js",
     "./tutorial": "./dist/index.tutorial.js",
     "./internal/*": "./dist/*"
