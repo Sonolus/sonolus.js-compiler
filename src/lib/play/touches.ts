@@ -2,8 +2,8 @@ import { Intrinsic } from '../../intrinsic/index.js'
 import { IR } from '../../ir/nodes/index.js'
 import { Vec } from '../shared/containers/Vec.js'
 import { defineLib } from '../shared/define/lib.js'
-import { TouchId } from '../shared/instanceIds/TouchId.js'
 import { createIterate } from '../shared/utils/iterate.js'
+import { TouchId } from './instanceIds/TouchId.js'
 import { readonlyPointer } from './utils/pointer.js'
 
 export type Touch = {
