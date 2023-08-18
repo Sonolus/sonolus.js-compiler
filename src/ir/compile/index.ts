@@ -33,6 +33,7 @@ import { compileObjectDestructorRest } from './ObjectDestructorRest.js'
 import { compileReference } from './Reference.js'
 import { compileSet } from './Set.js'
 import { compileSuper } from './Super.js'
+import { compileSwitch } from './Switch.js'
 import { compileThrow } from './Throw.js'
 import { compileUnary } from './Unary.js'
 import { compileValue } from './Value.js'
@@ -72,6 +73,7 @@ export const compileIR = visit<CompileIR<IR>>().create('compile', {
     compileReference,
     compileSet,
     compileSuper,
+    compileSwitch,
     compileThrow,
     compileUnary,
     compileValue,

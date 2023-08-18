@@ -31,6 +31,7 @@ import { iterateObjectDestructorRest } from './ObjectDestructorRest.js'
 import { iterateReference } from './Reference.js'
 import { iterateSet } from './Set.js'
 import { iterateSuper } from './Super.js'
+import { iterateSwitch } from './Switch.js'
 import { iterateThrow } from './Throw.js'
 import { iterateUnary } from './Unary.js'
 import { iterateValue } from './Value.js'
@@ -70,6 +71,7 @@ export const iterateIR = visit<(ir: IR) => IR[]>().create('iterate', {
     iterateReference,
     iterateSet,
     iterateSuper,
+    iterateSwitch,
     iterateThrow,
     iterateUnary,
     iterateValue,

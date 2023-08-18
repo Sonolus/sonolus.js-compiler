@@ -6,6 +6,7 @@ import { connectConditional } from './Conditional.js'
 import { connectIns, ConnectIRContext } from './context.js'
 import { connectDoWhile } from './DoWhile.js'
 import { connectLogical } from './Logical.js'
+import { connectSwitch } from './Switch.js'
 import { connectWhile } from './While.js'
 
 export type ConnectIR<N extends IR> = (ir: N, inputs: IR[], ctx: ConnectIRContext) => IR[]
@@ -17,6 +18,7 @@ export const connectIR = visit<ConnectIR<IR>>().create(
         connectConditional,
         connectDoWhile,
         connectLogical,
+        connectSwitch,
         connectWhile,
     },
     (ir, inputs, ctx) => {
