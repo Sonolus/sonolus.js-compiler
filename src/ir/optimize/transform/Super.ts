@@ -17,7 +17,7 @@ export const transformSuper: TransformIR<Super> = (ir, ctx) => {
                 ...callClassConstructor(
                     ir,
                     ir.instance,
-                    Object.getPrototypeOf(ir.prototype),
+                    Object.getPrototypeOf(ir.prototype) as Function,
                     result.value as unknown[],
                     ctx,
                 ),

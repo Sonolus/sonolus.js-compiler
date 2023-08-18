@@ -34,14 +34,9 @@ export const visit = <F extends (...args: never[]) => unknown>(): CreateVisit<F>
 
             return (node, ...args) => {
                 const visit = map.get((node as Node).type)
-                if (!visit) {
-                    if (!onDefault)
-                        throw new Error(`Unexpected missing ${prefix}${(node as Node).type}`)
-
-                    return onDefault(node, ...args)
-                }
+                if (!visit) return onDefault(node, ...args)
 
                 return (visit as F)(node, ...args)
             }
         },
-    } as CreateVisit<F>)
+    }) as CreateVisit<F>

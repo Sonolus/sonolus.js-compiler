@@ -37,5 +37,7 @@ const endsInBreak = (ir: IR, target: object): IR[] | undefined => {
             if (ir.target !== target) return
 
             return [ir.value]
+        default:
+            return
     }
 }

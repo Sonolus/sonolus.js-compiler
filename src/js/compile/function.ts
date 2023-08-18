@@ -11,6 +11,7 @@ export const compileJSFunction = memoize(
 const compileExpressionFunction = (value: unknown) => {
     try {
         let root
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         const source = `_ = \n${value}\n`
 
         root = compileJS(source)
@@ -34,6 +35,7 @@ const compileExpressionFunction = (value: unknown) => {
 const compileGetterSetterFunction = (value: unknown) => {
     try {
         let root
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         const source = `_ = function\n${value}\n`
 
         root = compileJS(source)
@@ -57,6 +59,7 @@ const compileGetterSetterFunction = (value: unknown) => {
 const compileClassFunction = (value: unknown) => {
     try {
         let root
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         const source = `class _ {\n${value}\n}`
 
         root = compileJS(source)

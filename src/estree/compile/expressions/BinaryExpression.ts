@@ -26,8 +26,6 @@ export const compileBinaryExpression: CompileESTree<BinaryExpression> = (node, c
         case 'in':
         case 'instanceof':
             break
-        default:
-            throw ctx.error(node, `Operator ${node.operator} is not supported`)
     }
 
     return ctx.Binary(node, {

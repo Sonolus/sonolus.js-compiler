@@ -30,7 +30,13 @@ export const callClassConstructor = (
         calls.push(...compileFunctionCall(ctor, ctor.params, ctor.body, args, estreeCtx))
     } else if (node.superClass) {
         calls.push(
-            ...callClassConstructor(ir, instance, Object.getPrototypeOf(prototype), args, ctx),
+            ...callClassConstructor(
+                ir,
+                instance,
+                Object.getPrototypeOf(prototype) as Function,
+                args,
+                ctx,
+            ),
         )
         calls.push(...initializeClassFields(ir, instance, prototype, ctx))
     }

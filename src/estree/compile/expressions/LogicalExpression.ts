@@ -7,8 +7,6 @@ export const compileLogicalExpression: CompileESTree<LogicalExpression> = (node,
         case '&&':
         case '??':
             break
-        default:
-            throw ctx.error(node, `Operator ${node.operator} is not supported`)
     }
 
     return ctx.Logical(node, {

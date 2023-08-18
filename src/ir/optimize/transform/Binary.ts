@@ -31,6 +31,7 @@ const operations: Record<BinaryOperator, (lhs: unknown, rhs: unknown) => unknown
     '<<': (lhs, rhs) => (lhs as never) << (rhs as never),
     '>>': (lhs, rhs) => (lhs as never) >> (rhs as never),
     '>>>': (lhs, rhs) => (lhs as never) >>> (rhs as never),
+    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     '+': (lhs, rhs) => (lhs as never) + rhs,
     '-': (lhs, rhs) => (lhs as never) - (rhs as never),
     '*': (lhs, rhs) => (lhs as never) * (rhs as never),

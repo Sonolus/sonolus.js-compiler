@@ -31,8 +31,6 @@ export const compileObjectExpression: CompileESTree<ObjectExpression> = (node, c
                     }),
                 )
                 break
-            default:
-                throw ctx.error(property, `Property kind ${property.kind} is not supported`)
         }
     }
 

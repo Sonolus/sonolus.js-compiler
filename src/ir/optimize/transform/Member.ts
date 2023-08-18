@@ -13,7 +13,7 @@ export const transformMember: TransformIR<Member> = (ir, ctx) => {
     const keyResult = isConstant(key)
     if (!keyResult) return { ...ir, object, key }
 
-    const descriptor = getPropertyDescriptor(objectResult.value, keyResult.value as never)
+    const descriptor = getPropertyDescriptor(objectResult.value, keyResult.value as PropertyKey)
     if (!descriptor) return { ...ir, object, key }
 
     return rewriteAsExecute(ir, ctx, [
@@ -37,7 +37,7 @@ const getPropertyDescriptor = (object: unknown, key: PropertyKey) => {
 }
 
 const toValue = (descriptor: PropertyDescriptor, thisValue: unknown) => {
-    if ('value' in descriptor) return descriptor.value
+    if ('value' in descriptor) return descriptor.value as unknown
 
     const value = {}
 

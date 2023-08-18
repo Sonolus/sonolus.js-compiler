@@ -26,21 +26,33 @@ export const unwrapIRGet = (ir: IR, ctx: TransformIRContext): IR => {
                 ],
             })
         case 'Value':
-            if (!hasIntrinsicGet(ir.value)) break
+            if (!hasIntrinsicGet(ir.value)) return ir
 
             return ir.value[Intrinsic.Get](ir, ctx)
+        default:
+            return ir
     }
-
-    return ir
 }
 
 export const isResolved = (ir: IR): boolean => {
     switch (ir.type) {
-        case 'ArrayConstructor':
-        case 'ObjectConstructor':
-            return false
-        default:
+        case 'Binary':
+        case 'Block':
+        case 'Break':
+        case 'Conditional':
+        case 'Declare':
+        case 'DoWhile':
+        case 'Execute':
+        case 'Get':
+        case 'Logical':
+        case 'Native':
+        case 'Set':
+        case 'Unary':
+        case 'Value':
+        case 'While':
             return true
+        default:
+            return false
     }
 }
 
@@ -50,6 +62,8 @@ export const isConstant = (ir: IR): Value | undefined => {
             return isConstant(ir.children[ir.children.length - 1])
         case 'Value':
             return ir
+        default:
+            return
     }
 }
 
@@ -61,5 +75,7 @@ export const isReference = (ir: IR): Value | undefined => {
             if (typeof ir.value === 'number' || typeof ir.value === 'boolean') return
 
             return ir
+        default:
+            return
     }
 }

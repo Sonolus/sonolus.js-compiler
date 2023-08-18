@@ -12,4 +12,4 @@ export const createMapIRVisitor =
 
             type: ir.type,
             ...map(ir, ...(children as IRChildren<N>)),
-        } as N)
+        }) as N

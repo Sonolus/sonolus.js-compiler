@@ -10,7 +10,7 @@ export const transformObjectDestructorGet: TransformIR<ObjectDestructorGet> = (i
 
     if (!ir.target.keys) return { ...ir, key }
 
-    const index = ir.target.keys.indexOf(result.value as never)
+    const index = ir.target.keys.indexOf(result.value as string)
     if (index !== -1) {
         ir.target.keys.splice(index, 1)
     }
