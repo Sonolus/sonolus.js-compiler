@@ -1,43 +1,44 @@
 import { collectIR } from '../../collect/index.js'
 import { Block } from '../../nodes/Block.js'
 import { IR } from '../../nodes/index.js'
+import { replaceIR } from '../../replace/index.js'
 import { TransformIR } from './index.js'
-import { rewriteAsExecute, transformIRAndGet } from './utils.js'
+import { transformIRAndGet } from './utils.js'
 
 export const transformBlock: TransformIR<Block> = (ir, ctx) => {
-    const body = transformIRAndGet(ir.body, ctx)
+    let body = transformIRAndGet(ir.body, ctx)
 
-    const count = countBreaks(body, ir.target)
+    while (true) {
+        const count = countBreaks(body, ir.target)
+        if (count === 0) return body
 
-    if (count === 0) return body
+        const replacements = new Map<IR, IR>()
+        findBreakReplacements(body, ir.target, replacements)
 
-    const result = endsInBreak(body, ir.target)
-    if (!result) return { ...ir, body }
+        const result = replaceIR(body, replacements)
+        if (!result.changed) return { ...ir, body }
 
-    if (count === 1) return rewriteAsExecute(ir, ctx, result)
-
-    return { ...ir, body: rewriteAsExecute(ir, ctx, result) }
+        body = transformIRAndGet(result.ir, ctx)
+    }
 }
 
 const countBreaks = (ir: IR, target: object) =>
     collectIR(ir).filter((ir) => ir.type === 'Break' && ir.target === target).length
 
-const endsInBreak = (ir: IR, target: object): IR[] | undefined => {
+const findBreakReplacements = (ir: IR, target: object, replacements: Map<IR, IR>) => {
     switch (ir.type) {
-        case 'Execute': {
-            const last = ir.children.at(-1)
-            if (!last) return
+        case 'Break': {
+            if (ir.target !== target) break
 
-            const result = endsInBreak(last, target)
-            if (!result) return
-
-            return [...ir.children.slice(0, -1), ...result]
+            replacements.set(ir, ir.value)
+            break
         }
-        case 'Break':
-            if (ir.target !== target) return
-
-            return [ir.value]
+        case 'Execute': {
+            const last = ir.children[ir.children.length - 1]
+            findBreakReplacements(last, target, replacements)
+            break
+        }
         default:
-            return
+            break
     }
 }
