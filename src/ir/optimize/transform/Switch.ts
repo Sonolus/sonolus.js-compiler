@@ -1,14 +1,50 @@
 import { Switch } from '../../nodes/Switch.js'
+import { IR } from '../../nodes/index.js'
 import { TransformIR, transformIR } from './index.js'
-import { rewriteAsExecute, transformIRAndGet } from './utils.js'
+import { isConstant, rewriteAsExecute, transformIRAndGet } from './utils.js'
 
 export const transformSwitch: TransformIR<Switch> = (ir, ctx) => {
     const discriminant = transformIRAndGet(ir.discriminant, ctx)
-    const defaultCase = transformIRAndGet(ir.defaultCase, ctx)
-    const cases = ir.cases.map(({ test, consequent }) => ({
-        test: transformIRAndGet(test, ctx),
-        consequent: transformIRAndGet(consequent, ctx),
-    }))
+
+    const discriminantResult = isConstant(discriminant)
+
+    let prepend: IR | undefined
+    const cases: {
+        test: IR
+        consequent: IR
+    }[] = []
+
+    for (const switchCase of ir.cases) {
+        const test = prepend
+            ? rewriteAsExecute(switchCase.test, ctx, [
+                  prepend,
+                  transformIRAndGet(switchCase.test, ctx),
+              ])
+            : transformIRAndGet(switchCase.test, ctx)
+        prepend = undefined
+
+        if (discriminantResult) {
+            const testResult = isConstant(test)
+            if (testResult) {
+                if (discriminantResult.value === testResult.value) {
+                    prepend = rewriteAsExecute(ir, ctx, [discriminant, test, switchCase.consequent])
+                    break
+                }
+
+                prepend = test
+                continue
+            }
+        }
+
+        cases.push({
+            test,
+            consequent: transformIR(switchCase.consequent, ctx),
+        })
+    }
+
+    const defaultCase = prepend
+        ? rewriteAsExecute(ir.defaultCase, ctx, [prepend, ir.defaultCase])
+        : transformIR(ir.defaultCase, ctx)
 
     switch (cases.length) {
         case 0:
