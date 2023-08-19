@@ -5,6 +5,7 @@ import { optimizeAdd } from './Add.js'
 import { optimizeDivide } from './Divide.js'
 import { optimizeGet } from './Get.js'
 import { optimizeGetShifted } from './GetShifted.js'
+import { optimizeIf } from './If.js'
 import { optimizeMod } from './Mod.js'
 import { optimizeMultiply } from './Multiply.js'
 import { optimizePower } from './Power.js'
@@ -24,6 +25,7 @@ const optimizers: {
     optimizeDivide,
     optimizeGet,
     optimizeGetShifted,
+    optimizeIf,
     optimizeMod,
     optimizeMultiply,
     optimizePower,
