@@ -33,9 +33,25 @@ const findBreakReplacements = (ir: IR, target: object, replacements: Map<IR, IR>
             replacements.set(ir, ir.value)
             break
         }
+        case 'Conditional': {
+            findBreakReplacements(ir.consequent, target, replacements)
+            findBreakReplacements(ir.alternate, target, replacements)
+            break
+        }
         case 'Execute': {
             const last = ir.children[ir.children.length - 1]
             findBreakReplacements(last, target, replacements)
+            break
+        }
+        case 'Logical': {
+            findBreakReplacements(ir.rhs, target, replacements)
+            break
+        }
+        case 'Switch': {
+            for (const { consequent } of ir.cases) {
+                findBreakReplacements(consequent, target, replacements)
+            }
+            findBreakReplacements(ir.defaultCase, target, replacements)
             break
         }
         default:
