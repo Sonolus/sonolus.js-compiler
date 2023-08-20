@@ -32,6 +32,7 @@ import { compileForOfStatement } from './statements/ForOfStatement.js'
 import { compileForStatement } from './statements/ForStatement.js'
 import { compileIfStatement } from './statements/IfStatement.js'
 import { compileReturnStatement } from './statements/ReturnStatement.js'
+import { compileSwitchStatement } from './statements/SwitchStatement.js'
 import { compileThrowStatement } from './statements/ThrowStatement.js'
 import { compileWhileStatement } from './statements/WhileStatement.js'
 
@@ -65,6 +66,7 @@ export const compileESTree = visit<CompileESTree<Node>>().create(
         compileReturnStatement,
         compileSequenceExpression,
         compileSuper,
+        compileSwitchStatement,
         compileTemplateLiteral,
         compileThisExpression,
         compileThrowStatement,

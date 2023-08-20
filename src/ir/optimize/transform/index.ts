@@ -31,6 +31,7 @@ import { transformObjectDestructorRest } from './ObjectDestructorRest.js'
 import { transformReference } from './Reference.js'
 import { transformSet } from './Set.js'
 import { transformSuper } from './Super.js'
+import { transformSwitch } from './Switch.js'
 import { transformThrow } from './Throw.js'
 import { transformUnary } from './Unary.js'
 import { transformValue } from './Value.js'
@@ -71,6 +72,7 @@ export const transformIR = visit<TransformIR<IR>>().create('transform', {
     transformReference,
     transformSet,
     transformSuper,
+    transformSwitch,
     transformThrow,
     transformUnary,
     transformValue,

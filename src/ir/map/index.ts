@@ -31,6 +31,7 @@ import { mapObjectDestructorRest } from './ObjectDestructorRest.js'
 import { mapReference } from './Reference.js'
 import { mapSet } from './Set.js'
 import { mapSuper } from './Super.js'
+import { mapSwitch } from './Switch.js'
 import { mapThrow } from './Throw.js'
 import { mapUnary } from './Unary.js'
 import { mapValue } from './Value.js'
@@ -70,6 +71,7 @@ export const mapIR = visit<<N extends IR>(ir: N, ...children: IRChildren<N>) => 
     mapReference,
     mapSet,
     mapSuper,
+    mapSwitch,
     mapThrow,
     mapUnary,
     mapValue,

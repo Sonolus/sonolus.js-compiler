@@ -5,6 +5,7 @@ import { optimizeAdd } from './Add.js'
 import { optimizeDivide } from './Divide.js'
 import { optimizeGet } from './Get.js'
 import { optimizeGetShifted } from './GetShifted.js'
+import { optimizeIf } from './If.js'
 import { optimizeMod } from './Mod.js'
 import { optimizeMultiply } from './Multiply.js'
 import { optimizePower } from './Power.js'
@@ -12,6 +13,7 @@ import { optimizeRem } from './Rem.js'
 import { optimizeSet } from './Set.js'
 import { optimizeSetShifted } from './SetShifted.js'
 import { optimizeSubtract } from './Subtract.js'
+import { optimizeSwitchWithDefault } from './SwitchWithDefault.js'
 import { optimizeWhile } from './While.js'
 import { isValue } from './utils.js'
 
@@ -24,6 +26,7 @@ const optimizers: {
     optimizeDivide,
     optimizeGet,
     optimizeGetShifted,
+    optimizeIf,
     optimizeMod,
     optimizeMultiply,
     optimizePower,
@@ -31,6 +34,7 @@ const optimizers: {
     optimizeSet,
     optimizeSetShifted,
     optimizeSubtract,
+    optimizeSwitchWithDefault,
     optimizeWhile,
 }
 

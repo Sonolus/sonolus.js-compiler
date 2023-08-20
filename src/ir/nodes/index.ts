@@ -34,6 +34,7 @@ import { ObjectDestructorRest, ObjectDestructorRestChildren } from './ObjectDest
 import { Reference, ReferenceChildren } from './Reference.js'
 import { Set, SetChildren } from './Set.js'
 import { Super, SuperChildren } from './Super.js'
+import { Switch, SwitchChildren } from './Switch.js'
 import { Throw, ThrowChildren } from './Throw.js'
 import { Unary, UnaryChildren } from './Unary.js'
 import { Value, ValueChildren } from './Value.js'
@@ -76,6 +77,7 @@ export type IR =
     | Reference
     | Set
     | Super
+    | Switch
     | Throw
     | Unary
     | Value
@@ -113,6 +115,7 @@ export type IRChildren<N extends IR> = {
     Reference: ReferenceChildren
     Set: SetChildren
     Super: SuperChildren
+    Switch: SwitchChildren
     Throw: ThrowChildren
     Unary: UnaryChildren
     Value: ValueChildren
@@ -151,6 +154,7 @@ export const IRTypes = [
     'Reference',
     'Set',
     'Super',
+    'Switch',
     'Throw',
     'Unary',
     'Value',
