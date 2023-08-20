@@ -7,24 +7,37 @@ export const optimizeSwitchWithDefault: OptimizeFunc<'SwitchWithDefault'> = (sno
     const cases = snode.args.slice(1, -1)
     const defaultCase = snode.args[snode.args.length - 1]
 
+    const removeDefault = defaultCase === 0
+
     const result = tryNormalize(cases)
-    if (result)
-        return {
-            func: 'SwitchIntegerWithDefault',
+    if (result) {
+        const normalizedDiscriminant = optimizeSNode({
+            func: 'Divide',
             args: [
-                optimizeSNode({
-                    func: 'Divide',
-                    args: [
-                        {
-                            func: 'Subtract',
-                            args: [discriminant, result.a],
-                        },
-                        result.d,
-                    ],
-                }),
-                ...cases.filter((_, i) => i % 2 === 1),
-                defaultCase,
+                {
+                    func: 'Subtract',
+                    args: [discriminant, result.a],
+                },
+                result.d,
             ],
+        })
+        const consequences = cases.filter((_, i) => i % 2 === 1)
+
+        return removeDefault
+            ? {
+                  func: 'SwitchInteger',
+                  args: [normalizedDiscriminant, ...consequences],
+              }
+            : {
+                  func: 'SwitchIntegerWithDefault',
+                  args: [normalizedDiscriminant, ...consequences, defaultCase],
+              }
+    }
+
+    if (removeDefault)
+        return {
+            func: 'Switch',
+            args: [discriminant, ...cases],
         }
 
     return snode
