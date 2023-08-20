@@ -36,13 +36,22 @@ Notably, language features that do not exist in Sonolus runtime (strings, object
 
 #### Archetypes
 
+Play:
+
 -   `Archetype`
 -   `SpawnableArchetype`
 
 #### Blocks
 
+Play:
+
 -   `levelData`
 -   `levelMemory`
+
+Tutorial:
+
+-   `tutorialData`
+-   `tutorialMemory`
 
 #### Data types
 
@@ -59,20 +68,34 @@ Notably, language features that do not exist in Sonolus runtime (strings, object
 
 #### Defines
 
--   `defineArchetypes`
--   `defineBuckets`
 -   `defineEffect`
 -   `defineLib`
 -   `defineOptions`
 -   `defineParticle`
 -   `defineSkin`
 
+Play:
+
+-   `defineArchetypes`
+-   `defineBuckets`
+
+Tutorial:
+
+-   `defineInstruction`
+
 #### Enums
 
--   `ArchetypeCallback`
 -   `EntityState`
 -   `HorizontalAlign`
 -   `Judgment`
+
+Play:
+
+-   `ArchetypeCallback`
+
+Tutorial:
+
+-   `NavigationDirection`
 
 #### Ids
 
@@ -80,27 +103,42 @@ Notably, language features that do not exist in Sonolus runtime (strings, object
 -   `ParticleEffectId`
 -   `SkinSpriteId`
 
+Tutorial:
+
+-   `InstructionIconId`
+-   `InstructionTextId`
+
 #### Instance ids
 
 -   `LoopedEffectClipInstanceId`
 -   `ParticleEffectInstanceId`
 -   `ScheduledLoopedEffectClipInstanceId`
+
+Play:
+
 -   `TouchId`
 
 #### Misc
 
 -   `audio`
 -   `background`
--   `bpmChanges`
 -   `compiler`
 -   `debug`
+-   `native`
+-   `screen`
+-   `time`
+-   `ui`
+
+Play:
+
+-   `bpmChanges`
 -   `entityInfos`
 -   `input`
 -   `life`
--   `native`
 -   `score`
--   `screen`
--   `time`
 -   `timeScaleChanges`
 -   `touches`
--   `ui`
+
+Tutorial:
+
+-   `navigation`
