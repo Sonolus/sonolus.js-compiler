@@ -13,6 +13,7 @@ import { optimizeRem } from './Rem.js'
 import { optimizeSet } from './Set.js'
 import { optimizeSetShifted } from './SetShifted.js'
 import { optimizeSubtract } from './Subtract.js'
+import { optimizeSwitchWithDefault } from './SwitchWithDefault.js'
 import { optimizeWhile } from './While.js'
 import { isValue } from './utils.js'
 
@@ -33,6 +34,7 @@ const optimizers: {
     optimizeSet,
     optimizeSetShifted,
     optimizeSubtract,
+    optimizeSwitchWithDefault,
     optimizeWhile,
 }
 
