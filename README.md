@@ -41,12 +41,20 @@ Play:
 -   `Archetype`
 -   `SpawnableArchetype`
 
+Preview:
+
+-   `Archetype`
+
 #### Blocks
 
 Play:
 
 -   `levelData`
 -   `levelMemory`
+
+Preview:
+
+-   `previewData`
 
 Tutorial:
 
@@ -68,77 +76,110 @@ Tutorial:
 
 #### Defines
 
--   `defineEffect`
 -   `defineLib`
 -   `defineOptions`
--   `defineParticle`
 -   `defineSkin`
 
 Play:
 
 -   `defineArchetypes`
 -   `defineBuckets`
+-   `defineEffect`
+-   `defineParticle`
+
+Preview:
+
+-   `defineArchetypes`
 
 Tutorial:
 
+-   `defineEffect`
 -   `defineInstruction`
+-   `defineParticle`
 
 #### Enums
-
--   `EntityState`
--   `HorizontalAlign`
--   `Judgment`
 
 Play:
 
 -   `ArchetypeCallback`
+-   `EntityState`
+-   `HorizontalAlign`
+-   `Judgment`
+
+Preview:
+
+-   `ArchetypeCallback`
+-   `Scroll`
 
 Tutorial:
 
+-   `EntityState`
+-   `HorizontalAlign`
+-   `Judgment`
 -   `NavigationDirection`
 
 #### Ids
 
+-   `SkinSpriteId`
+
+Play:
+
 -   `EffectClipId`
 -   `ParticleEffectId`
--   `SkinSpriteId`
 
 Tutorial:
 
+-   `EffectClipId`
 -   `InstructionIconId`
 -   `InstructionTextId`
+-   `ParticleEffectId`
 
 #### Instance ids
+
+Play:
+
+-   `LoopedEffectClipInstanceId`
+-   `ParticleEffectInstanceId`
+-   `ScheduledLoopedEffectClipInstanceId`
+-   `TouchId`
+
+Tutorial:
 
 -   `LoopedEffectClipInstanceId`
 -   `ParticleEffectInstanceId`
 -   `ScheduledLoopedEffectClipInstanceId`
 
-Play:
-
--   `TouchId`
-
 #### Misc
 
--   `audio`
--   `background`
 -   `compiler`
 -   `debug`
 -   `native`
 -   `screen`
--   `time`
 -   `ui`
 
 Play:
 
+-   `audio`
+-   `background`
 -   `bpmChanges`
 -   `entityInfos`
 -   `input`
 -   `life`
 -   `score`
+-   `time`
 -   `timeScaleChanges`
 -   `touches`
 
+Preview:
+
+-   `bpmChanges`
+-   `canvas`
+-   `entityInfos`
+-   `timeScaleChanges`
+
 Tutorial:
 
+-   `audio`
+-   `background`
 -   `navigation`
+-   `time`
