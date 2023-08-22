@@ -1,5 +1,2 @@
-export { EntityState } from '../../shared/enums/EntityState.js'
-export { HorizontalAlign } from '../../shared/enums/HorizontalAlign.js'
-export { Judgment } from '../../shared/enums/Judgment.js'
 export { NavigationDirection } from './NavigationDirection.js'
 export { TutorialCallback } from './TutorialCallback.js'

@@ -76,7 +76,6 @@ Tutorial:
 
 #### Defines
 
--   `defineLib`
 -   `defineOptions`
 -   `defineSkin`
 
@@ -113,10 +112,8 @@ Preview:
 
 Tutorial:
 
--   `EntityState`
--   `HorizontalAlign`
--   `Judgment`
 -   `NavigationDirection`
+-   `TutorialCallback`
 
 #### Ids
 

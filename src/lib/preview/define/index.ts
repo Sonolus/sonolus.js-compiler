@@ -1,4 +1,3 @@
-export { defineLib } from '../../shared/define/lib.js'
 export { SkinSprite } from '../../shared/define/skin.js'
 export { defineArchetypes } from './archetypes.js'
 export { defineOptions } from './options.js'
