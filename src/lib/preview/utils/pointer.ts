@@ -7,19 +7,4 @@ export const readonlyPointer = createPointer([])
 
 export const preprocessWritablePointer = createPointer(['preprocess'])
 
-export const singleThreadedWritablePointer = createPointer([
-    'preprocess',
-    'updateSequential',
-    'touch',
-])
-
-export const allWritablePointer = createPointer([
-    'preprocess',
-    'spawnOrder',
-    'shouldSpawn',
-    'initialize',
-    'updateSequential',
-    'touch',
-    'updateParallel',
-    'terminate',
-])
+export const allWritablePointer = createPointer(['preprocess', 'render'])

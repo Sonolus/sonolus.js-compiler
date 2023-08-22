@@ -1,0 +1,162 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+
+import { EngineArchetypeDataName, EnginePlayDataArchetype } from 'sonolus-core'
+import { Intrinsic } from '../../intrinsic/index.js'
+import { readContainer } from '../shared/blocks/utils.js'
+import { ContainerType } from '../shared/containers/ContainerType.js'
+import { DataType } from '../shared/containers/DataType.js'
+import { defineLib } from '../shared/define/lib.js'
+import { compiler } from './compiler.js'
+import { allWritablePointer, preprocessWritablePointer } from './utils/pointer.js'
+
+type EntityDataDefinition = Record<
+    string,
+    {
+        name: EngineArchetypeDataName | (string & {})
+        type: NumberConstructor | BooleanConstructor | typeof DataType<number | boolean>
+    }
+>
+
+type EntityDataType<T extends EntityDataDefinition> = {
+    [K in keyof T]: T[K]['type'] extends NumberConstructor
+        ? number
+        : T[K]['type'] extends BooleanConstructor
+        ? boolean
+        : InstanceType<T[K]['type']> extends DataType<infer T>
+        ? T
+        : never
+}
+
+type EntityData<T extends EntityDataDefinition> = EntityDataType<T> & {
+    names: {
+        [K in keyof T]: T[K]['name']
+    }
+} & EntityDataLib<T>
+
+type EntityDataLib<T extends EntityDataDefinition> = {
+    get(index: number): EntityDataType<T>
+}
+
+type EntitySharedMemoryLib<T extends object> = {
+    get(index: number): ContainerType<T>
+}
+
+type EntityInfo = {
+    readonly index: number
+    readonly archetype: number
+}
+
+export class Archetype {
+    name = ''
+    index = 0
+
+    preprocessOrder = 0
+    preprocess(): void {}
+
+    render(): void {}
+
+    private readonly _entityData: EnginePlayDataArchetype['data'] = []
+    protected defineData<T extends EntityDataDefinition>(type: T): EntityData<T> {
+        // eslint-disable-next-line @typescript-eslint/no-throw-literal
+        if (compiler.isCompiling) throw 'defineData can only be called at compile time'
+
+        const data = Object.entries(type).map(([key, { name }], index) => ({
+            key,
+            name,
+            offset: this._entityData.length + index,
+        }))
+
+        for (const { name, offset: index } of data) {
+            this._entityData.push({
+                name,
+                index,
+            })
+        }
+
+        // eslint-disable-next-line @typescript-eslint/no-throw-literal
+        if (data.length > 32) throw 'Max defineData capacity (32) reached'
+
+        return {
+            ...Object.fromEntries(
+                data.map(({ key, offset }) => [key, preprocessWritablePointer(4000, offset, 0, 0)]),
+            ),
+
+            names: Object.fromEntries(Object.entries(type).map(([key, { name }]) => [key, name])),
+
+            ...defineLib<EntityDataLib<T>>({
+                get: {
+                    [Intrinsic.Call]: (ir, _, [index], ctx) =>
+                        ctx.value(
+                            ir,
+                            Object.fromEntries(
+                                data.map(({ key, offset }) => [
+                                    key,
+                                    preprocessWritablePointer(
+                                        4100,
+                                        offset,
+                                        () => ctx.value(ir, index),
+                                        32,
+                                    ),
+                                ]),
+                            ),
+                        ),
+                },
+            }),
+        } as never
+    }
+
+    private _sharedMemoryOffset = 0
+    protected defineSharedMemory<const T extends object>(
+        type: T,
+    ): ContainerType<T> & EntitySharedMemoryLib<T> {
+        // eslint-disable-next-line @typescript-eslint/no-throw-literal
+        if (compiler.isCompiling) throw 'defineSharedMemory can only be called at compile time'
+
+        const start = this._sharedMemoryOffset
+
+        const allocate = (size: number) => {
+            const start = this._sharedMemoryOffset
+            this._sharedMemoryOffset += size
+
+            // eslint-disable-next-line @typescript-eslint/no-throw-literal
+            if (this._sharedMemoryOffset > 32) throw 'Max defineSharedMemory capacity (32) reached'
+
+            return [...Array(size).keys()].map((i) =>
+                preprocessWritablePointer(4001, start + i, 0, 0),
+            )
+        }
+
+        const container = readContainer(type, allocate)
+
+        return Object.assign(
+            container as never,
+            defineLib<EntitySharedMemoryLib<T>>({
+                get: {
+                    [Intrinsic.Call]: (ir, _, [index], ctx) => {
+                        let offset = start
+                        const allocate = (size: number) => {
+                            const start = offset
+                            offset += size
+
+                            return [...Array(size).keys()].map((i) =>
+                                preprocessWritablePointer(
+                                    4101,
+                                    start + i,
+                                    () => ctx.value(ir, index),
+                                    32,
+                                ),
+                            )
+                        }
+
+                        return ctx.value(ir, readContainer(type, allocate))
+                    },
+                },
+            }),
+        )
+    }
+
+    protected readonly info: EntityInfo = {
+        index: allWritablePointer(4002, 0, 0, 0),
+        archetype: allWritablePointer(4002, 1, 0, 0),
+    }
+}
