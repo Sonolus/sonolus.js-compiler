@@ -1,4 +1,3 @@
-import { ExpressionStatement } from 'estree'
 import { createCompileESTreeContext } from '../../../../estree/compile/context.js'
 import { compileESTree } from '../../../../estree/compile/index.js'
 import { createCompileIRContext } from '../../../../ir/compile/context.js'
@@ -21,7 +20,7 @@ export const buildArchetypeCallback = (
 
     const js = `\n${name}.${callback}[${index}](${index})\n`
     const program = compileJS(js)
-    const node = (program.body[0] as ExpressionStatement).expression
+    const node = program.body[0]
 
     const estreeCtx = createCompileESTreeContext([], undefined, undefined, {
         callback,
