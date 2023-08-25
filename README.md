@@ -108,6 +108,9 @@ Play:
 Preview:
 
 -   `ArchetypeCallback`
+-   `HorizontalAlign`
+-   `PrintColor`
+-   `PrintFormat`
 -   `Scroll`
 
 Tutorial:
