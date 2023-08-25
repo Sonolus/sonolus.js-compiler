@@ -308,6 +308,23 @@ export const native = defineNative<{
         a: number,
     ): void
 
+    Print(
+        value: number,
+        format: number,
+        decimalPlaces: number,
+        anchorX: number,
+        anchorY: number,
+        pivotX: number,
+        pivotY: number,
+        width: number,
+        height: number,
+        rotation: number,
+        color: number,
+        alpha: number,
+        horizontalAlign: number,
+        background: boolean,
+    ): void
+
     HasSkinSprite(id: number): boolean
     HasEffectClip(id: number): boolean
     HasParticleEffect(id: number): boolean
@@ -517,6 +534,8 @@ export const native = defineNative<{
     DestroyParticleEffect: 1,
 
     Paint: 7,
+
+    Print: 14,
 
     HasSkinSprite: 1,
     HasEffectClip: 1,
