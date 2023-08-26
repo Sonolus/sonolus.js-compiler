@@ -22,11 +22,12 @@ export const buildArchetypeCallback = (
           snode: SNode
       }
     | undefined => {
-    const name = `${archetype.name}_${Math.ceil(Math.random() * Number.MAX_SAFE_INTEGER).toString(
-        16,
-    )}`
+    const name = JSON.stringify(archetype.name)
 
-    const js = `\n${name}.${callback}()\n`
+    const wrapper = { [archetype.name]: archetype }
+    const wrapperName = `_${Math.ceil(Math.random() * Number.MAX_SAFE_INTEGER).toString(16)}`
+
+    const js = `\n${wrapperName}[${name}].${callback}()\n`
     const program = compileJS(js)
     const node =
         callback === 'spawnOrder' || callback === 'shouldSpawn'
@@ -36,10 +37,10 @@ export const buildArchetypeCallback = (
     const estreeCtx = createCompileESTreeContext([], undefined, undefined, {
         callback,
         lexical: {
-            get: (n) => {
-                if (n === name) return archetype
+            get: (name) => {
+                if (name === wrapperName) return wrapper
 
-                return globalResolver(n)
+                return globalResolver(name)
             },
             set: (ir, _name, _value, ctx) => {
                 throw ctx.error(ir, 'Cannot mutate global lexical scope')
