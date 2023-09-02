@@ -44,4 +44,4 @@ const createEntityInfo = (index: () => IR) => ({
     archetype: entityInfoPointer(1, index),
 })
 
-const entityInfoPointer = (x: number, index: () => IR) => readonlyPointer(4102, x, index, 3)
+const entityInfoPointer = (x: number, index: () => IR) => readonlyPointer(4102, x, index, 2)
