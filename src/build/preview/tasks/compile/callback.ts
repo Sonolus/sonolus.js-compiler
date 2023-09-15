@@ -4,31 +4,39 @@ import { createCompileIRContext } from '../../../../ir/compile/context.js'
 import { compileIR } from '../../../../ir/compile/index.js'
 import { optimizeIR } from '../../../../ir/optimize/index.js'
 import { compileJS } from '../../../../js/compile/index.js'
-import { TutorialCallback } from '../../../../lib/tutorial/index.js'
+import { Archetype } from '../../../../lib/play/Archetype.js'
+import { ArchetypeCallback } from '../../../../lib/preview/enums/ArchetypeCallback.js'
 import { SNode } from '../../../../snode/nodes/index.js'
 import { optimizeSNode } from '../../../../snode/optimize/index.js'
 import { ignoreReturn } from '../../../shared/utils/compile.js'
 
 export const buildArchetypeCallback = (
-    tutorial: Partial<Record<TutorialCallback, ((index: number) => void)[]>>,
-    callback: TutorialCallback,
-    index: number,
+    archetype: Archetype,
+    callback: ArchetypeCallback,
     optimizationLevel: 'low' | 'high',
     globalResolver: (name: string) => unknown,
-): SNode | undefined => {
-    const name = `Tutorial_${Math.ceil(Math.random() * Number.MAX_SAFE_INTEGER).toString(16)}`
+):
+    | {
+          order: number
+          snode: SNode
+      }
+    | undefined => {
+    const name = JSON.stringify(archetype.name)
 
-    const js = `\n${name}.${callback}[${index}](${index})\n`
+    const wrapper = { [archetype.name]: archetype }
+    const wrapperName = `_${Math.ceil(Math.random() * Number.MAX_SAFE_INTEGER).toString(16)}`
+
+    const js = `\n${wrapperName}[${name}].${callback}()\n`
     const program = compileJS(js)
     const node = program.body[0]
 
     const estreeCtx = createCompileESTreeContext([], undefined, undefined, {
         callback,
         lexical: {
-            get: (n) => {
-                if (n === name) return tutorial
+            get: (name) => {
+                if (name === wrapperName) return wrapper
 
-                return globalResolver(n)
+                return globalResolver(name)
             },
             set: (ir, _name, _value, ctx) => {
                 throw ctx.error(ir, 'Cannot mutate global lexical scope')
@@ -40,10 +48,17 @@ export const buildArchetypeCallback = (
     const irCtx = createCompileIRContext()
     const snode = optimizeSNode(compileIR(ir, irCtx))
 
+    const result = {
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+        order: archetype[`${callback}Order` as never] ?? 0,
+        snode,
+    }
+
     if (typeof snode === 'number') return
 
-    if (snode.func === 'Execute' && snode.args[snode.args.length - 1] === 0)
-        return ignoreReturn(snode)
+    if (snode.func === 'Execute' && snode.args[snode.args.length - 1] === 0) {
+        result.snode = ignoreReturn(snode)
+    }
 
-    return snode
+    return result
 }

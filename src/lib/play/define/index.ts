@@ -1,5 +1,4 @@
 export { EffectClip, defineEffect } from '../../shared/define/effect.js'
-export { defineLib } from '../../shared/define/lib.js'
 export { ParticleEffect } from '../../shared/define/particle.js'
 export { SkinSprite } from '../../shared/define/skin.js'
 export { defineArchetypes } from './archetypes.js'
