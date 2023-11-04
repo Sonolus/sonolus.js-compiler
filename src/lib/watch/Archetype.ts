@@ -6,7 +6,6 @@ import { createDefineBlock, readContainer } from '../shared/blocks/utils.js'
 import { ContainerType } from '../shared/containers/ContainerType.js'
 import { DataType } from '../shared/containers/DataType.js'
 import { defineLib } from '../shared/define/lib.js'
-import { Judgment } from '../shared/enums/Judgment.js'
 import { ArchetypeLife } from '../shared/life.js'
 import { compiler } from './compiler.js'
 import { EntityState } from './enums/EntityState.js'
@@ -57,12 +56,7 @@ type EntityInfo = {
 }
 
 type EntityInputResult = {
-    judgment: Judgment
-    accuracy: number
-    readonly bucket: {
-        index: number
-        value: number
-    }
+    time: number
 }
 
 export class Archetype {
@@ -74,23 +68,20 @@ export class Archetype {
     preprocessOrder = 0
     preprocess(): void {}
 
-    spawnOrderOrder = 0
-    spawnOrder(): number {
+    spawnTimeOrder = 0
+    spawnTime(): number {
         return 0
     }
 
-    shouldSpawnOrder = 0
-    shouldSpawn(): boolean {
-        return true
+    despawnTimeOrder = 0
+    despawnTime(): number {
+        return 0
     }
 
     initialize(): void {}
 
     updateSequentialOrder = 0
     updateSequential(): void {}
-
-    touchOrder = 0
-    touch(): void {}
 
     updateParallel(): void {}
 
@@ -214,14 +205,7 @@ export class Archetype {
         state: readonlyPointer(4003, 2, 0, 0),
     }
 
-    protected despawn: boolean = allWritablePointer(4004, 0, 0, 0)
-
     protected readonly result: EntityInputResult = {
-        judgment: allWritablePointer(4005, 0, 0, 0),
-        accuracy: allWritablePointer(4005, 1, 0, 0),
-        bucket: {
-            index: allWritablePointer(4005, 2, 0, 0),
-            value: allWritablePointer(4005, 3, 0, 0),
-        },
+        time: preprocessWritablePointer(4004, 0, 0, 0),
     }
 }
