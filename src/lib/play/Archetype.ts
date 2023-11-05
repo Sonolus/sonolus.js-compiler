@@ -13,6 +13,7 @@ import { ArchetypeLife, life } from './life.js'
 import {
     allWritablePointer,
     preprocessWritablePointer,
+    readonlyPointer,
     singleThreadedWritablePointer,
 } from './utils/pointer.js'
 
@@ -207,9 +208,9 @@ export class Archetype {
     }
 
     protected readonly info: EntityInfo = {
-        index: allWritablePointer(4003, 0, 0, 0),
-        archetype: allWritablePointer(4003, 1, 0, 0),
-        state: allWritablePointer(4003, 2, 0, 0),
+        index: readonlyPointer(4003, 0, 0, 0),
+        archetype: readonlyPointer(4003, 1, 0, 0),
+        state: readonlyPointer(4003, 2, 0, 0),
     }
 
     protected despawn: boolean = allWritablePointer(4004, 0, 0, 0)
