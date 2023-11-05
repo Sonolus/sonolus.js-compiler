@@ -55,7 +55,7 @@ type EntityInfo = {
     readonly state: EntityState
 }
 
-type InputResult = {
+type EntityInputResult = {
     judgment: Judgment
     accuracy: number
     readonly bucket: {
@@ -215,7 +215,7 @@ export class Archetype {
 
     protected despawn: boolean = allWritablePointer(4004, 0, 0, 0)
 
-    protected readonly result: InputResult = {
+    protected readonly result: EntityInputResult = {
         judgment: allWritablePointer(4005, 0, 0, 0),
         accuracy: allWritablePointer(4005, 1, 0, 0),
         bucket: {
