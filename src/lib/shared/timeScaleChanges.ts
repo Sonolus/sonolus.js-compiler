@@ -1,5 +1,5 @@
-import { defineLib } from '../shared/define/lib.js'
-import { native } from '../shared/native.js'
+import { defineLib } from './define/lib.js'
+import { native } from './native.js'
 
 export type TimeScaleChange = {
     readonly timeScale: number
