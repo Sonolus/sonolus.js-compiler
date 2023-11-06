@@ -12,6 +12,7 @@
   "exports": {
     "./shared": "./dist/index.shared.js",
     "./play": "./dist/index.play.js",
+    "./watch": "./dist/index.watch.js",
     "./preview": "./dist/index.preview.js",
     "./tutorial": "./dist/index.tutorial.js",
     "./internal/*": "./dist/*"
