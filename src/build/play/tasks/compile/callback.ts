@@ -6,14 +6,14 @@ import { compileIR } from '../../../../ir/compile/index.js'
 import { optimizeIR } from '../../../../ir/optimize/index.js'
 import { compileJS } from '../../../../js/compile/index.js'
 import { Archetype } from '../../../../lib/play/Archetype.js'
-import { ArchetypeCallback } from '../../../../lib/play/enums/ArchetypeCallback.js'
+import { Callback } from '../../../../lib/play/enums/Callback.js'
 import { SNode } from '../../../../snode/nodes/index.js'
 import { optimizeSNode } from '../../../../snode/optimize/index.js'
 import { ignoreReturn } from '../../../shared/utils/compile.js'
 
 export const buildArchetypeCallback = (
     archetype: Archetype,
-    callback: ArchetypeCallback,
+    callback: Callback,
     optimizationLevel: 'low' | 'high',
     globalResolver: (name: string) => unknown,
 ):

@@ -1,5 +1,5 @@
 export { HorizontalAlign } from '../../shared/enums/HorizontalAlign.js'
 export { PrintColor } from '../../shared/enums/PrintColor.js'
 export { PrintFormat } from '../../shared/enums/PrintFormat.js'
-export { ArchetypeCallback } from './ArchetypeCallback.js'
+export { Callback } from './Callback.js'
 export { Scroll } from './Scroll.js'

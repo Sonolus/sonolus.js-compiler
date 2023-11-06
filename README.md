@@ -100,14 +100,14 @@ Tutorial:
 
 Play:
 
--   `ArchetypeCallback`
+-   `Callback`
 -   `EntityState`
 -   `HorizontalAlign`
 -   `Judgment`
 
 Preview:
 
--   `ArchetypeCallback`
+-   `Callback`
 -   `HorizontalAlign`
 -   `PrintColor`
 -   `PrintFormat`

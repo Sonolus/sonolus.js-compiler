@@ -1,7 +1,7 @@
 import { createPointer as _createPointer } from '../../shared/utils/pointer.js'
-import { ArchetypeCallback } from '../enums/ArchetypeCallback.js'
+import { Callback } from '../enums/Callback.js'
 
-const createPointer = _createPointer<ArchetypeCallback>
+const createPointer = _createPointer<Callback>
 
 export const readonlyPointer = createPointer([])
 

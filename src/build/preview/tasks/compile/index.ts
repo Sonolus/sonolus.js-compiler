@@ -1,4 +1,4 @@
-import { ArchetypeCallback } from '../../../../lib/preview/enums/ArchetypeCallback.js'
+import { Callback } from '../../../../lib/preview/enums/Callback.js'
 import { SNode } from '../../../../snode/nodes/index.js'
 import { Project } from '../../project.js'
 import { buildArchetypeCallback } from './callback.js'
@@ -6,14 +6,14 @@ import { buildArchetypeCallback } from './callback.js'
 export type CompileTask = {
     type: 'compile'
     archetype: string
-    callback: ArchetypeCallback
+    callback: Callback
     optimizationLevel: 'low' | 'high'
 }
 
 export type CompileTaskArtifacts = {
     type: 'compile'
     index: number
-    callback: ArchetypeCallback
+    callback: Callback
     result:
         | {
               order: number

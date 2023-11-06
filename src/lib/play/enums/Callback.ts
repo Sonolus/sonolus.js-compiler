@@ -1,4 +1,4 @@
-export const ArchetypeCallback = {
+export const Callback = {
     Preprocess: 'preprocess',
     SpawnOrder: 'spawnOrder',
     ShouldSpawn: 'shouldSpawn',
@@ -9,4 +9,4 @@ export const ArchetypeCallback = {
     Terminate: 'terminate',
 } as const
 
-export type ArchetypeCallback = (typeof ArchetypeCallback)[keyof typeof ArchetypeCallback]
+export type Callback = (typeof Callback)[keyof typeof Callback]
