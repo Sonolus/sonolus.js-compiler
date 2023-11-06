@@ -41,6 +41,11 @@ Play:
 -   `Archetype`
 -   `SpawnableArchetype`
 
+Watch:
+
+-   `Archetype`
+-   `SpawnableArchetype`
+
 Preview:
 
 -   `Archetype`
@@ -48,6 +53,11 @@ Preview:
 #### Blocks
 
 Play:
+
+-   `levelData`
+-   `levelMemory`
+
+Watch:
 
 -   `levelData`
 -   `levelMemory`
@@ -86,6 +96,12 @@ Play:
 -   `defineEffect`
 -   `defineParticle`
 
+Watch:
+
+-   `defineArchetypes`
+-   `defineEffect`
+-   `defineParticle`
+
 Preview:
 
 -   `defineArchetypes`
@@ -99,6 +115,13 @@ Tutorial:
 #### Enums
 
 Play:
+
+-   `Callback`
+-   `EntityState`
+-   `HorizontalAlign`
+-   `Judgment`
+
+Watch:
 
 -   `Callback`
 -   `EntityState`
@@ -127,6 +150,11 @@ Play:
 -   `EffectClipId`
 -   `ParticleEffectId`
 
+Watch:
+
+-   `EffectClipId`
+-   `ParticleEffectId`
+
 Tutorial:
 
 -   `EffectClipId`
@@ -142,6 +170,12 @@ Play:
 -   `ParticleEffectInstanceId`
 -   `ScheduledLoopedEffectClipInstanceId`
 -   `TouchId`
+
+Watch:
+
+-   `LoopedEffectClipInstanceId`
+-   `ParticleEffectInstanceId`
+-   `ScheduledLoopedEffectClipInstanceId`
 
 Tutorial:
 
@@ -169,6 +203,18 @@ Play:
 -   `time`
 -   `timeScaleChanges`
 -   `touches`
+
+Watch:
+
+-   `audio`
+-   `background`
+-   `bpmChanges`
+-   `entityInfos`
+-   `input`
+-   `life`
+-   `score`
+-   `time`
+-   `timeScaleChanges`
 
 Preview:
 
