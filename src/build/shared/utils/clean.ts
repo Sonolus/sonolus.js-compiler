@@ -3,24 +3,24 @@ type UnionKeys<T> = T extends T ? keyof T : never
 type Schema_<T, Recur extends boolean = true> = [T] extends [undefined]
     ? undefined
     : [T] extends [string]
-    ? 'string'
-    : [T] extends [number]
-    ? 'number'
-    : [T] extends [boolean]
-    ? 'boolean'
-    : [T] extends [(infer T)[]]
-    ? [Schema<T>]
-    : [T] extends [object]
-    ? {
-          [K in UnionKeys<T> & string as [K, T[K]] extends [keyof T, Required<T>[K]]
-              ? K
-              : `${K}?`]-?: Schema<T[K]>
-      }
-    : Recur extends false
-    ? T
-    : T extends T
-    ? Schema_<T, false>
-    : never
+      ? 'string'
+      : [T] extends [number]
+        ? 'number'
+        : [T] extends [boolean]
+          ? 'boolean'
+          : [T] extends [(infer T)[]]
+            ? [Schema<T>]
+            : [T] extends [object]
+              ? {
+                    [K in UnionKeys<T> & string as [K, T[K]] extends [keyof T, Required<T>[K]]
+                        ? K
+                        : `${K}?`]-?: Schema<T[K]>
+                }
+              : Recur extends false
+                ? T
+                : T extends T
+                  ? Schema_<T, false>
+                  : never
 
 export type Schema<T> = Schema_<T>
 

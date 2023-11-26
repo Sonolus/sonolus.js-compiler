@@ -30,10 +30,10 @@ type EntityDataType<T extends EntityDataDefinition> = {
     [K in keyof T]: T[K]['type'] extends NumberConstructor
         ? number
         : T[K]['type'] extends BooleanConstructor
-        ? boolean
-        : InstanceType<T[K]['type']> extends DataType<infer T>
-        ? T
-        : never
+          ? boolean
+          : InstanceType<T[K]['type']> extends DataType<infer T>
+            ? T
+            : never
 }
 
 type EntityData<T extends EntityDataDefinition> = EntityDataType<T> & {

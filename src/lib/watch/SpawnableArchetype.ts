@@ -7,8 +7,8 @@ type SpawnData<T extends SpawnDataDefinition> = {
     [K in keyof T]: T[K] extends NumberConstructor
         ? number
         : T[K] extends BooleanConstructor
-        ? boolean
-        : never
+          ? boolean
+          : never
 }
 
 export type SpawnableArchetype<T extends SpawnDataDefinition> = Archetype & {
