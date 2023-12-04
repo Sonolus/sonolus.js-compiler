@@ -6,10 +6,10 @@ type Options<T extends OptionsDefinition> = EngineConfigurationOption[] & {
     readonly [K in keyof T]: T[K]['type'] extends 'slider'
         ? number
         : T[K]['type'] extends 'toggle'
-        ? boolean
-        : T[K]['type'] extends 'select'
-        ? number
-        : never
+          ? boolean
+          : T[K]['type'] extends 'select'
+            ? number
+            : never
 }
 
 export const createDefineOption =

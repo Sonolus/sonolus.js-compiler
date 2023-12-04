@@ -1,4 +1,4 @@
 import { createCompiler } from '../shared/compiler.js'
-import { ArchetypeCallback } from './enums/ArchetypeCallback.js'
+import { Callback } from './enums/Callback.js'
 
-export const compiler = createCompiler<ArchetypeCallback>()
+export const compiler = createCompiler<Callback>()

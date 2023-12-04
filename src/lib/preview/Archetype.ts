@@ -7,7 +7,7 @@ import { ContainerType } from '../shared/containers/ContainerType.js'
 import { DataType } from '../shared/containers/DataType.js'
 import { defineLib } from '../shared/define/lib.js'
 import { compiler } from './compiler.js'
-import { allWritablePointer, preprocessWritablePointer } from './utils/pointer.js'
+import { preprocessWritablePointer, readonlyPointer } from './utils/pointer.js'
 
 type EntityDataDefinition = Record<
     string,
@@ -21,10 +21,10 @@ type EntityDataType<T extends EntityDataDefinition> = {
     [K in keyof T]: T[K]['type'] extends NumberConstructor
         ? number
         : T[K]['type'] extends BooleanConstructor
-        ? boolean
-        : InstanceType<T[K]['type']> extends DataType<infer T>
-        ? T
-        : never
+          ? boolean
+          : InstanceType<T[K]['type']> extends DataType<infer T>
+            ? T
+            : never
 }
 
 type EntityData<T extends EntityDataDefinition> = EntityDataType<T> & {
@@ -156,7 +156,7 @@ export class Archetype {
     }
 
     protected readonly info: EntityInfo = {
-        index: allWritablePointer(4002, 0, 0, 0),
-        archetype: allWritablePointer(4002, 1, 0, 0),
+        index: readonlyPointer(4002, 0, 0, 0),
+        archetype: readonlyPointer(4002, 1, 0, 0),
     }
 }

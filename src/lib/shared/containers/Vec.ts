@@ -87,6 +87,22 @@ export class Vec extends Container<Vec>('x', 'y') {
         return new Vec(0, 1)
     }
 
+    static get lb(): Vec {
+        return new Vec(-1, -1)
+    }
+
+    static get rb(): Vec {
+        return new Vec(1, -1)
+    }
+
+    static get lt(): Vec {
+        return new Vec(-1, 1)
+    }
+
+    static get rt(): Vec {
+        return new Vec(1, 1)
+    }
+
     static lerp(x: VecLike, y: VecLike, s: number): Vec {
         return Vec._map(x, y, (x, y) => native.Lerp(x, y, s))
     }

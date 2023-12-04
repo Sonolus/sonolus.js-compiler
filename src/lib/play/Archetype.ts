@@ -6,13 +6,15 @@ import { createDefineBlock, readContainer } from '../shared/blocks/utils.js'
 import { ContainerType } from '../shared/containers/ContainerType.js'
 import { DataType } from '../shared/containers/DataType.js'
 import { defineLib } from '../shared/define/lib.js'
-import { EntityState } from '../shared/enums/EntityState.js'
 import { Judgment } from '../shared/enums/Judgment.js'
+import { ArchetypeLife } from '../shared/life.js'
 import { compiler } from './compiler.js'
-import { ArchetypeLife, life } from './life.js'
+import { EntityState } from './enums/EntityState.js'
+import { life } from './life.js'
 import {
     allWritablePointer,
     preprocessWritablePointer,
+    readonlyPointer,
     singleThreadedWritablePointer,
 } from './utils/pointer.js'
 
@@ -28,10 +30,10 @@ type EntityDataType<T extends EntityDataDefinition> = {
     [K in keyof T]: T[K]['type'] extends NumberConstructor
         ? number
         : T[K]['type'] extends BooleanConstructor
-        ? boolean
-        : InstanceType<T[K]['type']> extends DataType<infer T>
-        ? T
-        : never
+          ? boolean
+          : InstanceType<T[K]['type']> extends DataType<infer T>
+            ? T
+            : never
 }
 
 type EntityData<T extends EntityDataDefinition> = EntityDataType<T> & {
@@ -54,7 +56,7 @@ type EntityInfo = {
     readonly state: EntityState
 }
 
-type InputResult = {
+type EntityInputResult = {
     judgment: Judgment
     accuracy: number
     readonly bucket: {
@@ -207,14 +209,14 @@ export class Archetype {
     }
 
     protected readonly info: EntityInfo = {
-        index: allWritablePointer(4003, 0, 0, 0),
-        archetype: allWritablePointer(4003, 1, 0, 0),
-        state: allWritablePointer(4003, 2, 0, 0),
+        index: readonlyPointer(4003, 0, 0, 0),
+        archetype: readonlyPointer(4003, 1, 0, 0),
+        state: readonlyPointer(4003, 2, 0, 0),
     }
 
     protected despawn: boolean = allWritablePointer(4004, 0, 0, 0)
 
-    protected readonly result: InputResult = {
+    protected readonly result: EntityInputResult = {
         judgment: allWritablePointer(4005, 0, 0, 0),
         accuracy: allWritablePointer(4005, 1, 0, 0),
         bucket: {

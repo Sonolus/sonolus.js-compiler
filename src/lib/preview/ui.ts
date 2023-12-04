@@ -67,8 +67,10 @@ const createUIConfiguration = (index: number) =>
 
 export const ui = {
     menu: createUI(0),
+    progress: createUI(1),
 
     configuration: {
         menu: createUIConfiguration(0),
+        progress: createUIConfiguration(1),
     },
 } as const
