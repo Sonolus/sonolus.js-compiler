@@ -9,7 +9,7 @@ import { defineLib } from '../shared/define/lib.js'
 import { compiler } from './compiler.js'
 import { preprocessWritablePointer, readonlyPointer } from './utils/pointer.js'
 
-type EntityDataDefinition = Record<
+type EntityImportDefinition = Record<
     string,
     {
         name: EngineArchetypeDataName | (string & {})
@@ -17,7 +17,7 @@ type EntityDataDefinition = Record<
     }
 >
 
-type EntityDataType<T extends EntityDataDefinition> = {
+type EntityImportType<T extends EntityImportDefinition> = {
     [K in keyof T]: T[K]['type'] extends NumberConstructor
         ? number
         : T[K]['type'] extends BooleanConstructor
@@ -27,14 +27,14 @@ type EntityDataType<T extends EntityDataDefinition> = {
             : never
 }
 
-type EntityData<T extends EntityDataDefinition> = EntityDataType<T> & {
+type EntityImport<T extends EntityImportDefinition> = EntityImportType<T> & {
     names: {
         [K in keyof T]: T[K]['name']
     }
-} & EntityDataLib<T>
+} & EntityImportLib<T>
 
-type EntityDataLib<T extends EntityDataDefinition> = {
-    get(index: number): EntityDataType<T>
+type EntityImportLib<T extends EntityImportDefinition> = {
+    get(index: number): EntityImportType<T>
 }
 
 type EntitySharedMemoryLib<T extends object> = {
@@ -55,26 +55,26 @@ export class Archetype {
 
     render(): void {}
 
-    private readonly _entityData: EnginePlayDataArchetype['data'] = []
-    protected defineData<T extends EntityDataDefinition>(type: T): EntityData<T> {
+    private readonly _entityImports: EnginePlayDataArchetype['imports'] = []
+    protected defineImport<T extends EntityImportDefinition>(type: T): EntityImport<T> {
         // eslint-disable-next-line @typescript-eslint/no-throw-literal
-        if (compiler.isCompiling) throw 'defineData can only be called at compile time'
+        if (compiler.isCompiling) throw 'defineImport can only be called at compile time'
 
         const data = Object.entries(type).map(([key, { name }], index) => ({
             key,
             name,
-            offset: this._entityData.length + index,
+            offset: this._entityImports.length + index,
         }))
 
         for (const { name, offset: index } of data) {
-            this._entityData.push({
+            this._entityImports.push({
                 name,
                 index,
             })
         }
 
         // eslint-disable-next-line @typescript-eslint/no-throw-literal
-        if (data.length > 32) throw 'Max defineData capacity (32) reached'
+        if (data.length > 32) throw 'Max defineImport capacity (32) reached'
 
         return {
             ...Object.fromEntries(
@@ -83,7 +83,7 @@ export class Archetype {
 
             names: Object.fromEntries(Object.entries(type).map(([key, { name }]) => [key, name])),
 
-            ...defineLib<EntityDataLib<T>>({
+            ...defineLib<EntityImportLib<T>>({
                 get: {
                     [Intrinsic.Call]: (ir, _, [index], ctx) =>
                         ctx.value(

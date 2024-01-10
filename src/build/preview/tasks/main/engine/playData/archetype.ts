@@ -6,5 +6,5 @@ export const buildArchetypes = (
 ): EnginePreviewDataArchetype[] =>
     Object.values(archetypes).map((archetype) => ({
         name: archetype.name,
-        data: archetype['_entityData'],
+        imports: archetype['_entityImports'],
     }))

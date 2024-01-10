@@ -7,5 +7,5 @@ export const buildArchetypes = (
     Object.values(archetypes).map((archetype) => ({
         name: archetype.name,
         hasInput: archetype.hasInput,
-        data: archetype['_entityData'],
+        imports: archetype['_entityImports'],
     }))
