@@ -139,6 +139,8 @@ export const native = defineNative<{
     StackGetFramePointer(): number
     StackSetFramePointer(value: number): number
 
+    ExportValue(index: number, value: number | boolean): void
+
     BeatToBPM(beat: number): number
     BeatToTime(beat: number): number
     BeatToStartingBeat(beat: number): number
@@ -501,6 +503,8 @@ export const native = defineNative<{
     StackSetFrame: 2,
     StackGetFramePointer: 0,
     StackSetFramePointer: 1,
+
+    ExportValue: 2,
 
     BeatToBPM: 1,
     BeatToTime: 1,
