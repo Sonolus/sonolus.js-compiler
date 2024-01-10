@@ -10,6 +10,7 @@ import { Judgment } from '../shared/enums/Judgment.js'
 import { ArchetypeLife } from '../shared/life.js'
 import { compiler } from './compiler.js'
 import { EntityState } from './enums/EntityState.js'
+import { native } from './index.js'
 import { life } from './life.js'
 import {
     allWritablePointer,
@@ -45,6 +46,29 @@ type EntityImport<T extends EntityImportDefinition> = EntityImportType<T> & {
 type EntityImportLib<T extends EntityImportDefinition> = {
     get(index: number): EntityImportType<T>
 }
+
+type EntityExportDefinition = Record<
+    string,
+    {
+        name: EngineArchetypeDataName | (string & {})
+        type: NumberConstructor | BooleanConstructor | typeof DataType<number | boolean>
+    }
+>
+
+type EntityExportArgs<T extends EntityExportDefinition> = {
+    [K in keyof T]: [
+        key: K,
+        value: T[K]['type'] extends NumberConstructor
+            ? number
+            : T[K]['type'] extends BooleanConstructor
+              ? boolean
+              : InstanceType<T[K]['type']> extends DataType<infer T>
+                ? T
+                : never,
+    ]
+}[keyof T]
+
+type EntityExport<T extends EntityExportDefinition> = (...args: EntityExportArgs<T>) => void
 
 type EntitySharedMemoryLib<T extends object> = {
     get(index: number): ContainerType<T>
@@ -148,6 +172,29 @@ export class Archetype {
                 },
             }),
         } as never
+    }
+
+    private readonly _entityExportKeys: string[] = []
+    private readonly _entityExports: EnginePlayDataArchetype['exports'] = []
+    protected defineExport<T extends EntityExportDefinition>(type: T): EntityExport<T> {
+        // eslint-disable-next-line @typescript-eslint/no-throw-literal
+        if (compiler.isCompiling) throw 'defineExport can only be called at compile time'
+
+        for (const [key, { name }] of Object.entries(type)) {
+            // eslint-disable-next-line @typescript-eslint/no-throw-literal
+            if (this._entityExports.includes(name)) throw `Duplicate export: ${name}`
+
+            this._entityExportKeys.push(key)
+            this._entityExports.push(name)
+        }
+
+        return (key, value) => {
+            const index = this._entityExportKeys.indexOf(key as string)
+            // eslint-disable-next-line @typescript-eslint/no-throw-literal
+            if (index === -1) throw `Export not found: ${key as string}`
+
+            native.ExportValue(index, value)
+        }
     }
 
     private _sharedMemoryOffset = 0

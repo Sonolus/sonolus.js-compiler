@@ -6,5 +6,5 @@ export const buildArchetypes = (archetypes: Record<string, Archetype>): EnginePl
         name: archetype.name,
         hasInput: archetype.hasInput,
         imports: archetype['_entityImports'],
-        exports: [],
+        exports: archetype['_entityExports'],
     }))
