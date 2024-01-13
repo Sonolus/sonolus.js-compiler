@@ -7,7 +7,7 @@ export const buildLevelData = (data: Project['level']['data']): LevelData =>
         bgmOffset: 'number',
         entities: [
             {
-                'ref?': 'string',
+                'name?': 'string',
                 archetype: 'string',
                 data: [
                     {
