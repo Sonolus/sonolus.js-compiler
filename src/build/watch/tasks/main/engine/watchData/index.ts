@@ -1,4 +1,5 @@
 import { EngineWatchData } from 'sonolus-core'
+import { buildBuckets } from '../../../../../shared/tasks/main/engine/data/buckets.js'
 import { Project } from '../../../../project.js'
 import { buildArchetypes } from './archetype.js'
 import { buildEffect } from './effect.js'
@@ -11,6 +12,7 @@ export const buildEngineWatchData = (
     skin: buildSkin(watchData.skin),
     effect: buildEffect(watchData.effect),
     particle: buildParticle(watchData.particle),
+    buckets: buildBuckets(watchData.buckets),
     archetypes: buildArchetypes(watchData.archetypes),
     updateSpawn: -1,
     nodes: [],

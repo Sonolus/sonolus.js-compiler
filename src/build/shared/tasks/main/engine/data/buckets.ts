@@ -1,7 +1,7 @@
-import { EnginePlayData } from 'sonolus-core'
-import { clean } from '../../../../../shared/utils/clean.js'
+import { EngineDataBucket } from 'sonolus-core'
+import { clean } from '../../../../utils/clean.js'
 
-export const buildBuckets = (buckets: EnginePlayData['buckets']): EnginePlayData['buckets'] =>
+export const buildBuckets = (buckets: EngineDataBucket[]): EngineDataBucket[] =>
     clean(buckets, [
         {
             sprites: [

@@ -57,6 +57,10 @@ type EntityInfo = {
 
 type EntityInputResult = {
     time: number
+    readonly bucket: {
+        index: number
+        value: number
+    }
 }
 
 export class Archetype {
@@ -207,5 +211,9 @@ export class Archetype {
 
     protected readonly result: EntityInputResult = {
         time: preprocessWritablePointer(4004, 0, 0, 0),
+        bucket: {
+            index: preprocessWritablePointer(4004, 1, 0, 0),
+            value: preprocessWritablePointer(4004, 2, 0, 0),
+        },
     }
 }

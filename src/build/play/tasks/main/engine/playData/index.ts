@@ -1,7 +1,7 @@
 import { EnginePlayData } from 'sonolus-core'
+import { buildBuckets } from '../../../../../shared/tasks/main/engine/data/buckets.js'
 import { Project } from '../../../../project.js'
 import { buildArchetypes } from './archetype.js'
-import { buildBuckets } from './buckets.js'
 import { buildEffect } from './effect.js'
 import { buildParticle } from './particle.js'
 import { buildSkin } from './skin.js'
