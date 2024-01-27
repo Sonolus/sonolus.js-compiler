@@ -1,14 +1,20 @@
 import { Intrinsic } from '../../intrinsic/index.js'
+import { DataType } from '../shared/containers/DataType.js'
 import { Archetype } from './Archetype.js'
 
-export type SpawnDataDefinition = Record<string, NumberConstructor | BooleanConstructor>
+export type SpawnDataDefinition = Record<
+    string,
+    NumberConstructor | BooleanConstructor | typeof DataType<number | boolean>
+>
 
 type SpawnData<T extends SpawnDataDefinition> = {
     [K in keyof T]: T[K] extends NumberConstructor
         ? number
         : T[K] extends BooleanConstructor
           ? boolean
-          : never
+          : InstanceType<T[K]> extends DataType<infer T>
+            ? T
+            : never
 }
 
 export type SpawnableArchetype<T extends SpawnDataDefinition> = Archetype & {
