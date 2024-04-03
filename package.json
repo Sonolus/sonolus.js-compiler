@@ -1,5 +1,5 @@
 {
-  "name": "sonolus.js-compiler",
+  "name": "@sonolus/sonolus.js-compiler",
   "version": "1.4.0",
   "description": "Sonolus.js Compiler",
   "author": "NonSpicyBurrito",
