@@ -1,4 +1,4 @@
-import { EngineConfigurationOption } from 'sonolus-core'
+import { EngineConfigurationOption } from '@sonolus/core'
 
 type OptionsDefinition = Record<string, EngineConfigurationOption>
 

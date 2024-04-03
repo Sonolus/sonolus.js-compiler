@@ -1,4 +1,4 @@
-import { ParticleEffectName } from 'sonolus-core'
+import { ParticleEffectName } from '@sonolus/core'
 import { convert } from '../containers/Convertible.js'
 import { Mat, MatLike } from '../containers/Mat.js'
 import { QuadLikeConvertible } from '../containers/Quad.js'

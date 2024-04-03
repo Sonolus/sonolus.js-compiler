@@ -1,4 +1,4 @@
-import { LevelData } from 'sonolus-core'
+import { LevelData } from '@sonolus/core'
 import { clean } from '../../../../../shared/utils/clean.js'
 import { Project } from '../../../../project.js'
 

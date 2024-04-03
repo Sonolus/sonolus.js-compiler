@@ -1,4 +1,4 @@
-import { RuntimeFunction } from 'sonolus-core'
+import { RuntimeFunction } from '@sonolus/core'
 import { Unary, UnaryOperator } from '../nodes/Unary.js'
 import { CompileIR } from './index.js'
 

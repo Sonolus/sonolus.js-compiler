@@ -1,4 +1,4 @@
-import { EngineDataBucket } from 'sonolus-core'
+import { EngineDataBucket } from '@sonolus/core'
 import { clean } from '../../../../utils/clean.js'
 
 export const buildBuckets = (buckets: EngineDataBucket[]): EngineDataBucket[] =>

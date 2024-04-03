@@ -1,4 +1,4 @@
-import { EngineDataBucket } from 'sonolus-core'
+import { EngineDataBucket } from '@sonolus/core'
 import { JudgmentWindows } from '../../shared/JudgmentWindows.js'
 import { defineLib } from '../../shared/define/lib.js'
 

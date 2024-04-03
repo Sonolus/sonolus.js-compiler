@@ -1,4 +1,4 @@
-import { EngineConfiguration, EngineWatchData, LevelData } from 'sonolus-core'
+import { EngineConfiguration, EngineWatchData, LevelData } from '@sonolus/core'
 import { Callback } from '../../lib/watch/enums/Callback.js'
 import { createAppendSNode } from '../shared/assemble.js'
 import { CompileTaskArtifacts } from './tasks/compile/index.js'

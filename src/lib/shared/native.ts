@@ -1,4 +1,4 @@
-import { RuntimeFunction } from 'sonolus-core'
+import { RuntimeFunction } from '@sonolus/core'
 import { Intrinsic } from '../../intrinsic/index.js'
 
 const createNative = (func: RuntimeFunction, argCount: number): Intrinsic<'Call'> => ({

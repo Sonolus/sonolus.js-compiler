@@ -1,4 +1,4 @@
-import { EngineConfiguration, EnginePlayData, LevelData } from 'sonolus-core'
+import { EngineConfiguration, EnginePlayData, LevelData } from '@sonolus/core'
 import { buildEngineConfiguration } from '../../../shared/tasks/main/engine/configuration/index.js'
 import { clone } from '../../../shared/utils/clone.js'
 import { Project } from '../../project.js'

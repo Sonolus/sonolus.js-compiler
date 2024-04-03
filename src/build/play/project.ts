@@ -1,4 +1,4 @@
-import { EngineConfiguration, EngineDataBucket, EnginePlayData, LevelData } from 'sonolus-core'
+import { EngineConfiguration, EngineDataBucket, EnginePlayData, LevelData } from '@sonolus/core'
 import { Archetypes } from '../../lib/play/define/archetypes.js'
 
 export type Project = {

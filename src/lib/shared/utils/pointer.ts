@@ -1,4 +1,4 @@
-import { RuntimeFunction } from 'sonolus-core'
+import { RuntimeFunction } from '@sonolus/core'
 import { Intrinsic } from '../../../intrinsic/index.js'
 import { IR } from '../../../ir/nodes/index.js'
 import { TransformIRContext } from '../../../ir/optimize/transform/context.js'
