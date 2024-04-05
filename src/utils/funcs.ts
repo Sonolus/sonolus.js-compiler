@@ -1,4 +1,4 @@
-import { RuntimeFunction } from 'sonolus-core'
+import { RuntimeFunction } from '@sonolus/core'
 
 export const sideEffectFreeFuncs: RuntimeFunction[] = [
     'Abs',

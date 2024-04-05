@@ -1,4 +1,4 @@
-import { InstructionIconName } from 'sonolus-core'
+import { InstructionIconName } from '@sonolus/core'
 import { VecLike } from '../../shared/containers/Vec.js'
 import { defineLib } from '../../shared/define/lib.js'
 import { native } from '../../shared/native.js'

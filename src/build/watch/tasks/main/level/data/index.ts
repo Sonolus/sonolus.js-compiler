@@ -1,4 +1,4 @@
-import { LevelData } from 'sonolus-core'
+import { LevelData } from '@sonolus/core'
 import { clean } from '../../../../../shared/utils/clean.js'
 import { Project } from '../../../../project.js'
 
@@ -7,7 +7,7 @@ export const buildLevelData = (data: Project['level']['data']): LevelData =>
         bgmOffset: 'number',
         entities: [
             {
-                'ref?': 'string',
+                'name?': 'string',
                 archetype: 'string',
                 data: [
                     {

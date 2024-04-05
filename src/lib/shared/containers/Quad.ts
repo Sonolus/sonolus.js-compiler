@@ -2,6 +2,7 @@ import { native } from '../native.js'
 import { Container } from './Container.js'
 import { Convertible } from './Convertible.js'
 import { MatLike } from './Mat.js'
+import { Rect } from './Rect.js'
 import { Vec, VecLike } from './Vec.js'
 
 export type QuadLike = {
@@ -108,6 +109,15 @@ export class Quad extends Container<Quad>('x1', 'y1', 'x2', 'y2', 'x3', 'y3', 'x
 
     get p4(): Vec {
         return new Vec(this.x4, this.y4)
+    }
+
+    get aabb(): Rect {
+        return new Rect({
+            l: Math.min(this.x1, this.x2, this.x3, this.x4),
+            r: Math.max(this.x1, this.x2, this.x3, this.x4),
+            b: Math.min(this.y1, this.y2, this.y3, this.y4),
+            t: Math.max(this.y1, this.y2, this.y3, this.y4),
+        })
     }
 
     add(vec: VecLike): Quad {

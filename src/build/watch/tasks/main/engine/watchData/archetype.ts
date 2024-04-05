@@ -1,4 +1,4 @@
-import { EngineWatchDataArchetype } from 'sonolus-core'
+import { EngineWatchDataArchetype } from '@sonolus/core'
 import { Archetype } from '../../../../../../lib/watch/Archetype.js'
 
 export const buildArchetypes = (
@@ -7,5 +7,5 @@ export const buildArchetypes = (
     Object.values(archetypes).map((archetype) => ({
         name: archetype.name,
         hasInput: archetype.hasInput,
-        data: archetype['_entityData'],
+        imports: archetype['_entityImports'],
     }))

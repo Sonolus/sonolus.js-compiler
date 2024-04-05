@@ -1,4 +1,4 @@
-import { SkinSpriteName } from 'sonolus-core'
+import { SkinSpriteName } from '@sonolus/core'
 import { convert } from '../../shared/containers/Convertible.js'
 import { Mat, MatLike } from '../../shared/containers/Mat.js'
 import { QuadLikeConvertible } from '../../shared/containers/Quad.js'

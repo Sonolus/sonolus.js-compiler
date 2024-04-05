@@ -1,4 +1,4 @@
-import { RuntimeFunction } from 'sonolus-core'
+import { RuntimeFunction } from '@sonolus/core'
 import { Intrinsic } from '../../intrinsic/index.js'
 
 const createNative = (func: RuntimeFunction, argCount: number): Intrinsic<'Call'> => ({
@@ -138,6 +138,8 @@ export const native = defineNative<{
     StackSetFrame(offset: number, value: number): number
     StackGetFramePointer(): number
     StackSetFramePointer(value: number): number
+
+    ExportValue(index: number, value: number | boolean): void
 
     BeatToBPM(beat: number): number
     BeatToTime(beat: number): number
@@ -501,6 +503,8 @@ export const native = defineNative<{
     StackSetFrame: 2,
     StackGetFramePointer: 0,
     StackSetFramePointer: 1,
+
+    ExportValue: 2,
 
     BeatToBPM: 1,
     BeatToTime: 1,

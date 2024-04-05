@@ -1,4 +1,4 @@
-import { EngineTutorialData } from 'sonolus-core'
+import { EngineTutorialData } from '@sonolus/core'
 import { Project } from '../../../../project.js'
 import { buildEffect } from './effect.js'
 import { buildInstruction } from './instruction.js'

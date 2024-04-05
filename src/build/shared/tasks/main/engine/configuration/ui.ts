@@ -3,7 +3,7 @@ import {
     EngineConfigurationAnimationTween,
     EngineConfigurationUI,
     EngineConfigurationVisibility,
-} from 'sonolus-core'
+} from '@sonolus/core'
 import { Schema, clean } from '../../../../utils/clean.js'
 
 export const buildUI = (ui: EngineConfigurationUI): EngineConfigurationUI =>

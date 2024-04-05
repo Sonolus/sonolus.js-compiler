@@ -99,6 +99,7 @@ Play:
 Watch:
 
 -   `defineArchetypes`
+-   `defineBuckets`
 -   `defineEffect`
 -   `defineParticle`
 

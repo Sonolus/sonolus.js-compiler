@@ -1,4 +1,4 @@
-import { EngineDataNode } from 'sonolus-core'
+import { EngineDataNode } from '@sonolus/core'
 import { SNode } from '../../snode/nodes/index.js'
 
 export const createAppendSNode = (nodes: EngineDataNode[]): ((snode: SNode) => number) => {
