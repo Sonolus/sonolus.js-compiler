@@ -97,7 +97,7 @@ export class Archetype {
 
     private readonly _entityImports: EnginePlayDataArchetype['imports'] = []
     protected defineImport<T extends EntityImportDefinition>(type: T): EntityImport<T> {
-        // eslint-disable-next-line @typescript-eslint/no-throw-literal
+        // eslint-disable-next-line @typescript-eslint/only-throw-error
         if (compiler.isCompiling) throw 'defineImport can only be called at compile time'
 
         const data = Object.entries(type).map(([key, { name }], index) => ({
@@ -113,7 +113,7 @@ export class Archetype {
             })
         }
 
-        // eslint-disable-next-line @typescript-eslint/no-throw-literal
+        // eslint-disable-next-line @typescript-eslint/only-throw-error
         if (data.length > 32) throw 'Max defineImport capacity (32) reached'
 
         return {
@@ -149,7 +149,7 @@ export class Archetype {
     protected defineSharedMemory<const T extends object>(
         type: T,
     ): ContainerType<T> & EntitySharedMemoryLib<T> {
-        // eslint-disable-next-line @typescript-eslint/no-throw-literal
+        // eslint-disable-next-line @typescript-eslint/only-throw-error
         if (compiler.isCompiling) throw 'defineSharedMemory can only be called at compile time'
 
         const start = this._sharedMemoryOffset
@@ -158,7 +158,7 @@ export class Archetype {
             const start = this._sharedMemoryOffset
             this._sharedMemoryOffset += size
 
-            // eslint-disable-next-line @typescript-eslint/no-throw-literal
+            // eslint-disable-next-line @typescript-eslint/only-throw-error
             if (this._sharedMemoryOffset > 32) throw 'Max defineSharedMemory capacity (32) reached'
 
             return [...Array(size).keys()].map((i) =>
@@ -197,7 +197,7 @@ export class Archetype {
 
     private readonly _entityMemory = createDefineBlock('entityMemory', 4000, 64, allWritablePointer)
     protected entityMemory<const T extends object>(type: T): ContainerType<T> {
-        // eslint-disable-next-line @typescript-eslint/no-throw-literal
+        // eslint-disable-next-line @typescript-eslint/only-throw-error
         if (compiler.isCompiling) throw 'entityMemory can only be called at compile time'
 
         return this._entityMemory(type)
