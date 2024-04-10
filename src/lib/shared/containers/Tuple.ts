@@ -65,7 +65,7 @@ export const Tuple = <const T extends object>(
         }
 
         static copy(source: Tuple<ContainerType<T>>, target: Tuple<ContainerType<T>>) {
-            // eslint-disable-next-line @typescript-eslint/no-throw-literal
+            // eslint-disable-next-line @typescript-eslint/only-throw-error
             if (source.length !== target.length) throw 'Tuples must have the same length'
 
             for (let i = 0; i < target.length; i++) {

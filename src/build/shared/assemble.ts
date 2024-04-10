@@ -23,7 +23,6 @@ export const createAppendSNode = (nodes: EngineDataNode[]): ((snode: SNode) => n
         const func = snode.func
         const args = snode.args.map(appendSNode)
 
-        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         return append(`${func}:${args}`, {
             func,
             args,
