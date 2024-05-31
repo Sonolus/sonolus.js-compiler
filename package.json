@@ -1,6 +1,6 @@
 {
   "name": "@sonolus/sonolus.js-compiler",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "Sonolus.js Compiler",
   "author": "NonSpicyBurrito",
   "repository": "github:Sonolus/sonolus.js-compiler",
@@ -28,7 +28,7 @@
     "acorn": "^8.11.3"
   },
   "peerDependencies": {
-    "@sonolus/core": "~7.5.1"
+    "@sonolus/core": "~7.6.0"
   },
   "devDependencies": {
     "@eslint/js": "^8.57.0",
