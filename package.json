@@ -25,20 +25,20 @@
     "build": "tsc -p ."
   },
   "dependencies": {
-    "acorn": "^8.12.0"
+    "acorn": "^8.12.1"
   },
   "peerDependencies": {
-    "@sonolus/core": "~7.7.0"
+    "@sonolus/core": "~7.8.0"
   },
   "devDependencies": {
     "@eslint/js": "^8.57.0",
     "@types/estree": "^1.0.5",
-    "@types/node": "~20.14.2",
+    "@types/node": "~20.14.11",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
-    "prettier": "^3.3.2",
-    "prettier-plugin-organize-imports": "^3.2.4",
-    "typescript": "~5.4.5",
-    "typescript-eslint": "^7.13.0"
+    "prettier": "^3.3.3",
+    "prettier-plugin-organize-imports": "^4.0.0",
+    "typescript": "~5.5.4",
+    "typescript-eslint": "^7.17.0"
   }
 }
