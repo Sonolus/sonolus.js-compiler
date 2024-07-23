@@ -1,5 +1,5 @@
-export { JudgmentWindow, JudgmentWindows } from './JudgmentWindows.js'
 export * from './containers/index.js'
 export * from './ids/index.js'
 export * from './instanceIds/index.js'
+export { JudgmentWindow, JudgmentWindows } from './JudgmentWindows.js'
 export { native } from './native.js'
