@@ -12,7 +12,7 @@ export const transformJSCall: TransformIR<JSCall> = (ir, ctx) => {
     let ret: unknown
     try {
         ret = ir.func.call(ir.thisValue, ...results.map((arg) => arg.value))
-    } catch (_) {
+    } catch {
         return { ...ir, args }
     }
 

@@ -14,7 +14,7 @@ export default tsEslint.config(
     {
         languageOptions: {
             parserOptions: {
-                project: true,
+                projectService: true,
                 tsconfigRootDir: import.meta.dirname,
             },
         },
@@ -35,16 +35,8 @@ export default tsEslint.config(
                     checkLoops: false,
                 },
             ],
-            '@typescript-eslint/ban-types': [
-                'error',
-                {
-                    types: {
-                        Function: false,
-                        '{}': false,
-                    },
-                    extendDefaults: true,
-                },
-            ],
+            '@typescript-eslint/no-empty-object-type': 'off',
+            '@typescript-eslint/no-unsafe-function-type': 'off',
             '@typescript-eslint/dot-notation': [
                 'error',
                 {
@@ -52,6 +44,7 @@ export default tsEslint.config(
                 },
             ],
             '@typescript-eslint/unbound-method': 'off',
+            '@typescript-eslint/no-unnecessary-type-parameters': 'off',
         },
     },
 
