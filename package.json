@@ -28,7 +28,7 @@
     "acorn": "^8.12.1"
   },
   "peerDependencies": {
-    "@sonolus/core": "~7.8.0"
+    "@sonolus/core": "~7.9.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
