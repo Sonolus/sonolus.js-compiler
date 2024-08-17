@@ -26,7 +26,7 @@ const compileExpressionFunction = (value: unknown) => {
         if (root.type !== 'ArrowFunctionExpression' && root.type !== 'FunctionExpression') return
 
         return root
-    } catch (error) {
+    } catch {
         return
     }
 }
@@ -49,7 +49,7 @@ const compileGetterSetterFunction = (value: unknown) => {
         if (root.type !== 'FunctionExpression') return
 
         return root
-    } catch (error) {
+    } catch {
         return
     }
 }
@@ -74,7 +74,7 @@ const compileClassFunction = (value: unknown) => {
         root = root.value
 
         return root
-    } catch (error) {
+    } catch {
         return
     }
 }

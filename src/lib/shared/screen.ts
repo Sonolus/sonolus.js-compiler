@@ -16,7 +16,7 @@ type Screen = {
 export const createScreen = (aspectRatio: Pointer): Screen =>
     defineLib<Screen>({
         get l() {
-            return -this.aspectRatio
+            return -(this.aspectRatio as number)
         },
         b: -1,
         get r() {

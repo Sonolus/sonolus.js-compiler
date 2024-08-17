@@ -17,7 +17,7 @@ const compileClassDeclaration = (value: unknown) => {
         if (root.type !== 'ClassDeclaration') return
 
         return root
-    } catch (error) {
+    } catch {
         return
     }
 }
@@ -40,7 +40,7 @@ const compileClassExpression = (value: unknown) => {
         if (root.type !== 'ClassExpression') return
 
         return root
-    } catch (error) {
+    } catch {
         return
     }
 }
