@@ -1,10 +1,7 @@
-export type JudgmentWindow = {
-    min: number
-    max: number
-}
+import { RangeLike } from './containers/Range.js'
 
 export type JudgmentWindows = {
-    perfect: JudgmentWindow
-    great: JudgmentWindow
-    good: JudgmentWindow
+    perfect: RangeLike
+    great: RangeLike
+    good: RangeLike
 }

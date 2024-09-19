@@ -1,3 +1,4 @@
+export { Range, RangeLike } from '../../shared/containers/Range.js'
 export { Collection } from './Collection.js'
 export { Container } from './Container.js'
 export { ContainerType } from './ContainerType.js'
