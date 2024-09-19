@@ -1,21 +1,21 @@
 import { EngineDataBucket } from '@sonolus/core'
 import { JudgmentWindows } from '../../shared/JudgmentWindows.js'
 import { defineLib } from '../../shared/define/lib.js'
+import { Range, RangeLike } from '../containers/Range.js'
+
+export type BucketRange = {
+    min: number
+    max: number
+    readonly range: Range
+
+    set(range: RangeLike): void
+}
 
 export type Bucket = {
     readonly index: number
-    readonly perfect: {
-        min: number
-        max: number
-    }
-    readonly great: {
-        min: number
-        max: number
-    }
-    readonly good: {
-        min: number
-        max: number
-    }
+    readonly perfect: BucketRange
+    readonly great: BucketRange
+    readonly good: BucketRange
 
     set(windows: JudgmentWindows): void
 }
@@ -41,14 +41,35 @@ export const createDefineBuckets =
                         perfect: {
                             min: pointer(0, index, 6),
                             max: pointer(1, index, 6),
+                            get range() {
+                                return new Range(this as never)
+                            },
+
+                            set(range: RangeLike) {
+                                ;({ min: this.min, max: this.max } = range)
+                            },
                         },
                         great: {
                             min: pointer(2, index, 6),
                             max: pointer(3, index, 6),
+                            get range() {
+                                return new Range(this as never)
+                            },
+
+                            set(range: RangeLike) {
+                                ;({ min: this.min, max: this.max } = range)
+                            },
                         },
                         good: {
                             min: pointer(4, index, 6),
                             max: pointer(5, index, 6),
+                            get range() {
+                                return new Range(this as never)
+                            },
+
+                            set(range: RangeLike) {
+                                ;({ min: this.min, max: this.max } = range)
+                            },
                         },
 
                         set(windows: JudgmentWindows) {

@@ -1,4 +1,4 @@
-export { JudgmentWindow, JudgmentWindows } from '../shared/JudgmentWindows.js'
+export { JudgmentWindows } from '../shared/JudgmentWindows.js'
 export { native } from '../shared/native.js'
 export { audio } from './audio.js'
 export { background } from './background.js'

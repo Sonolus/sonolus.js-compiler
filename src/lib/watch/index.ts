@@ -1,5 +1,5 @@
 export { BpmChange, bpmChanges } from '../shared/bpmChanges.js'
-export { JudgmentWindow, JudgmentWindows } from '../shared/JudgmentWindows.js'
+export { JudgmentWindows } from '../shared/JudgmentWindows.js'
 export { ArchetypeLife, ConsecutiveLife } from '../shared/life.js'
 export { native } from '../shared/native.js'
 export { ConsecutiveScore } from '../shared/score.js'

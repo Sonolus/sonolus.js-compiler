@@ -80,6 +80,7 @@ Tutorial:
 -   `Dictionary`
 -   `Mat`
 -   `Quad`
+-   `Range`
 -   `Rect`
 -   `Tuple`
 -   `Vec`
