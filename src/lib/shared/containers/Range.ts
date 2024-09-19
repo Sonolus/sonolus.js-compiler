@@ -69,7 +69,7 @@ export class Range extends Container<Range>('min', 'max') {
     }
 
     static get one(): Range {
-        return new Range(1, 1)
+        return new Range(-1, 1)
     }
 
     static get l(): Range {
