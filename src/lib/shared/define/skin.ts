@@ -33,6 +33,7 @@ export type SkinSprite = {
 }
 
 type SkinDefinition = {
+    renderMode?: 'default' | 'standard' | 'lightweight'
     sprites: Record<string, SkinSpriteName | (string & {})>
 }
 
@@ -61,6 +62,7 @@ type SkinSprites = {
 }
 
 type Skin<T extends SkinDefinition> = {
+    renderMode?: 'default' | 'standard' | 'lightweight'
     sprites: { readonly name: string; readonly id: number }[] & {
         [K in keyof T['sprites']]: SkinSprite
     } & SkinSprites
@@ -91,6 +93,7 @@ export const createDefineSkin =
     (pointer: <T>(x: number, y: number, s: number) => T) =>
     <T extends SkinDefinition>(skin: T): Skin<T> =>
         defineLib<Skin<T>>({
+            ...(skin.renderMode && { renderMode: skin.renderMode }),
             sprites: Object.assign(
                 Object.values(skin.sprites).map((name, id) => ({ name, id })),
                 Object.fromEntries(
