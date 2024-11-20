@@ -88,8 +88,8 @@ export const Dictionary = <const K extends object, const V extends object>(
 
         declare count: number
 
-        private declare _keys: Tuple<ContainerType<K>>
-        private declare _values: Tuple<ContainerType<V>>
+        declare private _keys: Tuple<ContainerType<K>>
+        declare private _values: Tuple<ContainerType<V>>
 
         getKey(index: number) {
             return this._keys.get(index)
