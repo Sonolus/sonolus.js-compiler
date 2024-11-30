@@ -75,7 +75,7 @@ export const Collection = <const T extends object>(
 
         declare count: number
 
-        private declare _values: Tuple<ContainerType<T>>
+        declare private _values: Tuple<ContainerType<T>>
 
         get(index: number) {
             return this._values.get(index)

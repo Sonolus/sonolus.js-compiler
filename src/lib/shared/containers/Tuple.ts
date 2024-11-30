@@ -34,6 +34,7 @@ export const Tuple = <const T extends object>(
     type TupleImpl = InstanceType<typeof TupleImpl>
 
     const pointers = (ir: IR, tuple: TupleImpl, index: () => IR, ctx: TransformIRContext) =>
+        // eslint-disable-next-line @typescript-eslint/dot-notation
         createPointers(ir, tuple['_buffer'] as never, index, 0, size, ctx)
 
     const TupleImpl = class {
@@ -77,7 +78,7 @@ export const Tuple = <const T extends object>(
 
         readonly length = length
 
-        private declare _buffer: number
+        declare private _buffer: number
 
         readonly get: (index: number) => ContainerType<T> = {
             [Intrinsic.Call]: (ir, thisValue, [index], ctx) =>
