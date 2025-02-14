@@ -1,5 +1,5 @@
 import { Static, Type } from '@sinclair/typebox'
-import { EnginePlayData } from '@sonolus/core'
+import { EnginePreviewData } from '@sonolus/core'
 import { clean } from '../../../../../shared/utils/clean.js'
 
 const schema = Type.Object({
@@ -18,7 +18,7 @@ const schema = Type.Object({
     ),
 })
 
-type _Test<T extends Static<typeof schema> = EnginePlayData['skin']> = T
+type _Test<T extends Static<typeof schema> = EnginePreviewData['skin']> = T
 
-export const buildSkin = (skin: EnginePlayData['skin']): EnginePlayData['skin'] =>
+export const buildSkin = (skin: EnginePreviewData['skin']): EnginePreviewData['skin'] =>
     clean(schema, skin)

@@ -2,7 +2,7 @@ import { EngineConfiguration, EnginePreviewData, LevelData } from '@sonolus/core
 import { buildEngineConfiguration } from '../../../shared/tasks/main/engine/configuration/index.js'
 import { clone } from '../../../shared/utils/clone.js'
 import { Project } from '../../project.js'
-import { buildEnginePreviewData } from './engine/playData/index.js'
+import { buildEnginePreviewData } from './engine/previewData/index.js'
 import { buildLevelData } from './level/data/index.js'
 
 export type MainTask = {

@@ -30,6 +30,7 @@
     "acorn": "^8.14.0"
   },
   "peerDependencies": {
+    "@sinclair/typebox": "^0.34.27",
     "@sonolus/core": "~7.11.0"
   },
   "devDependencies": {

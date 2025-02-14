@@ -1,12 +1,17 @@
-import { EnginePlayData } from '@sonolus/core'
+import { Static, Type } from '@sinclair/typebox'
+import { EngineWatchData } from '@sonolus/core'
 import { clean } from '../../../../../shared/utils/clean.js'
 
-export const buildParticle = (particle: EnginePlayData['particle']): EnginePlayData['particle'] =>
-    clean(particle, {
-        effects: [
-            {
-                name: 'string',
-                id: 'number',
-            },
-        ],
-    })
+const schema = Type.Object({
+    effects: Type.Array(
+        Type.Object({
+            name: Type.String(),
+            id: Type.Number(),
+        }),
+    ),
+})
+
+type _Test<T extends Static<typeof schema> = EngineWatchData['particle']> = T
+
+export const buildParticle = (particle: EngineWatchData['particle']): EngineWatchData['particle'] =>
+    clean(schema, particle)
