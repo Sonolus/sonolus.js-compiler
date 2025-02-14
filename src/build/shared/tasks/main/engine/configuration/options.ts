@@ -6,6 +6,7 @@ const schema = Type.Array(
     Type.Union([
         Type.Object({
             name: Type.String(),
+            description: Type.Optional(Type.String()),
             standard: Type.Optional(Type.Boolean()),
             advanced: Type.Optional(Type.Boolean()),
             scope: Type.Optional(Type.String()),
@@ -18,6 +19,7 @@ const schema = Type.Array(
         }),
         Type.Object({
             name: Type.String(),
+            description: Type.Optional(Type.String()),
             standard: Type.Optional(Type.Boolean()),
             advanced: Type.Optional(Type.Boolean()),
             scope: Type.Optional(Type.String()),
@@ -26,6 +28,7 @@ const schema = Type.Array(
         }),
         Type.Object({
             name: Type.String(),
+            description: Type.Optional(Type.String()),
             standard: Type.Optional(Type.Boolean()),
             advanced: Type.Optional(Type.Boolean()),
             scope: Type.Optional(Type.String()),

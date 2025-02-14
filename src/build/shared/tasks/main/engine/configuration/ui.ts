@@ -58,6 +58,8 @@ const EngineConfigurationAnimation = Type.Object({
 
 const EngineConfigurationJudgmentErrorStyle = Type.Union([
     Type.Literal('none'),
+    Type.Literal('late'),
+    Type.Literal('early'),
     Type.Literal('plus'),
     Type.Literal('minus'),
     Type.Literal('arrowUp'),
@@ -71,9 +73,13 @@ const EngineConfigurationJudgmentErrorStyle = Type.Union([
 ])
 
 const EngineConfigurationJudgmentErrorPlacement = Type.Union([
-    Type.Literal('both'),
     Type.Literal('left'),
     Type.Literal('right'),
+    Type.Literal('leftRight'),
+    Type.Literal('top'),
+    Type.Literal('bottom'),
+    Type.Literal('topBottom'),
+    Type.Literal('center'),
 ])
 
 const schema = Type.Object({
