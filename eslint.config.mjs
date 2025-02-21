@@ -50,6 +50,12 @@ export default tsEslint.config(
             ],
             '@typescript-eslint/unbound-method': 'off',
             '@typescript-eslint/no-unnecessary-type-parameters': 'off',
+            '@typescript-eslint/no-unused-vars': [
+                'error',
+                {
+                    varsIgnorePattern: '^_',
+                },
+            ],
         },
     },
 
