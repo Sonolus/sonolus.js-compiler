@@ -31,7 +31,7 @@
   },
   "peerDependencies": {
     "@sinclair/typebox": "^0.34.27",
-    "@sonolus/core": "~7.11.0"
+    "@sonolus/core": "~7.12.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.20.0",
