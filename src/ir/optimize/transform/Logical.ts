@@ -16,6 +16,7 @@ export const transformLogical: TransformIR<Logical> = (ir, ctx) => {
 }
 
 const operations: Record<LogicalOperator, (lhs: unknown, rhs: unknown) => unknown> = {
+    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
     '||': (lhs, rhs) => lhs || rhs,
     '&&': (lhs, rhs) => lhs && rhs,
     '??': (lhs, rhs) => lhs ?? rhs,
