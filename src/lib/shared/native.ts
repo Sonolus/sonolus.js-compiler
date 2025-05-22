@@ -141,6 +141,12 @@ export const native = defineNative<{
 
     ExportValue(index: number, value: number | boolean): void
 
+    StreamSet(id: number, key: number, value: number | boolean): void
+    StreamHas(id: number, key: number): boolean
+    StreamGetPreviousKey(id: number, key: number): number
+    StreamGetNextKey(id: number, key: number): number
+    StreamGetValue(id: number, key: number): number
+
     BeatToBPM(beat: number): number
     BeatToTime(beat: number): number
     BeatToStartingBeat(beat: number): number
@@ -505,6 +511,12 @@ export const native = defineNative<{
     StackSetFramePointer: 1,
 
     ExportValue: 2,
+
+    StreamSet: 3,
+    StreamHas: 2,
+    StreamGetPreviousKey: 2,
+    StreamGetNextKey: 2,
+    StreamGetValue: 2,
 
     BeatToBPM: 1,
     BeatToTime: 1,

@@ -202,6 +202,7 @@ Play:
 -   `input`
 -   `life`
 -   `score`
+-   `streams`
 -   `time`
 -   `timeScaleChanges`
 -   `touches`
@@ -215,6 +216,7 @@ Watch:
 -   `input`
 -   `life`
 -   `score`
+-   `streams`
 -   `time`
 -   `timeScaleChanges`
 
