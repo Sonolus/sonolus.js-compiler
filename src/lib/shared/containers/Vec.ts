@@ -63,6 +63,18 @@ export class Vec extends Container<Vec>('x', 'y') {
         )
     }
 
+    normalize(): Vec {
+        return this.div(this.length)
+    }
+
+    dot(vec: VecLike): number {
+        return this.x * vec.x + this.y * vec.y
+    }
+
+    wedge(vec: VecLike): number {
+        return this.x * vec.y - this.y * vec.x
+    }
+
     static get zero(): Vec {
         return new Vec(0, 0)
     }
