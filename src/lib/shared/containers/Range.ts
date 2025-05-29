@@ -64,6 +64,14 @@ export class Range extends Container<Range>('min', 'max') {
         return value >= this.min && value <= this.max
     }
 
+    lerp(s: number): number {
+        return native.Lerp(this.min, this.max, s)
+    }
+
+    unlerp(x: number): number {
+        return native.Unlerp(this.min, this.max, x)
+    }
+
     static get zero(): Range {
         return new Range(0, 0)
     }
