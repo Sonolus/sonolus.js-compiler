@@ -109,7 +109,7 @@ export const native = defineNative<{
     SetModPointed(id: number, index: number, offset: number, value: number): number
     SetPowerPointed(id: number, index: number, offset: number, value: number): number
 
-    Copy(srcId: number, srcIndex: number, dstId: number, dstIndex: number, count: number): number
+    Copy(srcId: number, srcIndex: number, dstId: number, dstIndex: number, count: number): void
 
     IncrementPre(id: number, index: number): number
     IncrementPreShifted(id: number, x: number, y: number, s: number): number
@@ -124,12 +124,12 @@ export const native = defineNative<{
     DecrementPostShifted(id: number, x: number, y: number, s: number): number
     DecrementPostPointed(id: number, index: number, offset: number): number
 
-    StackInit(): number
+    StackInit(): void
     StackPush(value: number): number
     StackPop(): number
     StackGrow(size: number): number
-    StackEnter(size: number): number
-    StackLeave(): number
+    StackEnter(size: number): void
+    StackLeave(): void
     StackGet(offset: number): number
     StackSet(offset: number, value: number): number
     StackGetPointer(): number
@@ -163,7 +163,7 @@ export const native = defineNative<{
         y4: number,
         z: number,
         a: number,
-    ): number
+    ): void
     DrawCurvedL(
         id: number,
         x1: number,
@@ -179,7 +179,7 @@ export const native = defineNative<{
         n: number,
         p: number,
         q: number,
-    ): number
+    ): void
     DrawCurvedR(
         id: number,
         x1: number,
@@ -195,7 +195,7 @@ export const native = defineNative<{
         n: number,
         p: number,
         q: number,
-    ): number
+    ): void
     DrawCurvedLR(
         id: number,
         x1: number,
@@ -213,7 +213,7 @@ export const native = defineNative<{
         q1: number,
         p2: number,
         q2: number,
-    ): number
+    ): void
     DrawCurvedB(
         id: number,
         x1: number,
@@ -229,7 +229,7 @@ export const native = defineNative<{
         n: number,
         p: number,
         q: number,
-    ): number
+    ): void
     DrawCurvedT(
         id: number,
         x1: number,
@@ -245,7 +245,7 @@ export const native = defineNative<{
         n: number,
         p: number,
         q: number,
-    ): number
+    ): void
     DrawCurvedBT(
         id: number,
         x1: number,
@@ -263,16 +263,16 @@ export const native = defineNative<{
         q1: number,
         p2: number,
         q2: number,
-    ): number
+    ): void
 
-    Play(id: number, distance: number): number
-    PlayScheduled(id: number, time: number, distance: number): number
+    Play(id: number, distance: number): void
+    PlayScheduled(id: number, time: number, distance: number): void
     PlayLooped(id: number): number
     PlayLoopedScheduled(id: number, startTime: number): number
-    StopLooped(loopId: number): number
-    StopLoopedScheduled(loopId: number, endTime: number): number
+    StopLooped(loopId: number): void
+    StopLoopedScheduled(loopId: number, endTime: number): void
 
-    Spawn(id: number, ...memory: number[]): number
+    Spawn(id: number, ...memory: number[]): void
 
     SpawnParticleEffect(
         id: number,
@@ -297,8 +297,8 @@ export const native = defineNative<{
         y3: number,
         x4: number,
         y4: number,
-    ): number
-    DestroyParticleEffect(particleId: number): number
+    ): void
+    DestroyParticleEffect(particleId: number): void
 
     Paint(
         id: number,
@@ -386,8 +386,8 @@ export const native = defineNative<{
     EaseInOutElastic(value: number): number
     EaseOutInElastic(value: number): number
 
-    DebugPause(): number
-    DebugLog(value: number): number
+    DebugPause(): void
+    DebugLog(value: number): void
 }>({
     Add: Infinity,
     Multiply: Infinity,
