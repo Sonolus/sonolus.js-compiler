@@ -10,6 +10,7 @@ import { Judgment } from '../shared/enums/Judgment.js'
 import { ArchetypeLife } from '../shared/life.js'
 import { compiler } from './compiler.js'
 import { EntityState } from './enums/EntityState.js'
+import { HapticType } from './enums/HapticType.js'
 import { native } from './index.js'
 import { life } from './life.js'
 import {
@@ -87,6 +88,7 @@ type EntityInputResult = {
         index: number
         value: number
     }
+    haptic: HapticType
 }
 
 export class Archetype {
@@ -270,5 +272,6 @@ export class Archetype {
             index: allWritablePointer(4005, 2, 0, 0),
             value: allWritablePointer(4005, 3, 0, 0),
         },
+        haptic: allWritablePointer(4005, 4, 0, 0),
     }
 }
