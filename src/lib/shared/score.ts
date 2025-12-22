@@ -1,4 +1,14 @@
+import { Intrinsic } from '../../intrinsic/index.js'
+import { IR } from '../../ir/nodes/index.js'
 import { defineLib } from '../shared/define/lib.js'
+
+type ArchetypeScoreOptions = {
+    multiplier: number
+}
+
+export type ArchetypeScore = ArchetypeScoreOptions & {
+    set(options: ArchetypeScoreOptions): void
+}
 
 type BaseScoreOptions = {
     perfect: number
@@ -21,6 +31,9 @@ export type ConsecutiveScore = ConsecutiveScoreOptions & {
 }
 
 type Score = {
+    readonly archetypes: {
+        get(index: number): ArchetypeScore
+    }
     readonly base: BaseScore
     readonly consecutive: {
         readonly perfect: ConsecutiveScore
@@ -29,21 +42,45 @@ type Score = {
     }
 }
 
-export const createScore = (pointer: <T>(x: number, y: number, s: number) => T): Score =>
+export const createScore = (
+    archetypeScorePointer: <T>(x: number, y: () => IR, s: number) => T,
+    levelScorePointer: <T>(x: number, y: number, s: number) => T,
+): Score =>
     defineLib<Score>({
+        archetypes: {
+            get: {
+                [Intrinsic.Call]: (ir, _, [index], ctx) =>
+                    ctx.value(
+                        ir,
+                        createArchetypeScore(archetypeScorePointer, () => ctx.value(ir, index)),
+                    ),
+            },
+        },
         base: {
-            perfect: pointer(0, 0, 1),
-            great: pointer(0, 1, 1),
-            good: pointer(0, 2, 1),
+            perfect: levelScorePointer(0, 0, 1),
+            great: levelScorePointer(0, 1, 1),
+            good: levelScorePointer(0, 2, 1),
 
             set(this: BaseScore, options: BaseScoreOptions) {
                 ;({ perfect: this.perfect, great: this.great, good: this.good } = options)
             },
         },
         consecutive: {
-            perfect: createConsecutiveScore(pointer, 0),
-            great: createConsecutiveScore(pointer, 1),
-            good: createConsecutiveScore(pointer, 2),
+            perfect: createConsecutiveScore(levelScorePointer, 0),
+            great: createConsecutiveScore(levelScorePointer, 1),
+            good: createConsecutiveScore(levelScorePointer, 2),
+        },
+    })
+
+const createArchetypeScore = (
+    pointer: <T>(x: number, y: () => IR, s: number) => T,
+    index: () => IR,
+) =>
+    defineLib<ArchetypeScore>({
+        multiplier: pointer(0, index, 1),
+
+        set(this: ArchetypeScore, options: ArchetypeScoreOptions) {
+            ;({ multiplier: this.multiplier } = options)
         },
     })
 

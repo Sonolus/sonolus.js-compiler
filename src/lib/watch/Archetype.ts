@@ -7,9 +7,11 @@ import { ContainerType } from '../shared/containers/ContainerType.js'
 import { DataType } from '../shared/containers/DataType.js'
 import { defineLib } from '../shared/define/lib.js'
 import { ArchetypeLife } from '../shared/life.js'
+import { ArchetypeScore } from '../shared/score.js'
 import { compiler } from './compiler.js'
 import { EntityState } from './enums/EntityState.js'
 import { life } from './life.js'
+import { score } from './score.js'
 import {
     allWritablePointer,
     preprocessWritablePointer,
@@ -90,6 +92,10 @@ export class Archetype {
     updateParallel(): void {}
 
     terminate(): void {}
+
+    protected get score(): ArchetypeScore {
+        return score.archetypes.get(this.index)
+    }
 
     protected get life(): ArchetypeLife {
         return life.archetypes.get(this.index)

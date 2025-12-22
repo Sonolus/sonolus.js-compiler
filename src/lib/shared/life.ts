@@ -35,7 +35,7 @@ type Life = {
 
 export const createLife = (
     archetypeLifePointer: <T>(x: number, y: () => IR, s: number) => T,
-    consecutiveLifePointer: <T>(x: number, y: number, s: number) => T,
+    levelLifePointer: <T>(x: number, y: number, s: number) => T,
 ): Life =>
     defineLib<Life>({
         archetypes: {
@@ -48,9 +48,9 @@ export const createLife = (
             },
         },
         consecutive: {
-            perfect: createConsecutiveLife(consecutiveLifePointer, 0),
-            great: createConsecutiveLife(consecutiveLifePointer, 1),
-            good: createConsecutiveLife(consecutiveLifePointer, 2),
+            perfect: createConsecutiveLife(levelLifePointer, 0),
+            great: createConsecutiveLife(levelLifePointer, 1),
+            good: createConsecutiveLife(levelLifePointer, 2),
         },
     })
 
