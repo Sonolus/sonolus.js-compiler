@@ -93,6 +93,10 @@ type EntityInputResult = {
     haptic: HapticType
 }
 
+type EntityScore = {
+    multiplier: number
+}
+
 export class Archetype {
     name = ''
     index = 0
@@ -124,11 +128,11 @@ export class Archetype {
 
     terminate(): void {}
 
-    protected get score(): ArchetypeScore {
+    protected get archetypeScore(): ArchetypeScore {
         return score.archetypes.get(this.index)
     }
 
-    protected get life(): ArchetypeLife {
+    protected get archetypeLife(): ArchetypeLife {
         return life.archetypes.get(this.index)
     }
 
@@ -279,5 +283,9 @@ export class Archetype {
             value: allWritablePointer(4005, 3, 0, 0),
         },
         haptic: allWritablePointer(4005, 4, 0, 0),
+    }
+
+    protected readonly entityScore: EntityScore = {
+        multiplier: preprocessWritablePointer(4006, 0, 0, 0),
     }
 }

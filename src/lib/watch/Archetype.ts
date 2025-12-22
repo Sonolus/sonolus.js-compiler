@@ -65,6 +65,10 @@ type EntityInputResult = {
     }
 }
 
+type EntityScore = {
+    multiplier: number
+}
+
 export class Archetype {
     name = ''
     index = 0
@@ -93,11 +97,11 @@ export class Archetype {
 
     terminate(): void {}
 
-    protected get score(): ArchetypeScore {
+    protected get archetypeScore(): ArchetypeScore {
         return score.archetypes.get(this.index)
     }
 
-    protected get life(): ArchetypeLife {
+    protected get archetypeLife(): ArchetypeLife {
         return life.archetypes.get(this.index)
     }
 
@@ -221,5 +225,9 @@ export class Archetype {
             index: preprocessWritablePointer(4004, 1, 0, 0),
             value: preprocessWritablePointer(4004, 2, 0, 0),
         },
+    }
+
+    protected readonly entityScore: EntityScore = {
+        multiplier: preprocessWritablePointer(4005, 0, 0, 0),
     }
 }
