@@ -90,7 +90,10 @@ export const ui = {
             value: createUI(7),
         },
     },
-    progress: createUI(8),
+    progress: {
+        bar: createUI(8),
+        graph: createUI(9),
+    },
 
     configuration: {
         menu: createUIConfiguration(0),
