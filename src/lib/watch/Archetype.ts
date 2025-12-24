@@ -69,6 +69,13 @@ type EntityScore = {
     multiplier: number
 }
 
+type EntityLife = {
+    perfect: number
+    great: number
+    good: number
+    miss: number
+}
+
 export class Archetype {
     name = ''
     index = 0
@@ -229,5 +236,12 @@ export class Archetype {
 
     protected readonly entityScore: EntityScore = {
         multiplier: preprocessWritablePointer(4005, 0, 0, 0),
+    }
+
+    protected readonly entityLife: EntityLife = {
+        perfect: preprocessWritablePointer(4006, 0, 0, 0),
+        great: preprocessWritablePointer(4006, 1, 0, 0),
+        good: preprocessWritablePointer(4006, 2, 0, 0),
+        miss: preprocessWritablePointer(4006, 3, 0, 0),
     }
 }
