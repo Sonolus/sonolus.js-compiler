@@ -31,6 +31,8 @@ type Life = {
         readonly great: ConsecutiveLife
         readonly good: ConsecutiveLife
     }
+    initial: number
+    max: number
 }
 
 export const createLife = (
@@ -52,6 +54,8 @@ export const createLife = (
             great: createConsecutiveLife(levelLifePointer, 1),
             good: createConsecutiveLife(levelLifePointer, 2),
         },
+        initial: levelLifePointer(6, 0, 0),
+        max: levelLifePointer(7, 0, 0),
     })
 
 const createArchetypeLife = (
