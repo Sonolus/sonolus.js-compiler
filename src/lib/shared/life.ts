@@ -1,6 +1,7 @@
 import { Intrinsic } from '../../intrinsic/index.js'
 import { IR } from '../../ir/nodes/index.js'
 import { defineLib } from '../shared/define/lib.js'
+import { native } from './native.js'
 
 type ArchetypeLifeOptions = {
     perfect: number
@@ -33,6 +34,8 @@ type Life = {
     }
     initial: number
     max: number
+
+    addScheduled(value: number, time: number): void
 }
 
 export const createLife = (
@@ -56,6 +59,8 @@ export const createLife = (
         },
         initial: levelLifePointer(6, 0, 0),
         max: levelLifePointer(7, 0, 0),
+
+        addScheduled: native.AddLifeScheduled,
     })
 
 const createArchetypeLife = (
