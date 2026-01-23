@@ -333,6 +333,8 @@ export const native = defineNative<{
         background: boolean,
     ): void
 
+    AddLifeScheduled(value: number, time: number): void
+
     HasSkinSprite(id: number): boolean
     HasEffectClip(id: number): boolean
     HasParticleEffect(id: number): boolean
@@ -556,6 +558,8 @@ export const native = defineNative<{
     HasSkinSprite: 1,
     HasEffectClip: 1,
     HasParticleEffect: 1,
+
+    AddLifeScheduled: 2,
 
     Judge: 8,
     JudgeSimple: 5,

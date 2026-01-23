@@ -7,4 +7,7 @@ export const buildEngineConfiguration = (
 ): EngineConfiguration => ({
     options: buildOptions(configuration.options),
     ui: buildUI(configuration.ui),
+    ...(configuration.replayFallbackOptionNames && {
+        replayFallbackOptionNames: configuration.replayFallbackOptionNames,
+    }),
 })

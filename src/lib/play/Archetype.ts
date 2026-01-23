@@ -8,10 +8,13 @@ import { DataType } from '../shared/containers/DataType.js'
 import { defineLib } from '../shared/define/lib.js'
 import { Judgment } from '../shared/enums/Judgment.js'
 import { ArchetypeLife } from '../shared/life.js'
+import { ArchetypeScore } from '../shared/score.js'
 import { compiler } from './compiler.js'
 import { EntityState } from './enums/EntityState.js'
+import { HapticType } from './enums/HapticType.js'
 import { native } from './index.js'
 import { life } from './life.js'
+import { score } from './score.js'
 import {
     allWritablePointer,
     preprocessWritablePointer,
@@ -24,6 +27,7 @@ type EntityImportDefinition = Record<
     {
         name: EngineArchetypeDataName | (string & {})
         type: NumberConstructor | BooleanConstructor | typeof DataType<number | boolean>
+        def?: number | boolean
     }
 >
 
@@ -87,6 +91,18 @@ type EntityInputResult = {
         index: number
         value: number
     }
+    haptic: HapticType
+}
+
+type EntityScore = {
+    multiplier: number
+}
+
+type EntityLife = {
+    perfect: number
+    great: number
+    good: number
+    miss: number
 }
 
 export class Archetype {
@@ -120,7 +136,11 @@ export class Archetype {
 
     terminate(): void {}
 
-    protected get life(): ArchetypeLife {
+    protected get archetypeScore(): ArchetypeScore {
+        return score.archetypes.get(this.index)
+    }
+
+    protected get archetypeLife(): ArchetypeLife {
         return life.archetypes.get(this.index)
     }
 
@@ -129,16 +149,20 @@ export class Archetype {
         // eslint-disable-next-line @typescript-eslint/only-throw-error
         if (compiler.isCompiling) throw 'defineImport can only be called at compile time'
 
-        const data = Object.entries(type).map(([key, { name }], index) => ({
+        const data = Object.entries(type).map(([key, { name, def }], index) => ({
             key,
             name,
+            def,
             offset: this._entityImports.length + index,
         }))
 
-        for (const { name, offset: index } of data) {
+        for (const { name, def, offset: index } of data) {
             this._entityImports.push({
                 name,
                 index,
+                ...(def !== undefined && {
+                    def: +def,
+                }),
             })
         }
 
@@ -270,5 +294,17 @@ export class Archetype {
             index: allWritablePointer(4005, 2, 0, 0),
             value: allWritablePointer(4005, 3, 0, 0),
         },
+        haptic: allWritablePointer(4005, 4, 0, 0),
+    }
+
+    protected readonly entityScore: EntityScore = {
+        multiplier: preprocessWritablePointer(4006, 0, 0, 0),
+    }
+
+    protected readonly entityLife: EntityLife = {
+        perfect: preprocessWritablePointer(4007, 0, 0, 0),
+        great: preprocessWritablePointer(4007, 1, 0, 0),
+        good: preprocessWritablePointer(4007, 2, 0, 0),
+        miss: preprocessWritablePointer(4007, 3, 0, 0),
     }
 }

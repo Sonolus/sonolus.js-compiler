@@ -7,9 +7,11 @@ import { ContainerType } from '../shared/containers/ContainerType.js'
 import { DataType } from '../shared/containers/DataType.js'
 import { defineLib } from '../shared/define/lib.js'
 import { ArchetypeLife } from '../shared/life.js'
+import { ArchetypeScore } from '../shared/score.js'
 import { compiler } from './compiler.js'
 import { EntityState } from './enums/EntityState.js'
 import { life } from './life.js'
+import { score } from './score.js'
 import {
     allWritablePointer,
     preprocessWritablePointer,
@@ -22,6 +24,7 @@ type EntityImportDefinition = Record<
     {
         name: EngineArchetypeDataName | (string & {})
         type: NumberConstructor | BooleanConstructor | typeof DataType<number | boolean>
+        def?: number | boolean
     }
 >
 
@@ -63,6 +66,17 @@ type EntityInputResult = {
     }
 }
 
+type EntityScore = {
+    multiplier: number
+}
+
+type EntityLife = {
+    perfect: number
+    great: number
+    good: number
+    miss: number
+}
+
 export class Archetype {
     name = ''
     index = 0
@@ -91,7 +105,11 @@ export class Archetype {
 
     terminate(): void {}
 
-    protected get life(): ArchetypeLife {
+    protected get archetypeScore(): ArchetypeScore {
+        return score.archetypes.get(this.index)
+    }
+
+    protected get archetypeLife(): ArchetypeLife {
         return life.archetypes.get(this.index)
     }
 
@@ -100,16 +118,20 @@ export class Archetype {
         // eslint-disable-next-line @typescript-eslint/only-throw-error
         if (compiler.isCompiling) throw 'defineImport can only be called at compile time'
 
-        const data = Object.entries(type).map(([key, { name }], index) => ({
+        const data = Object.entries(type).map(([key, { name, def }], index) => ({
             key,
             name,
+            def,
             offset: this._entityImports.length + index,
         }))
 
-        for (const { name, offset: index } of data) {
+        for (const { name, def, offset: index } of data) {
             this._entityImports.push({
                 name,
                 index,
+                ...(def !== undefined && {
+                    def: +def,
+                }),
             })
         }
 
@@ -215,5 +237,16 @@ export class Archetype {
             index: preprocessWritablePointer(4004, 1, 0, 0),
             value: preprocessWritablePointer(4004, 2, 0, 0),
         },
+    }
+
+    protected readonly entityScore: EntityScore = {
+        multiplier: preprocessWritablePointer(4005, 0, 0, 0),
+    }
+
+    protected readonly entityLife: EntityLife = {
+        perfect: preprocessWritablePointer(4006, 0, 0, 0),
+        great: preprocessWritablePointer(4006, 1, 0, 0),
+        good: preprocessWritablePointer(4006, 2, 0, 0),
+        miss: preprocessWritablePointer(4006, 3, 0, 0),
     }
 }

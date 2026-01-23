@@ -1,6 +1,7 @@
 import { Intrinsic } from '../../intrinsic/index.js'
 import { IR } from '../../ir/nodes/index.js'
 import { defineLib } from '../shared/define/lib.js'
+import { native } from './native.js'
 
 type ArchetypeLifeOptions = {
     perfect: number
@@ -31,11 +32,15 @@ type Life = {
         readonly great: ConsecutiveLife
         readonly good: ConsecutiveLife
     }
+    initial: number
+    max: number
+
+    addScheduled(value: number, time: number): void
 }
 
 export const createLife = (
     archetypeLifePointer: <T>(x: number, y: () => IR, s: number) => T,
-    consecutiveLifePointer: <T>(x: number, y: number, s: number) => T,
+    levelLifePointer: <T>(x: number, y: number, s: number) => T,
 ): Life =>
     defineLib<Life>({
         archetypes: {
@@ -48,10 +53,14 @@ export const createLife = (
             },
         },
         consecutive: {
-            perfect: createConsecutiveLife(consecutiveLifePointer, 0),
-            great: createConsecutiveLife(consecutiveLifePointer, 1),
-            good: createConsecutiveLife(consecutiveLifePointer, 2),
+            perfect: createConsecutiveLife(levelLifePointer, 0),
+            great: createConsecutiveLife(levelLifePointer, 1),
+            good: createConsecutiveLife(levelLifePointer, 2),
         },
+        initial: levelLifePointer(6, 0, 0),
+        max: levelLifePointer(7, 0, 0),
+
+        addScheduled: native.AddLifeScheduled,
     })
 
 const createArchetypeLife = (

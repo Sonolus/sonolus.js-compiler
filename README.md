@@ -122,6 +122,7 @@ Play:
 -   `EntityState`
 -   `HorizontalAlign`
 -   `Judgment`
+-   `HapticType`
 
 Watch:
 
