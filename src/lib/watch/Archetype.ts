@@ -24,6 +24,7 @@ type EntityImportDefinition = Record<
     {
         name: EngineArchetypeDataName | (string & {})
         type: NumberConstructor | BooleanConstructor | typeof DataType<number | boolean>
+        def?: number | boolean
     }
 >
 
@@ -117,16 +118,20 @@ export class Archetype {
         // eslint-disable-next-line @typescript-eslint/only-throw-error
         if (compiler.isCompiling) throw 'defineImport can only be called at compile time'
 
-        const data = Object.entries(type).map(([key, { name }], index) => ({
+        const data = Object.entries(type).map(([key, { name, def }], index) => ({
             key,
             name,
+            def,
             offset: this._entityImports.length + index,
         }))
 
-        for (const { name, offset: index } of data) {
+        for (const { name, def, offset: index } of data) {
             this._entityImports.push({
                 name,
                 index,
+                ...(def !== undefined && {
+                    def: +def,
+                }),
             })
         }
 
