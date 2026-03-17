@@ -191,6 +191,7 @@ Tutorial:
 -   `compiler`
 -   `debug`
 -   `native`
+-   `safeArea`
 -   `screen`
 -   `ui`
 
