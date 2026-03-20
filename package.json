@@ -27,21 +27,21 @@
     "build": "tsc -p ."
   },
   "dependencies": {
-    "acorn": "^8.15.0"
+    "acorn": "^8.16.0"
   },
   "peerDependencies": {
-    "@sinclair/typebox": "^0.34.47",
+    "@sinclair/typebox": "^0.34.48",
     "@sonolus/core": "~7.15.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.2",
+    "@eslint/js": "^10.0.1",
     "@types/estree": "^1.0.8",
-    "@types/node": "^22.19.7",
-    "eslint": "^9.39.2",
+    "@types/node": "^22.19.15",
+    "eslint": "^10.0.3",
     "eslint-config-prettier": "^10.1.8",
     "prettier": "^3.8.1",
     "prettier-plugin-organize-imports": "^4.3.0",
     "typescript": "~5.9.3",
-    "typescript-eslint": "^8.53.1"
+    "typescript-eslint": "^8.57.1"
   }
 }
