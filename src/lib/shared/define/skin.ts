@@ -12,10 +12,10 @@ export type SkinSprite = {
     readonly id: SkinSpriteId
     readonly exists: boolean
 
-    draw(quadLike: QuadLikeConvertible, z: number, a: number): void
+    draw(quadLike: QuadLikeConvertible, z: [number, number?, number?, number?], a: number): void
     draw(
         quadLike: QuadLikeConvertible,
-        z: number,
+        z: [number, number?, number?, number?],
         a: number,
         curvedEdges: 'l' | 'r' | 'b' | 't',
         n: number,
@@ -23,7 +23,7 @@ export type SkinSprite = {
     ): void
     draw(
         quadLike: QuadLikeConvertible,
-        z: number,
+        z: [number, number?, number?, number?],
         a: number,
         curvedEdges: 'lr' | 'bt',
         n: number,
@@ -39,11 +39,16 @@ type SkinDefinition = {
 
 type SkinSprites = {
     exists(id: SkinSpriteId): boolean
-    draw(id: SkinSpriteId, quadLike: QuadLikeConvertible, z: number, a: number): void
     draw(
         id: SkinSpriteId,
         quadLike: QuadLikeConvertible,
-        z: number,
+        z: [number, number?, number?, number?],
+        a: number,
+    ): void
+    draw(
+        id: SkinSpriteId,
+        quadLike: QuadLikeConvertible,
+        z: [number, number?, number?, number?],
         a: number,
         curvedEdges: 'l' | 'r' | 'b' | 't',
         n: number,
@@ -52,7 +57,7 @@ type SkinSprites = {
     draw(
         id: SkinSpriteId,
         quadLike: QuadLikeConvertible,
-        z: number,
+        z: [number, number?, number?, number?],
         a: number,
         curvedEdges: 'lr' | 'bt',
         n: number,
@@ -119,7 +124,7 @@ export const createDefineSkin =
                                     quad.y3,
                                     quad.x4,
                                     quad.y4,
-                                    z,
+                                    z[0],
                                     a,
                                 ] as const
 
@@ -135,20 +140,24 @@ export const createDefineSkin =
                                         (cp2 as VecLike).y,
                                     ] as const
 
+                                const z2 = 1 in z ? z[1] : 0
+                                const z3 = 2 in z ? z[2] : 0
+                                const z4 = 3 in z ? z[3] : 0
+
                                 if (curvedEdges === 'l') {
-                                    native.DrawCurvedL(...baseArgs, ...oneEdgeArgs())
+                                    native.DrawCurvedL(...baseArgs, ...oneEdgeArgs(), z2, z3, z4)
                                 } else if (curvedEdges === 'r') {
-                                    native.DrawCurvedR(...baseArgs, ...oneEdgeArgs())
+                                    native.DrawCurvedR(...baseArgs, ...oneEdgeArgs(), z2, z3, z4)
                                 } else if (curvedEdges === 'b') {
-                                    native.DrawCurvedB(...baseArgs, ...oneEdgeArgs())
+                                    native.DrawCurvedB(...baseArgs, ...oneEdgeArgs(), z2, z3, z4)
                                 } else if (curvedEdges === 't') {
-                                    native.DrawCurvedT(...baseArgs, ...oneEdgeArgs())
+                                    native.DrawCurvedT(...baseArgs, ...oneEdgeArgs(), z2, z3, z4)
                                 } else if (curvedEdges === 'lr') {
-                                    native.DrawCurvedLR(...baseArgs, ...twoEdgesArgs())
+                                    native.DrawCurvedLR(...baseArgs, ...twoEdgesArgs(), z2, z3, z4)
                                 } else if (curvedEdges === 'bt') {
-                                    native.DrawCurvedBT(...baseArgs, ...twoEdgesArgs())
+                                    native.DrawCurvedBT(...baseArgs, ...twoEdgesArgs(), z2, z3, z4)
                                 } else {
-                                    native.Draw(...baseArgs)
+                                    native.Draw(...baseArgs, z2, z3, z4)
                                 }
                             },
                         }),
@@ -171,7 +180,7 @@ export const createDefineSkin =
                             quad.y3,
                             quad.x4,
                             quad.y4,
-                            z,
+                            z[0],
                             a,
                         ] as const
 
@@ -187,20 +196,24 @@ export const createDefineSkin =
                                 (cp2 as VecLike).y,
                             ] as const
 
+                        const z2 = 1 in z ? z[1] : 0
+                        const z3 = 2 in z ? z[2] : 0
+                        const z4 = 3 in z ? z[3] : 0
+
                         if (curvedEdges === 'l') {
-                            native.DrawCurvedL(...baseArgs, ...oneEdgeArgs())
+                            native.DrawCurvedL(...baseArgs, ...oneEdgeArgs(), z2, z3, z4)
                         } else if (curvedEdges === 'r') {
-                            native.DrawCurvedR(...baseArgs, ...oneEdgeArgs())
+                            native.DrawCurvedR(...baseArgs, ...oneEdgeArgs(), z2, z3, z4)
                         } else if (curvedEdges === 'b') {
-                            native.DrawCurvedB(...baseArgs, ...oneEdgeArgs())
+                            native.DrawCurvedB(...baseArgs, ...oneEdgeArgs(), z2, z3, z4)
                         } else if (curvedEdges === 't') {
-                            native.DrawCurvedT(...baseArgs, ...oneEdgeArgs())
+                            native.DrawCurvedT(...baseArgs, ...oneEdgeArgs(), z2, z3, z4)
                         } else if (curvedEdges === 'lr') {
-                            native.DrawCurvedLR(...baseArgs, ...twoEdgesArgs())
+                            native.DrawCurvedLR(...baseArgs, ...twoEdgesArgs(), z2, z3, z4)
                         } else if (curvedEdges === 'bt') {
-                            native.DrawCurvedBT(...baseArgs, ...twoEdgesArgs())
+                            native.DrawCurvedBT(...baseArgs, ...twoEdgesArgs(), z2, z3, z4)
                         } else {
-                            native.Draw(...baseArgs)
+                            native.Draw(...baseArgs, z2, z3, z4)
                         }
                     },
                 }),
