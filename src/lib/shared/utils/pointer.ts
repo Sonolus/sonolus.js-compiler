@@ -27,7 +27,7 @@ export const pointer = <T>(
 
         [Intrinsic.Get]: (ir, ctx) => pointerNative(ir, 'GetShifted', [id, x, y, s], ctx),
         [Intrinsic.Set]: (ir, value, ctx) => {
-            if (!writableCallbacks.includes(ir.env.callback as never))
+            if (!writableCallbacks.includes(ir.env.callback))
                 throw ctx.error(ir, `Cannot mutate in ${ir.env.callback} callback`)
 
             return pointerNative(ir, 'SetShifted', [id, x, y, s, () => value], ctx)

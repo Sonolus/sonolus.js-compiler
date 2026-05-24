@@ -44,7 +44,7 @@ export const defineEffect = <T extends EffectDefinition>(effect: T): Effect<T> =
                 Object.entries(effect.clips).map(([key, name], id) => [
                     key,
                     defineLib<EffectClip>({
-                        name: name as never,
+                        name,
                         id: id as never,
                         get exists() {
                             return native.HasEffectClip(this.id)
