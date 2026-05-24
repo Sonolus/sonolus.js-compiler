@@ -72,7 +72,7 @@ export const createDefineParticle =
                     Object.entries(particle.effects).map(([key, name], id) => [
                         key,
                         defineLib<ParticleEffect>({
-                            name: name as never,
+                            name,
                             id: id as never,
                             get exists() {
                                 return native.HasParticleEffect(this.id)

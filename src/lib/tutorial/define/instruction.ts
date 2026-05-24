@@ -92,7 +92,7 @@ export const defineInstruction = <T extends InstructionDefinition>(
                 Object.entries(instruction.icons).map(([key, name], id) => [
                     key,
                     defineLib<InstructionIcon>({
-                        name: name as never,
+                        name,
                         id: id as never,
 
                         paint(this: InstructionIcon, position, size, rotation, z, a) {

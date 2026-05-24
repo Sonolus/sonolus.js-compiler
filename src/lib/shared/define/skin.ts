@@ -100,7 +100,7 @@ export const createDefineSkin =
                     Object.entries(skin.sprites).map(([key, name], id) => [
                         key,
                         defineLib<SkinSprite>({
-                            name: name as never,
+                            name,
                             id: id as never,
                             get exists() {
                                 return native.HasSkinSprite(this.id)
