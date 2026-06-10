@@ -17,7 +17,7 @@ export const inlineIR = (ir: IR): { ir: IR; changed: boolean } => {
 
     const countState = countInlineIR(ir, irs, trackCtx.dependencies)
 
-    const findStates = findInlineIR(ir, irs)
+    const { states: findStates, merged } = findInlineIR(ir, irs)
 
-    return applyInlineIR(ir, trackCtx.sideEffects, countState, findStates)
+    return applyInlineIR(ir, trackCtx.sideEffects, countState, findStates, merged)
 }
