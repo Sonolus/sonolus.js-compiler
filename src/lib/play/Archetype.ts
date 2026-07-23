@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 
 import { EngineArchetypeDataName, EnginePlayDataArchetype } from '@sonolus/core'
+
 import { Intrinsic } from '../../intrinsic/index.js'
 import { createDefineBlock, readContainer } from '../shared/blocks/utils.js'
 import { ContainerType } from '../shared/containers/ContainerType.js'

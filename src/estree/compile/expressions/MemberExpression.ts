@@ -1,4 +1,5 @@
 import { MemberExpression } from 'estree'
+
 import { compileESTree, CompileESTree } from '../index.js'
 import { compileObjectKey } from '../utils/object.js'
 

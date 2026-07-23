@@ -1,5 +1,6 @@
 import { EngineConfigurationOption } from '@sonolus/core'
 import Type from 'typebox'
+
 import { clean } from '../../../../utils/clean.js'
 
 const schema = Type.Array(

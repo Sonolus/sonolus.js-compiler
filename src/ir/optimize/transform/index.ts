@@ -12,6 +12,7 @@ import { transformBlock } from './Block.js'
 import { transformBreak } from './Break.js'
 import { transformCall } from './Call.js'
 import { transformConditional } from './Conditional.js'
+import { TransformIRContext } from './context.js'
 import { transformDeclare } from './Declare.js'
 import { transformDoWhile } from './DoWhile.js'
 import { transformExecute } from './Execute.js'
@@ -36,7 +37,6 @@ import { transformThrow } from './Throw.js'
 import { transformUnary } from './Unary.js'
 import { transformValue } from './Value.js'
 import { transformWhile } from './While.js'
-import { TransformIRContext } from './context.js'
 
 export type TransformIR<N extends IR> = (ir: N, ctx: TransformIRContext) => IR
 

@@ -1,4 +1,5 @@
 import { RuntimeFunction } from '@sonolus/core'
+
 import { Func } from '../../snode/nodes/Func.js'
 import { CompilerError } from '../../utils/CompilerError.js'
 import { IR } from '../nodes/index.js'

@@ -1,4 +1,5 @@
 import { ForOfStatement } from 'estree'
+
 import { BaseIR, IR } from './index.js'
 
 export type ForOf = BaseIR & {

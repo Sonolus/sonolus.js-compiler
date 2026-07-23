@@ -1,4 +1,5 @@
 import { CallExpression } from 'estree'
+
 import { IR } from '../../../ir/nodes/index.js'
 import { CompileESTreeContext } from '../context.js'
 import { compileESTree } from '../index.js'

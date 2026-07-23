@@ -1,4 +1,5 @@
 import { EngineWatchDataArchetype } from '@sonolus/core'
+
 import { Archetype } from '../../../../../../lib/watch/Archetype.js'
 
 export const buildArchetypes = (

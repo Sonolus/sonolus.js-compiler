@@ -1,5 +1,6 @@
 import Type from 'typebox'
 import Value from 'typebox/value'
+
 import { clone } from './clone.js'
 
 export const clean = <T extends Type.TSchema>(schema: T, value: unknown): Type.Static<T> => {

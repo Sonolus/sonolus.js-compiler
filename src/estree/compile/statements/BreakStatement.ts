@@ -1,4 +1,5 @@
 import { BreakStatement } from 'estree'
+
 import { CompileESTree } from '../index.js'
 
 export const compileBreakStatement: CompileESTree<BreakStatement> = (node, ctx) => {

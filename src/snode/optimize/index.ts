@@ -1,4 +1,5 @@
 import { RuntimeFunction } from '@sonolus/core'
+
 import { Func } from '../nodes/Func.js'
 import { SNode } from '../nodes/index.js'
 import { optimizeAdd } from './Add.js'
@@ -14,8 +15,8 @@ import { optimizeSet } from './Set.js'
 import { optimizeSetShifted } from './SetShifted.js'
 import { optimizeSubtract } from './Subtract.js'
 import { optimizeSwitchWithDefault } from './SwitchWithDefault.js'
-import { optimizeWhile } from './While.js'
 import { isValue } from './utils.js'
+import { optimizeWhile } from './While.js'
 
 export type OptimizeFunc<T extends RuntimeFunction> = (snode: Func<T>) => SNode
 

@@ -1,4 +1,5 @@
 import { RuntimeFunction } from '@sonolus/core'
+
 import { Native } from '../../nodes/Native.js'
 import { Value } from '../../nodes/Value.js'
 import { TransformIR } from './index.js'

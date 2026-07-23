@@ -1,4 +1,5 @@
 import { VariableDeclaration, VariableDeclarator } from 'estree'
+
 import { CompileESTreeContext } from '../context.js'
 import { CompileESTree, compileESTree } from '../index.js'
 import { bindPattern } from '../utils/patterns/bind.js'

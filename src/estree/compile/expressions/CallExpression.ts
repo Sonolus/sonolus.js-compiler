@@ -1,4 +1,5 @@
 import { SimpleCallExpression } from 'estree'
+
 import { cloneIR } from '../../../ir/clone/index.js'
 import { compileESTree, CompileESTree } from '../index.js'
 import { compileCallArgs } from '../utils/call.js'

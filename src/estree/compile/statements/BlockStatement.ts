@@ -1,4 +1,5 @@
 import { BlockStatement } from 'estree'
+
 import { compileESTree, CompileESTree } from '../index.js'
 
 export const compileBlockStatement: CompileESTree<BlockStatement> = (node, ctx) =>

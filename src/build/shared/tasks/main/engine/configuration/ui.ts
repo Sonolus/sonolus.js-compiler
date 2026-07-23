@@ -1,5 +1,6 @@
 import { EngineConfigurationUI } from '@sonolus/core'
 import Type from 'typebox'
+
 import { clean } from '../../../../utils/clean.js'
 
 const EngineConfigurationMetric = Type.Union([

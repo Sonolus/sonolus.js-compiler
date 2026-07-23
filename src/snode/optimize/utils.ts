@@ -1,4 +1,5 @@
 import { RuntimeFunction } from '@sonolus/core'
+
 import { Func } from '../nodes/Func.js'
 import { SNode } from '../nodes/index.js'
 

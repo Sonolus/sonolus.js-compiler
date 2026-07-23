@@ -1,4 +1,5 @@
 import { RuntimeFunction } from '@sonolus/core'
+
 import { Binary, BinaryOperator } from '../nodes/Binary.js'
 import { CompileIR } from './index.js'
 

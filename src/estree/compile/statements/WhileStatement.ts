@@ -1,4 +1,5 @@
 import { WhileStatement } from 'estree'
+
 import { compileESTree, CompileESTree } from '../index.js'
 
 export const compileWhileStatement: CompileESTree<WhileStatement> = (node, ctx) =>

@@ -1,5 +1,5 @@
-import { ObjectConstructor } from '../../nodes/ObjectConstructor.js'
 import { IR } from '../../nodes/index.js'
+import { ObjectConstructor } from '../../nodes/ObjectConstructor.js'
 import { TransformIR, transformIR } from './index.js'
 import { rewriteAsExecute } from './utils.js'
 

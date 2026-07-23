@@ -1,4 +1,5 @@
 import { InspectOptions } from 'node:util'
+
 import { Intrinsic } from '../../intrinsic/index.js'
 import { defineLib } from './define/lib.js'
 

@@ -1,4 +1,5 @@
 import { FunctionExpression } from 'estree'
+
 import { CompileESTree } from '../index.js'
 
 export const compileFunctionExpression: CompileESTree<FunctionExpression> = (node, ctx) => {

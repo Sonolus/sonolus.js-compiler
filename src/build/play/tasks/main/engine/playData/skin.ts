@@ -1,5 +1,6 @@
 import { EnginePlayData } from '@sonolus/core'
 import Type from 'typebox'
+
 import { clean } from '../../../../../shared/utils/clean.js'
 
 const schema = Type.Object({

@@ -1,4 +1,5 @@
 import { IfStatement } from 'estree'
+
 import { compileESTree, CompileESTree } from '../index.js'
 
 export const compileIfStatement: CompileESTree<IfStatement> = (node, ctx) => {

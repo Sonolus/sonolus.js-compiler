@@ -1,4 +1,5 @@
 import { ArrowFunctionExpression } from 'estree'
+
 import { CompileESTree } from '../index.js'
 
 export const compileArrowFunctionExpression: CompileESTree<ArrowFunctionExpression> = (

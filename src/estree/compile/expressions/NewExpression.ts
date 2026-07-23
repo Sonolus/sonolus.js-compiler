@@ -1,4 +1,5 @@
 import { NewExpression } from 'estree'
+
 import { compileESTree, CompileESTree } from '../index.js'
 import { compileCallArgs } from '../utils/call.js'
 

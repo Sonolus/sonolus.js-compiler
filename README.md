@@ -4,10 +4,10 @@ Compiler for [Sonolus.js](https://github.com/Sonolus/sonolus.js)
 
 ## Links
 
--   [Sonolus Website](https://sonolus.com)
--   [Sonolus Wiki](https://wiki.sonolus.com)
--   [Sonolus.js](https://github.com/Sonolus/sonolus.js)
--   [Sonolus.js Guide](https://wiki.sonolus.com/sonolus.js-guide)
+- [Sonolus Website](https://sonolus.com)
+- [Sonolus Wiki](https://wiki.sonolus.com)
+- [Sonolus.js](https://github.com/Sonolus/sonolus.js)
+- [Sonolus.js Guide](https://wiki.sonolus.com/sonolus.js-guide)
 
 ## Usage
 
@@ -25,12 +25,12 @@ Notably, language features that do not exist in Sonolus runtime (strings, object
 
 #### Building
 
--   `buildMainTask`
--   `buildCompileTask`
+- `buildMainTask`
+- `buildCompileTask`
 
 #### Assembling
 
--   `assemble`
+- `assemble`
 
 ### Standard Library
 
@@ -38,200 +38,200 @@ Notably, language features that do not exist in Sonolus runtime (strings, object
 
 Play:
 
--   `Archetype`
--   `SpawnableArchetype`
+- `Archetype`
+- `SpawnableArchetype`
 
 Watch:
 
--   `Archetype`
--   `SpawnableArchetype`
+- `Archetype`
+- `SpawnableArchetype`
 
 Preview:
 
--   `Archetype`
+- `Archetype`
 
 #### Blocks
 
 Play:
 
--   `levelData`
--   `levelMemory`
+- `levelData`
+- `levelMemory`
 
 Watch:
 
--   `levelData`
--   `levelMemory`
+- `levelData`
+- `levelMemory`
 
 Preview:
 
--   `previewData`
+- `previewData`
 
 Tutorial:
 
--   `tutorialData`
--   `tutorialMemory`
+- `tutorialData`
+- `tutorialMemory`
 
 #### Data types
 
--   `Collection`
--   `Container`
--   `ContainerType`
--   `DataType`
--   `Dictionary`
--   `Mat`
--   `Quad`
--   `Range`
--   `Rect`
--   `Tuple`
--   `Vec`
+- `Collection`
+- `Container`
+- `ContainerType`
+- `DataType`
+- `Dictionary`
+- `Mat`
+- `Quad`
+- `Range`
+- `Rect`
+- `Tuple`
+- `Vec`
 
 #### Defines
 
--   `defineOptions`
--   `defineSkin`
+- `defineOptions`
+- `defineSkin`
 
 Play:
 
--   `defineArchetypes`
--   `defineBuckets`
--   `defineEffect`
--   `defineParticle`
+- `defineArchetypes`
+- `defineBuckets`
+- `defineEffect`
+- `defineParticle`
 
 Watch:
 
--   `defineArchetypes`
--   `defineBuckets`
--   `defineEffect`
--   `defineParticle`
+- `defineArchetypes`
+- `defineBuckets`
+- `defineEffect`
+- `defineParticle`
 
 Preview:
 
--   `defineArchetypes`
+- `defineArchetypes`
 
 Tutorial:
 
--   `defineEffect`
--   `defineInstruction`
--   `defineParticle`
+- `defineEffect`
+- `defineInstruction`
+- `defineParticle`
 
 #### Enums
 
 Play:
 
--   `Callback`
--   `EntityState`
--   `HorizontalAlign`
--   `Judgment`
--   `HapticType`
+- `Callback`
+- `EntityState`
+- `HorizontalAlign`
+- `Judgment`
+- `HapticType`
 
 Watch:
 
--   `Callback`
--   `EntityState`
--   `HorizontalAlign`
--   `Judgment`
+- `Callback`
+- `EntityState`
+- `HorizontalAlign`
+- `Judgment`
 
 Preview:
 
--   `Callback`
--   `HorizontalAlign`
--   `PrintColor`
--   `PrintFormat`
--   `Scroll`
+- `Callback`
+- `HorizontalAlign`
+- `PrintColor`
+- `PrintFormat`
+- `Scroll`
 
 Tutorial:
 
--   `NavigationDirection`
--   `TutorialCallback`
+- `NavigationDirection`
+- `TutorialCallback`
 
 #### Ids
 
--   `SkinSpriteId`
+- `SkinSpriteId`
 
 Play:
 
--   `EffectClipId`
--   `ParticleEffectId`
+- `EffectClipId`
+- `ParticleEffectId`
 
 Watch:
 
--   `EffectClipId`
--   `ParticleEffectId`
+- `EffectClipId`
+- `ParticleEffectId`
 
 Tutorial:
 
--   `EffectClipId`
--   `InstructionIconId`
--   `InstructionTextId`
--   `ParticleEffectId`
+- `EffectClipId`
+- `InstructionIconId`
+- `InstructionTextId`
+- `ParticleEffectId`
 
 #### Instance ids
 
 Play:
 
--   `LoopedEffectClipInstanceId`
--   `ParticleEffectInstanceId`
--   `ScheduledLoopedEffectClipInstanceId`
--   `TouchId`
+- `LoopedEffectClipInstanceId`
+- `ParticleEffectInstanceId`
+- `ScheduledLoopedEffectClipInstanceId`
+- `TouchId`
 
 Watch:
 
--   `LoopedEffectClipInstanceId`
--   `ParticleEffectInstanceId`
--   `ScheduledLoopedEffectClipInstanceId`
+- `LoopedEffectClipInstanceId`
+- `ParticleEffectInstanceId`
+- `ScheduledLoopedEffectClipInstanceId`
 
 Tutorial:
 
--   `LoopedEffectClipInstanceId`
--   `ParticleEffectInstanceId`
--   `ScheduledLoopedEffectClipInstanceId`
+- `LoopedEffectClipInstanceId`
+- `ParticleEffectInstanceId`
+- `ScheduledLoopedEffectClipInstanceId`
 
 #### Misc
 
--   `compiler`
--   `debug`
--   `native`
--   `safeArea`
--   `screen`
--   `ui`
+- `compiler`
+- `debug`
+- `native`
+- `safeArea`
+- `screen`
+- `ui`
 
 Play:
 
--   `audio`
--   `background`
--   `bpmChanges`
--   `entityInfos`
--   `input`
--   `life`
--   `score`
--   `streams`
--   `time`
--   `timeScaleChanges`
--   `touches`
+- `audio`
+- `background`
+- `bpmChanges`
+- `entityInfos`
+- `input`
+- `life`
+- `score`
+- `streams`
+- `time`
+- `timeScaleChanges`
+- `touches`
 
 Watch:
 
--   `audio`
--   `background`
--   `bpmChanges`
--   `entityInfos`
--   `input`
--   `life`
--   `score`
--   `streams`
--   `time`
--   `timeScaleChanges`
+- `audio`
+- `background`
+- `bpmChanges`
+- `entityInfos`
+- `input`
+- `life`
+- `score`
+- `streams`
+- `time`
+- `timeScaleChanges`
 
 Preview:
 
--   `bpmChanges`
--   `canvas`
--   `entityInfos`
--   `timeScaleChanges`
+- `bpmChanges`
+- `canvas`
+- `entityInfos`
+- `timeScaleChanges`
 
 Tutorial:
 
--   `audio`
--   `background`
--   `navigation`
--   `time`
+- `audio`
+- `background`
+- `navigation`
+- `time`

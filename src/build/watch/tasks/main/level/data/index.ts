@@ -1,5 +1,6 @@
 import { LevelData } from '@sonolus/core'
 import Type from 'typebox'
+
 import { clean } from '../../../../../shared/utils/clean.js'
 import { Project } from '../../../../project.js'
 

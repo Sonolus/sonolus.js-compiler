@@ -1,4 +1,5 @@
 import { ExpressionStatement } from 'estree'
+
 import { createCompileESTreeContext } from '../../../../estree/compile/context.js'
 import { compileESTree } from '../../../../estree/compile/index.js'
 import { createCompileIRContext } from '../../../../ir/compile/context.js'

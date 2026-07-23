@@ -1,4 +1,5 @@
 import { BinaryExpression } from 'estree'
+
 import { CompileESTree, compileESTree } from '../index.js'
 
 export const compileBinaryExpression: CompileESTree<BinaryExpression> = (node, ctx) => {

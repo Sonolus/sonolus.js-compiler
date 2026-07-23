@@ -1,4 +1,5 @@
 import { EffectClipName } from '@sonolus/core'
+
 import { EffectClipId } from '../ids/EffectClipId.js'
 import { LoopedEffectClipInstanceId } from '../instanceIds/LoopedEffectClipInstanceId.js'
 import { ScheduledLoopedEffectClipInstanceId } from '../instanceIds/ScheduledLoopedEffectClipInstanceId.js'

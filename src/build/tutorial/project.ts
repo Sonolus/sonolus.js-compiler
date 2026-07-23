@@ -1,4 +1,5 @@
 import { EngineConfiguration, EngineTutorialData } from '@sonolus/core'
+
 import { TutorialCallback } from '../../lib/tutorial/index.js'
 
 export type Project = {
