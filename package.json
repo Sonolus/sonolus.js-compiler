@@ -30,8 +30,8 @@
     "acorn": "^8.17.0"
   },
   "peerDependencies": {
-    "@sinclair/typebox": "^0.34.52",
-    "@sonolus/core": "~7.15.2"
+    "@sonolus/core": "~7.15.2",
+    "typebox": "^1.3.7"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

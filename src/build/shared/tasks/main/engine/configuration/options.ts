@@ -1,5 +1,5 @@
-import { Static, Type } from '@sinclair/typebox'
 import { EngineConfigurationOption } from '@sonolus/core'
+import Type from 'typebox'
 import { clean } from '../../../../utils/clean.js'
 
 const schema = Type.Array(
@@ -39,7 +39,7 @@ const schema = Type.Array(
     ]),
 )
 
-type _Test<T extends Static<typeof schema> = EngineConfigurationOption[]> = T
+type _Test<T extends Type.Static<typeof schema> = EngineConfigurationOption[]> = T
 
 export const buildOptions = (options: EngineConfigurationOption[]): EngineConfigurationOption[] =>
     clean(schema, options)

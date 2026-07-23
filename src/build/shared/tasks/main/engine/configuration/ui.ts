@@ -1,5 +1,5 @@
-import { Static, Type } from '@sinclair/typebox'
 import { EngineConfigurationUI } from '@sonolus/core'
+import Type from 'typebox'
 import { clean } from '../../../../utils/clean.js'
 
 const EngineConfigurationMetric = Type.Union([
@@ -101,6 +101,6 @@ const schema = Type.Object({
     judgmentErrorMin: Type.Number(),
 })
 
-type _Test<T extends Static<typeof schema> = EngineConfigurationUI> = T
+type _Test<T extends Type.Static<typeof schema> = EngineConfigurationUI> = T
 
 export const buildUI = (ui: EngineConfigurationUI): EngineConfigurationUI => clean(schema, ui)

@@ -1,5 +1,5 @@
-import { Static, Type } from '@sinclair/typebox'
 import { EnginePlayData } from '@sonolus/core'
+import Type from 'typebox'
 import { clean } from '../../../../../shared/utils/clean.js'
 
 const schema = Type.Object({
@@ -11,7 +11,7 @@ const schema = Type.Object({
     ),
 })
 
-type _Test<T extends Static<typeof schema> = EnginePlayData['particle']> = T
+type _Test<T extends Type.Static<typeof schema> = EnginePlayData['particle']> = T
 
 export const buildParticle = (particle: EnginePlayData['particle']): EnginePlayData['particle'] =>
     clean(schema, particle)
