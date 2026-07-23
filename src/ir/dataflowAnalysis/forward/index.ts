@@ -15,7 +15,6 @@ export const dataAnalysisForwardIR = <T>(
     const graph = generate(ir, irs)
     const workList = [...irs]
 
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-unnecessary-condition
     while ((ir = workList.shift()!)) {
         const inputs = graph.ins.get(ir)
         if (!inputs) throw new Error('Unexpected missing ins')
