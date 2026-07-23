@@ -1,4 +1,5 @@
 import { TemplateLiteral } from 'estree'
+
 import { IR } from '../../../ir/nodes/index.js'
 import { CompileESTree, compileESTree } from '../index.js'
 

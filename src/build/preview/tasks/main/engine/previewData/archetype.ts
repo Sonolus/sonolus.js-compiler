@@ -1,4 +1,5 @@
 import { EnginePreviewDataArchetype } from '@sonolus/core'
+
 import { Archetype } from '../../../../../../lib/play/Archetype.js'
 
 export const buildArchetypes = (

@@ -1,4 +1,5 @@
 import { UpdateExpression } from 'estree'
+
 import { cloneIR } from '../../../ir/clone/index.js'
 import { IR } from '../../../ir/nodes/index.js'
 import { CompileESTreeContext } from '../context.js'

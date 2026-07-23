@@ -1,4 +1,5 @@
 import { ArrayExpression } from 'estree'
+
 import { IR } from '../../../ir/nodes/index.js'
 import { compileESTree, CompileESTree } from '../index.js'
 

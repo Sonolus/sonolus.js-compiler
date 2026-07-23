@@ -1,9 +1,10 @@
 import { Node } from 'estree'
+
 import { Env } from '../../ir/env/index.js'
 import { Block } from '../../ir/nodes/Block.js'
 import { Break } from '../../ir/nodes/Break.js'
-import { Value } from '../../ir/nodes/Value.js'
 import { IR, IRTypes } from '../../ir/nodes/index.js'
+import { Value } from '../../ir/nodes/Value.js'
 import { CompilerError, StackTrace } from '../../utils/CompilerError.js'
 
 type IRFunctions = {

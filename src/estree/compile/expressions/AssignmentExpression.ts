@@ -1,4 +1,5 @@
 import { AssignmentExpression } from 'estree'
+
 import { CompileESTree, compileESTree } from '../index.js'
 import { assignPattern } from '../utils/patterns/assign.js'
 

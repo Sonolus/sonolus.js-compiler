@@ -1,4 +1,5 @@
 import { ExpressionStatement } from 'estree'
+
 import { createCompileESTreeContext } from '../../../../estree/compile/context.js'
 import { compileESTree } from '../../../../estree/compile/index.js'
 import { createCompileIRContext } from '../../../../ir/compile/context.js'
@@ -53,7 +54,6 @@ export const buildArchetypeCallback = (
     const snode = optimizeSNode(compileIR(ir, irCtx))
 
     const result = {
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         order: archetype[`${callback}Order` as never] ?? 0,
         snode,
     }

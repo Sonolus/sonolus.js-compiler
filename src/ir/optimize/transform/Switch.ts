@@ -1,5 +1,5 @@
-import { Switch } from '../../nodes/Switch.js'
 import { IR } from '../../nodes/index.js'
+import { Switch } from '../../nodes/Switch.js'
 import { TransformIR, transformIR } from './index.js'
 import { isConstant, rewriteAsExecute, transformIRAndGet } from './utils.js'
 

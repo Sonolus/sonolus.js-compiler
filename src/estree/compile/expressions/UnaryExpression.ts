@@ -1,4 +1,5 @@
 import { UnaryExpression } from 'estree'
+
 import { compileESTree, CompileESTree } from '../index.js'
 
 export const compileUnaryExpression: CompileESTree<UnaryExpression> = (node, ctx) => {

@@ -1,4 +1,5 @@
 import { ClassDeclaration, ClassExpression } from 'estree'
+
 import { createCompileESTreeContext } from '../../../../estree/compile/context.js'
 import { compileESTree } from '../../../../estree/compile/index.js'
 import { compileFunctionCall } from '../../../../estree/compile/utils/function.js'

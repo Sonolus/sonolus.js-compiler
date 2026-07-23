@@ -1,4 +1,5 @@
 import { Super } from 'estree'
+
 import { CompileESTree } from './index.js'
 
 export const compileSuper: CompileESTree<Super> = (node, ctx) =>

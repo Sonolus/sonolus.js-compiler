@@ -1,4 +1,5 @@
 import { ThrowStatement } from 'estree'
+
 import { CompileESTree, compileESTree } from '../index.js'
 
 export const compileThrowStatement: CompileESTree<ThrowStatement> = (node, ctx) =>

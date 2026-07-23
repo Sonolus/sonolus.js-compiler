@@ -1,4 +1,5 @@
 import { ObjectExpression } from 'estree'
+
 import { IR } from '../../../ir/nodes/index.js'
 import { CompileESTree, compileESTree } from '../index.js'
 import { compileObjectKey } from '../utils/object.js'

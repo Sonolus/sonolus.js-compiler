@@ -1,7 +1,7 @@
 import { hasIntrinsicGet } from '../../../intrinsic/has.js'
 import { Intrinsic } from '../../../intrinsic/index.js'
-import { Value } from '../../nodes/Value.js'
 import { IR } from '../../nodes/index.js'
+import { Value } from '../../nodes/Value.js'
 import { TransformIRContext } from './context.js'
 import { transformIR } from './index.js'
 

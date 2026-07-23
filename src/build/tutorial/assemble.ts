@@ -1,4 +1,5 @@
 import { EngineConfiguration, EngineTutorialData } from '@sonolus/core'
+
 import { TutorialCallback } from '../../index.tutorial.js'
 import { SNode } from '../../snode/nodes/index.js'
 import { createAppendSNode } from '../shared/assemble.js'

@@ -1,4 +1,5 @@
 import { Expression, SwitchCase, SwitchStatement } from 'estree'
+
 import { CompileESTree, compileESTree } from '../index.js'
 
 export const compileSwitchStatement: CompileESTree<SwitchStatement> = (node, ctx) => {

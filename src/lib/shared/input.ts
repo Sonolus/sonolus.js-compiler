@@ -1,6 +1,6 @@
-import { JudgmentWindows } from '../shared/JudgmentWindows.js'
 import { defineLib } from '../shared/define/lib.js'
 import { Judgment } from '../shared/enums/Judgment.js'
+import { JudgmentWindows } from '../shared/JudgmentWindows.js'
 import { native } from '../shared/native.js'
 
 type Input = {

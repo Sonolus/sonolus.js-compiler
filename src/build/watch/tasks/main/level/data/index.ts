@@ -1,5 +1,6 @@
-import { Static, Type } from '@sinclair/typebox'
 import { LevelData } from '@sonolus/core'
+import Type from 'typebox'
+
 import { clean } from '../../../../../shared/utils/clean.js'
 import { Project } from '../../../../project.js'
 
@@ -25,6 +26,6 @@ const schema = Type.Object({
     ),
 })
 
-type _Test<T extends Static<typeof schema> = LevelData> = T
+type _Test<T extends Type.Static<typeof schema> = LevelData> = T
 
 export const buildLevelData = (data: Project['level']['data']): LevelData => clean(schema, data)

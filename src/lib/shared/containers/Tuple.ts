@@ -34,7 +34,6 @@ export const Tuple = <const T extends object>(
     type TupleImpl = InstanceType<typeof TupleImpl>
 
     const pointers = (ir: IR, tuple: TupleImpl, index: () => IR, ctx: TransformIRContext) =>
-        // eslint-disable-next-line @typescript-eslint/dot-notation
         createPointers(ir, tuple['_buffer'] as never, index, 0, size, ctx)
 
     const TupleImpl = class {
@@ -66,7 +65,6 @@ export const Tuple = <const T extends object>(
         }
 
         static copy(source: Tuple<ContainerType<T>>, target: Tuple<ContainerType<T>>) {
-            // eslint-disable-next-line @typescript-eslint/only-throw-error
             if (source.length !== target.length) throw 'Tuples must have the same length'
 
             for (let i = 0; i < target.length; i++) {

@@ -1,6 +1,7 @@
 import { EngineDataBucket } from '@sonolus/core'
-import { JudgmentWindows } from '../../shared/JudgmentWindows.js'
+
 import { defineLib } from '../../shared/define/lib.js'
+import { JudgmentWindows } from '../../shared/JudgmentWindows.js'
 import { Range, RangeLike } from '../containers/Range.js'
 
 export type BucketRange = {

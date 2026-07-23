@@ -1,4 +1,5 @@
 import { ContinueStatement } from 'estree'
+
 import { CompileESTree } from '../index.js'
 
 export const compileContinueStatement: CompileESTree<ContinueStatement> = (node, ctx) => {

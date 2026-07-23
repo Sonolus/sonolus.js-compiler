@@ -1,4 +1,5 @@
 import { EngineWatchData } from '@sonolus/core'
+
 import { buildBuckets } from '../../../../../shared/tasks/main/engine/data/buckets.js'
 import { Project } from '../../../../project.js'
 import { buildArchetypes } from './archetype.js'

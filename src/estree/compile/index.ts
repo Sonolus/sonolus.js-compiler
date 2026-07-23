@@ -1,9 +1,7 @@
 import { Node } from 'estree'
+
 import { IR } from '../../ir/nodes/index.js'
 import { visit } from '../../utils/visitor.js'
-import { compileIdentifier } from './Identifier.js'
-import { compileLiteral } from './Literal.js'
-import { compileSuper } from './Super.js'
 import { CompileESTreeContext } from './context.js'
 import { compileVariableDeclaration } from './declarations/VariableDeclaration.js'
 import { compileArrayExpression } from './expressions/ArrayExpression.js'
@@ -22,6 +20,8 @@ import { compileTemplateLiteral } from './expressions/TemplateLiteral.js'
 import { compileThisExpression } from './expressions/ThisExpression.js'
 import { compileUnaryExpression } from './expressions/UnaryExpression.js'
 import { compileUpdateExpression } from './expressions/UpdateExpression.js'
+import { compileIdentifier } from './Identifier.js'
+import { compileLiteral } from './Literal.js'
 import { compileBlockStatement } from './statements/BlockStatement.js'
 import { compileBreakStatement } from './statements/BreakStatement.js'
 import { compileContinueStatement } from './statements/ContinueStatement.js'
@@ -35,6 +35,7 @@ import { compileReturnStatement } from './statements/ReturnStatement.js'
 import { compileSwitchStatement } from './statements/SwitchStatement.js'
 import { compileThrowStatement } from './statements/ThrowStatement.js'
 import { compileWhileStatement } from './statements/WhileStatement.js'
+import { compileSuper } from './Super.js'
 
 export type CompileESTree<N extends Node> = (node: N, ctx: CompileESTreeContext) => IR
 

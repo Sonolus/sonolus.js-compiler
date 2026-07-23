@@ -1,4 +1,5 @@
 import { ForStatement } from 'estree'
+
 import { CompileESTree, compileESTree } from '../index.js'
 
 export const compileForStatement: CompileESTree<ForStatement> = (node, ctx) =>

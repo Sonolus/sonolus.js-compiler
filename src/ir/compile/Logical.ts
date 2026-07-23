@@ -1,4 +1,5 @@
 import { RuntimeFunction } from '@sonolus/core'
+
 import { Logical, LogicalOperator } from '../nodes/Logical.js'
 import { CompileIR } from './index.js'
 

@@ -1,5 +1,5 @@
-import { Switch } from '../../../nodes/Switch.js'
 import { IR } from '../../../nodes/index.js'
+import { Switch } from '../../../nodes/Switch.js'
 import { connectIns } from './context.js'
 import { ConnectIR, connectIR } from './index.js'
 
