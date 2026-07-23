@@ -9,6 +9,7 @@ const EngineConfigurationMetric = Type.Union([
     Type.Literal('accuracy'),
     Type.Literal('accuracyPercentage'),
     Type.Literal('life'),
+    Type.Literal('time'),
     Type.Literal('perfect'),
     Type.Literal('perfectPercentage'),
     Type.Literal('greatGoodMiss'),
