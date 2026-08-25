@@ -6,6 +6,9 @@ import { buildUI } from './ui.js'
 export const buildEngineConfiguration = (
     configuration: EngineConfiguration,
 ): EngineConfiguration => ({
+    ...(configuration.optionCategories && {
+        optionCategories: configuration.optionCategories,
+    }),
     options: buildOptions(configuration.options),
     ui: buildUI(configuration.ui),
     ...(configuration.replayFallbackOptionNames && {
