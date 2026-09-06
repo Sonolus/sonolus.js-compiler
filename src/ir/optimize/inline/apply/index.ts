@@ -1,5 +1,6 @@
 import { myMapGet } from '../../../../utils/MyMap.js'
 import { IR } from '../../../nodes/index.js'
+import { Set as SetIR } from '../../../nodes/Set.js'
 import { replaceIR } from '../../../replace/index.js'
 import { CountInlineState } from '../count/state.js'
 import { FindInlineStates } from '../find/state.js'
@@ -9,6 +10,7 @@ export const applyInlineIR = (
     sideEffects: Set<IR>,
     countState: CountInlineState,
     findStates: FindInlineStates,
+    merged: ReadonlySet<SetIR>,
 ): { ir: IR; changed: boolean } => {
     const replacements = new Map(
         [...findStates.entries()].flatMap(([ir, state]): [IR, IR][] => {
@@ -16,6 +18,8 @@ export const applyInlineIR = (
 
             const element = myMapGet(state, ir.target)
             if (!element || element === 'T') return []
+
+            if (merged.has(element)) return []
 
             const count = myMapGet(countState.counts, element)
             if (count !== 1) return []
